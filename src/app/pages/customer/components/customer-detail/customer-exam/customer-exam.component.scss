@@ -1,0 +1,11 @@
+.exam_img {
+  // margin-bottom: 2px;
+  span {
+    margin: 3px;
+    :hover {
+      cursor: pointer;
+      background-color: rgba(0, 0, 0, 0.075);
+      padding: 5px;
+    }
+  }
+}

@@ -1,0 +1,99 @@
+<div class="container-fluid">
+    <!-- admin -->
+    <div *ngIf="isShow">
+        <div class="header">
+            <div class="header-logo">Tài Liệu</div>
+            <ul class="header-menu">
+                <li *ngFor="let derpartment of derpartments" (click)="getFolderFromDepartmentId(derpartment.DepartmentId)" [class.active]="selected == derpartment.DepartmentId" class="header-menu-list">
+                    {{derpartment.DepartmentName}}
+                </li>
+
+            </ul>
+        </div>
+        <div *ngFor="let derpartment of derpartments">
+            <div *ngIf="selected == derpartment.DepartmentId">
+                <div class="file">
+                    <div class="file-upload">
+                        <button class="add-button" [matMenuTriggerFor]="add">
+                        <i class="material-icons">
+                            add_circle_outline
+                        </i>
+                    </button>
+                        <mat-menu #add="matMenu">
+                            <button mat-menu-item (click)="addFolder(selected)">
+                            <mat-icon>create_new_folder</mat-icon>&nbsp; Thêm thư mục
+                        </button>
+                            <button mat-menu-item (click)="uploadFile(derpartment.DepartmentId)">
+                            <mat-icon>cloud_upload</mat-icon>&nbsp; Upload File
+                        </button>
+                        </mat-menu>
+                    </div>
+
+
+
+                    <div class="file-show">
+                        <div class="row">
+                            <div class="col-2 " *ngFor="let item of folders">
+                                <div class="file-show-item">
+                                    <div class="file-show-item-tool">
+                                        <!-- <span class="material-icons">more_horiz</span> -->
+                                        <div class="file-upload">
+                                            <button class="add-button" [matMenuTriggerFor]="add">
+                                            <i class="material-icons">
+                                                more_horiz
+                                            </i>
+                                        </button>
+                                            <mat-menu #add="matMenu">
+                                                <button mat-menu-item (click)="editFolder(item.DepartmentfolderId)">
+                                                <mat-icon>create</mat-icon>&nbsp; Sửa thư mục
+                                            </button>
+                                                <button mat-menu-item (click)="delFolder(item.DepartmentfolderId)">
+                                                <mat-icon>delete</mat-icon>&nbsp; Xóa Thư mục
+                                            </button>
+                                            </mat-menu>
+                                        </div>
+                                    </div>
+
+                                    <div class="file-show-item-img" (click)="showListFileInFolder(item.DepartmentfolderId)">
+                                        <img src="assets/svg/Icon.svg" alt="">
+                                    </div>
+                                    <div class="file-show-item-name">
+                                        <span>{{item.Name}}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div *ngIf="!isShow">
+        <div class="header">
+            <div class="header-logo">Tài Liệu</div>
+
+        </div>
+
+        <div class="file-show" class="user">
+            <div class="row">
+                <div class="col-2 " *ngFor="let item of myFolder">
+                    <div class="file-show-item">
+                        <div class="file-show-item-tool">
+
+                        </div>
+
+                        <div class="file-show-item-img" (click)="showListFileInFolder(item.DepartmentfolderId)">
+                            <img src="assets/svg/Icon.svg" alt="">
+                        </div>
+                        <div class="file-show-item-name">
+                            <span>{{item.Name}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>

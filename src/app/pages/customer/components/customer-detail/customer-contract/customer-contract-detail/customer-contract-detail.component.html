@@ -1,0 +1,168 @@
+<div>
+    <div class="row">
+        <div class="col text-center">
+            <br />
+            <h1>Chi tiết đơn hàng</h1>
+        </div>
+    </div>
+    <div class="row mx-auto justify-content-center">
+        <div class="col-5 contractInfo">
+            <div>
+                <mat-label>Tên đơn hàng</mat-label>
+                <mat-form-field>
+                    <input matInput name="contractCode" [(ngModel)]="contractCode" disabled />
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-label>Ngày</mat-label>
+                <mat-form-field>
+                    <input type="date" matInput name="signedDate" [(ngModel)]="signedDate" required />
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-label>Dịch vụ</mat-label>
+                <!-- <mat-form-field>
+                    <mat-select name="surgeryServiceId" [(ngModel)]="surgeryServiceId" (selectionChange)="getChildService($event.value)" required>
+                        <mat-option *ngFor="let service of parentServiceList" [value]="service.SurgeryServiceId">{{service.Name}}</mat-option>
+                    </mat-select>
+                </mat-form-field> -->
+                <mat-form-field>
+                    <mat-select multiple name="selectedParentService" [(ngModel)]="selectedParentService"
+                        (openedChange)="choosedParentService($event)" required>
+                        <mat-option *ngFor="let service of parentServiceList" [value]="service.SurgeryServiceId">
+                            {{ service.Name }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-label>Dịch vụ con</mat-label>
+                <!-- <mat-form-field>
+                    <mat-select name="surgerySubServiceId" [(ngModel)]="surgerySubServiceId"  required>
+                        <mat-option *ngFor="let subService of childServiceList" [value]="subService.SurgerySubServiceId">{{subService.Name}}</mat-option>
+                    </mat-select>
+                </mat-form-field> -->
+                <mat-form-field>
+                    <mat-select multiple name="selectedChildService" [(ngModel)]="selectedChildService"
+                        (selectionChange)="choosedChildService($event)" required>
+                        <mat-option *ngFor="let subService of childServiceList"
+                            [value]="subService.SurgerySubServiceId">{{ subService.Name }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div>
+                <mat-label>Giá trị</mat-label>
+                <mat-form-field>
+                    <input matInput (ngModelChange)="amount=currencyInputChanged($event)"
+                        [ngModel]="amount | number: '.'" />
+                    <span class="currency-1"> VNĐ </span>
+                </mat-form-field>
+            </div>
+            <div class="mt-1">
+                <mat-label>Đã thu</mat-label>
+                <span class="totalContractPayment">{{ paymentTotal | number: "." }}
+                    <span class="currency-2">VNĐ</span>
+                    <span *ngIf="remain > 0">(Còn thiếu: {{ remain | number: "." }} VNĐ)</span>
+                </span>
+                <div class="payment-history">
+                    <div *ngFor="let p of payment" class="payment">
+                        <a (click)="openPaymentDetailForm(p)">
+                            Ngày {{ p.PaymentDate | date: "dd/MM/yyyy" }}:
+                            {{ p.Amount | number: "." }} VNĐ
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
+        <div class="col-5 contractInfo">
+            <div>
+                <!-- <mat-label>Trạng thái</mat-label> -->
+                <div class="customerStatus insideShadow" style="width: 100%;">
+                    <span *ngFor="let level of potentialLevelList">
+                        <input type="radio" name="potentialLevel" id="{{ level.LevelValue }}"
+                            [checked]="level.LevelValue == levelValue" [value]="level.LevelValue"
+                            (click)="choosePotentialLevel(level.LevelValue)"
+                            (click)="changePotentialId(level.PotentialLevelId)" hidden [disabled]="disabledBtn" />
+                        <label for="{{ level.LevelValue }}">{{ level.Name }}</label>
+                    </span>
+                </div>
+            </div>
+            <div class="mt-2">
+                <mat-label>Trạng thái</mat-label>
+                <mat-form-field>
+                    <mat-select name="status" [(ngModel)]="status"
+                        (selectionChange)="changeContractStatus($event.value)" required>
+                        <mat-option [value]="1"> Đang chăm sóc </mat-option>
+                        <mat-option [value]="2"> Dừng chăm sóc </mat-option>
+                        <mat-option [value]="3"> Đã ký </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="text-note">
+                <mat-label>Ghi chú</mat-label>
+                <mat-form-field>
+                    <textarea matInput name="contractContent" cdkTextareaAutosize [(ngModel)]="contractContent">
+                  </textarea>
+                </mat-form-field>
+            </div>
+            <div class="d-flex">
+                <mat-label class="mr-4">Ảnh</mat-label>
+                <label class="title" for="contract">
+                    <i class="material-icons">
+                        add_a_photo
+                    </i>
+                </label>
+            </div>
+            <div class="contractImg">
+                <span>
+                    <img *ngFor="let item of imgListContractDetail" [src]="item.ImageUrl" (click)="openDetailForm(item)"
+                        style="width: 120px; height: 80px;">
+                    <!-- <img   style="width: 120px; height: 80px;" *ngFor="let img of imgList" src="{{img}}" alt=""> -->
+                </span>
+
+            </div>
+            <div class="imagePicking imageForm">
+                <ul class="list-group">
+                    <li class="list-group-item" *ngFor="let img of listName">
+                        {{img}}
+                    </li>
+                </ul>
+            </div>
+            <input #contract type="file" accept='image/*' id="contract" multiple
+                (change)="processFileContractImage(contract.files)" hidden required>
+
+            <!-- <div class="imageForm" style="height: 20em;">
+                    <label for="contract" class="w-100 h-100"><img [src]="contractImageString"
+                            *ngIf="contractImageString" class="img-fluid mb-1" /></label>
+
+                    <label for="contract"><span class="material-icons">
+                            add_a_photo
+                        </span></label>
+                </div>
+                <input #Contract type="file" accept="image/*" id="contract"
+                    (change)="processFileContractImage(Contract.files)" hidden /> -->
+
+        </div>
+    </div>
+    <br />
+    <div class="row btnGroup">
+        <div class="col d-flex justify-content-center">
+            <div class="insideShadow mr-4" style="max-width: 8rem;">
+                <button class="btn customBtn mr-2" (click)="updateCustomerContract()">
+                    Lưu
+                </button>
+                <button class="btn cancelBtn" (click)="openDeleteContractForm()">
+                    Xóa
+                </button>
+            </div>
+            <div>
+                <button class="btn customBtn mt-1" (click)="openCreatePaymentForm()">
+                    Thanh toán
+                </button>
+            </div>
+        </div>
+    </div>
+    <br />
+</div>

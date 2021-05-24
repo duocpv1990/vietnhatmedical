@@ -1,0 +1,53 @@
+.setting-container {
+  margin-top: 1.8em;
+
+  .mat-list-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #6b80a4;
+    height: 7vh;
+    color: #fff;
+    border-radius: 15px;
+  }
+
+  .table {
+    width: 100%;
+    th {
+      vertical-align: middle !important;
+    }
+    td {
+      vertical-align: middle !important;
+    }
+  }
+  .add-button {
+    bottom: 1rem;
+  }
+
+  ::ng-deep .mat-list-base {
+    padding-top: 0px;
+  }
+
+  ::ng-deep .mat-list-option {
+    border-radius: 15px;
+  }
+
+  ::ng-deep .mat-list-base .mat-list-item .mat-list-item-content-reverse,
+  .mat-list-base .mat-list-option .mat-list-item-content-reverse {
+    width: 100%;
+  }
+  .list-item {
+    display: flex;
+    // justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    div {
+      width: 100%;
+    }
+  }
+
+  ::ng-deep .mat-menu-item {
+    display: flex !important;
+    align-items: center !important;
+  }
+}

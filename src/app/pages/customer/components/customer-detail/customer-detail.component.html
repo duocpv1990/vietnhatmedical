@@ -1,0 +1,106 @@
+<div class="container-fluid">
+  <div class="tab-info" *ngIf="customer">
+    <img class="avatar" [src]="customer?.ProfileImageURL" />
+    <div>
+      <h4>{{ customer?.LastName }}</h4>
+      <h4>Mã KH: {{ customer?.CustomerID }}</h4>
+      <h4>
+        SĐT: {{ customer?.Phone }}
+        <span class="circle"> </span>
+        <span class="circle-fill"> </span>
+        <mat-icon class="callNow" matTooltip="Gọi ngay" (click)="callCustomer()">phone_in_talk</mat-icon>
+      </h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <mat-tab-group class="customer-detail-tab-group" [(selectedIndex)]="selectedIndex">
+        <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">person</mat-icon>
+            <span>Thông tin</span>
+          </ng-template><br />
+          <div class="px-3">
+            <app-customer-info></app-customer-info>
+          </div>
+        </mat-tab>
+
+        <!-- <mat-tab>
+          <ng-template mat-tab-label>
+            <mat-icon class="example-tab-icon">calendar_today</mat-icon>
+            <span>Đặt lịch</span>
+          </ng-template>
+          <app-schedule-booking></app-schedule-booking>
+        </mat-tab>
+
+        <mat-tab [disabled]="!isService">
+          <ng-template mat-tab-label>
+            <mat-icon #btnService class="example-tab-icon" (click)="loadCustomerService()">card_travel</mat-icon>
+            <span>Dịch vụ</span>
+          </ng-template>
+          <div #service></div>
+        </mat-tab> -->
+
+        <!-- <mat-tab [disabled]="!isCallLog">
+          <ng-template mat-tab-label>
+            <mat-icon #btnHistory class="example-tab-icon" (click)="loadCustomerCallLogs()">assignment</mat-icon>
+            <span>Lịch sử</span>
+          </ng-template>
+          <div #callLogs></div>
+        </mat-tab> -->
+
+        <mat-tab [disabled]="!isCallLog">
+          <ng-template mat-tab-label>
+            <mat-icon #btnHistory class="example-tab-icon">assignment</mat-icon>
+            <span>Lịch sử</span>
+          </ng-template>
+          <div #callLogs>
+            <app-call-logs></app-call-logs>
+          </div>
+        </mat-tab>
+
+        <!-- <mat-tab [disabled]="!isConsultantNote">
+          <ng-template mat-tab-label>
+            <mat-icon #btnConsultantNote class="example-tab-icon" (click)="loadCustomerConsultantNote()">event_note
+            </mat-icon>
+            <span>Tư vấn</span>
+          </ng-template>
+          <div #consultantNote></div>
+        </mat-tab> -->
+
+        <!-- <mat-tab [disabled]="!isExam">
+          <ng-template mat-tab-label>
+            <mat-icon #btnExam class="example-tab-icon" (click)="loadCustomerExam()">assignment</mat-icon>
+            <span>Xét nghiệm</span>
+          </ng-template>
+          <div #exam></div>
+        </mat-tab>
+
+        <mat-tab [disabled]="!isContract">
+          <ng-template mat-tab-label>
+            <mat-icon #btnContract class="example-tab-icon" (click)="loadCustomerContract()">book</mat-icon>
+            <span>Đơn hàng</span>
+          </ng-template>
+          <app-customer-contract></app-customer-contract>
+        </mat-tab>
+
+        <mat-tab [disabled]="!isPersonInCharge">
+          <ng-template mat-tab-label>
+            <mat-icon #btnPersonInCharge class="example-tab-icon" (click)="loadPersonInCharge()">accessibility
+            </mat-icon>
+            <span>Phụ trách</span>
+          </ng-template><br />
+          <div #personInCharge></div>
+        </mat-tab>
+
+        <mat-tab [disabled]="!isContractImage">
+          <ng-template mat-tab-label>
+            <mat-icon #btnContractImg class="example-tab-icon" (click)="loadContractImages()">image</mat-icon>
+            <span>Hình ảnh</span>
+          </ng-template><br />
+          <div #contractImg></div>
+        </mat-tab> -->
+      </mat-tab-group>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,88 @@
+<div class="dialog-container container" style="max-width: 50em;">
+    <div class="row">
+        <div class="col-11">
+            <span class="dialog-title" style="padding: .4em .7em;">Tạo lịch phẫu thuật</span>
+        </div>
+        <div class="col-1">
+            <span class="material-icons close-button" (click)="closeDialog()">
+                close
+            </span>
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="col-6">
+            <mat-label for="">Ngày phẫu thuật</mat-label>
+            <mat-form-field>
+                <input matInput type="date" name="operationDate" [(ngModel)]="operationDate">
+                <!-- <input matInput type="datetime-local" name="operationDate" [(ngModel)]="operationDate" [value]="operationDate | date:'yyyy-MM-ddTHH:mm'"> -->
+            </mat-form-field>
+        </div>
+        <div class="col-6">
+            <mat-label>Giờ phẫu thuật</mat-label>
+            <mat-form-field>
+                <input matInput type="time" name="operationTime" [(ngModel)]="operationTime">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <mat-label>Bác sĩ chính</mat-label>
+            <mat-form-field class="w-100">
+                <mat-select multiple name="selectedMainDoctor" [(ngModel)]="selectedMainDoctor">
+                    <mat-option *ngFor="let doctor of doctorList" [value]="doctor.ProviderId"
+                        (click)="chooseMainDoctor(doctor.ProviderId)">{{doctor.FullName}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-6">
+            <mat-label>Điều dưỡng chính</mat-label>
+            <mat-form-field class="w-100 chooseProvider">
+                <mat-select multiple name="selectedMainNurse" [(ngModel)]="selectedMainNurse" required>
+                    <mat-option *ngFor="let nurse of assistantList" [value]="nurse.ProviderId"
+                        (click)="chooseMainNurse(nurse.ProviderId)">{{nurse.FullName}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <mat-label>Bác sĩ phụ</mat-label>
+            <mat-form-field class="w-100 chooseProvider">
+                <mat-select multiple name="selectedAssistantDoctor " [(ngModel)]="selectedAssistantDoctor" required>
+                                <mat-option *ngFor="let doctor of doctorList" [value]="doctor.ProviderId"
+                                    (click)="chooseAssitantDoctor(doctor.ProviderId)">{{doctor.FullName}}</mat-option>
+                            </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-6">
+            <mat-label>Điều dưỡng phụ</mat-label>
+            <mat-form-field class="w-100 chooseProvider">
+                <mat-select multiple name="selectedAssistantNurse" [(ngModel)]="selectedAssistantNurse" required>
+                    <mat-option *ngFor="let assitant of assistantList" [value]="assitant.ProviderId"
+                        (click)="chooseAssistantNurseIdList(assitant.ProviderId)">{{assitant.FullName}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <!-- <div class="col-6">
+            <mat-label>Giờ phẫu thuật</mat-label>
+            <mat-form-field>
+                <input matInput type="time" name="operationTime" [(ngModel)]="operationTime">
+            </mat-form-field>
+        </div> -->
+        <div class="col">
+            <mat-label>Ghi chú</mat-label>
+            <mat-form-field class="w-100">
+                <textarea  matInput name="notes" [(ngModel)]="notes"> </textarea>
+            </mat-form-field>
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="col text-center">
+            <div class="mx-auto" style="max-width: 7rem;">
+                <button class="btn customBtn" (click)="createSurgerySchedule()">Lưu</button>
+            </div>
+        </div>
+    </div>
+</div>

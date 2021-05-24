@@ -1,0 +1,56 @@
+<div class="dialog-container container edit-positon">
+    <div class="row">
+        <div class="col-10">
+            <span class="dialog-title" style="padding: 0.3rem 0.75rem;">Sửa chức vụ</span>
+        </div>
+        <div class="col-2 pl-4">
+            <span class="material-icons close-button" (click)="closeDialog()">
+                close
+            </span>
+        </div>
+    </div><br>
+    
+    <form ngNativeValidate #createForm="ngForm">
+        <div class="row">
+            <div class="col-4">
+                <mat-label for="">Chức vụ:</mat-label>
+            </div>
+            <div class="col-8">
+                <input matInput name="name" [(ngModel)]="name" required>
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="col-4"><br>
+                <mat-label>Mô tả:</mat-label>
+            </div>
+            <div class="col-8">
+                <mat-form-field class="w-100">
+                    <textarea matInput name="description" [(ngModel)]="description"></textarea>
+                </mat-form-field>
+            </div>
+        </div> -->
+
+        <div class="row role-list">
+            <div class="col-4">
+                <mat-label>Nhóm chức năng:</mat-label>
+            </div>
+            <div class="col-8">
+                <mat-form-field>
+                    <mat-select multiple [(ngModel)]="selectedRole" name="selectedRole" (selectionChange)="selectedRoles($event.value)">
+                        <mat-option *ngFor="let role of roleList" [value]="role.RoleID">
+                            {{ role.Name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            
+
+        </div>
+
+        <div class="row">
+            <div class="col text-center text-light">
+                <button class="btn customBtn" [disabled]="createForm.invalid" (click)="editPosition()">Cập nhật</button>
+            </div>
+        </div>
+    </form>
+</div>

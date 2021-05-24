@@ -1,0 +1,50 @@
+.row {
+  margin-bottom: 1em;
+}
+
+.imagePicking {
+  // position: relative;
+  overflow: auto;
+  max-height: 200px;
+}
+
+.add_image_btn {
+  width: 70px;
+  height: 70px;
+  font-size: 12px;
+}
+
+.photo_icon {
+  position: absolute;
+  bottom: 0;
+  right: 45%;
+  color: #375384;
+  z-index: 9999;
+  &:hover {
+    cursor: pointer;
+    font-size: xx-large;
+    color: #557ec5;
+    transition: 0.3s;
+  }
+}
+
+.avatar {
+  width: 200px;
+  height: 200px;
+  border: 1px solid;
+  margin-top: 2em;
+  position: relative;
+
+  img {
+    width: 100% !important;
+    height: 100% !important;
+  }
+
+  .material-icons {
+    position: absolute;
+    bottom: 5px;
+    right: 7px;
+    color: #375384;
+    font-size: 2rem;
+  }
+}

@@ -1,0 +1,73 @@
+<div class="container-fluid" *ngIf="!isShow">
+  <div class="row">
+    <div class="col">
+      <br>
+      <table mat-table [dataSource]="dataSource" class=" table-hover table-striped text-center customTableStyle w-100">
+
+        <ng-container matColumnDef="Ngày">
+          <th mat-header-cell *matHeaderCellDef> Ngày </th>
+          <td mat-cell *matCellDef="let customerHistory" (click)="setDataForDetail(customerHistory)">
+            {{customerHistory.ReminderDate }}</td>
+        </ng-container>
+        <ng-container matColumnDef="Giờ">
+          <th mat-header-cell *matHeaderCellDef> Giờ </th>
+          <td mat-cell *matCellDef="let customerHistory" (click)="setDataForDetail(customerHistory)">
+            {{customerHistory.ReminderTime }}</td>
+        </ng-container>
+        <ng-container matColumnDef="Loại lịch">
+          <th mat-header-cell *matHeaderCellDef> Loại lịch </th>
+          <td mat-cell *matCellDef="let customerHistory" (click)="setDataForDetail(customerHistory)">
+            {{customerHistory.TypeDescription }}</td>
+        </ng-container>
+        <ng-container matColumnDef="Liên hệ">
+          <th mat-header-cell *matHeaderCellDef> Liên hệ </th>
+          <td mat-cell *matCellDef="let customerHistory" (click)="setDataForDetail(customerHistory)">
+            {{customerHistory.ContactTypeDescription }}</td>
+        </ng-container>
+        <ng-container matColumnDef="Sale phụ trách">
+          <th mat-header-cell *matHeaderCellDef> Sale phụ trách </th>
+          <td mat-cell *matCellDef="let customerHistory" (click)="setDataForDetail(customerHistory)">
+            {{customerHistory.EmployeeFullName }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="Ghi chú">
+          <th mat-header-cell *matHeaderCellDef> Ghi chú </th>
+          <td mat-cell *matCellDef="let customerHistory" (click)="setDataForDetail(customerHistory)">
+            {{customerHistory.Description}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Trạng thái">
+          <th mat-header-cell *matHeaderCellDef>Trạng thái </th>
+          <td mat-cell *matCellDef="let customerHistory">
+            <div class="switch switch-yellow">
+              <input type="radio" class="switch-input" name="{{customerHistory.CustomerRemindersID}}" value="ignore"
+                id="ignore" [checked]="customerHistory.Status == 1">
+              <label (click)="updateStatus(1, customerHistory.CustomerRemindersID)" for="ignore"
+                class="switch-label switch-label-off">
+                <i class="material-icons">
+                  close
+                </i>
+              </label>
+              <input type="radio" class="switch-input" name="{{customerHistory.CustomerRemindersID}}" value="check"
+                id="check" [checked]="customerHistory.Status == 2">
+              <label (click)="updateStatus(2, customerHistory.CustomerRemindersID)" for="check"
+                class="switch-label switch-label-on">
+                <i class="material-icons">
+                  check
+                </i>
+              </label>
+              <span class="switch-selection"></span>
+            </div>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let customerHistory; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons="true">
+      </mat-paginator>
+    </div>
+  </div>
+</div>
+<div *ngIf="isShow">
+  <app-customer-history-detail (messageEvent)="receiveMessage($event)"></app-customer-history-detail>
+</div>
+<!-- nhận message, event là data (false) từ component con -->

@@ -1,0 +1,45 @@
+.notification {
+  position: absolute;
+  background: #fff;
+  height: 82vh;
+  width: 20vw;
+  top: 65px;
+  right: 27px;
+  border-radius: 15px;
+  .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 1.2vh;
+    margin-bottom: 1.2vh;
+    span {
+      background: #798cac;
+      width: 8vw;
+      height: 3vh;
+      border-radius: 10px;
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    button {
+      background: none;
+      border: none;
+      text-decoration: underline;
+    }
+  }
+  .list-group-item {
+    cursor: pointer;
+    .sub-title {
+      font-size: 0.8em;
+      display: flex;
+      span {
+        margin-right: 0.8em;
+      }
+      p {
+        font-weight: 700;
+        margin-bottom: 0;
+      }
+    }
+  }
+}

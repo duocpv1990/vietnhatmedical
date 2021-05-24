@@ -1,0 +1,44 @@
+.rate:not(:checked) > input {
+  position: absolute;
+  top: -9999px;
+}
+
+.rate-container {
+  display: flex;
+  justify-content: center;
+  .rate:not(:checked) > input {
+    position: absolute;
+    top: -9999px;
+  }
+  .rate:not(:checked) > label {
+    float: right;
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 26px;
+    color: #ccc;
+  }
+  .rate:not(:checked) > label:before {
+    content: "★ ";
+  }
+  .rate > input:checked ~ label {
+    color: #ffc700;
+  }
+}
+
+.no-schedule {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 55vh;
+  font-size: 1.5em;
+  font-weight: 500;
+  color: #375384;
+}
+
+.call {
+  color: #375384;
+  border: none;
+  background: none;
+}

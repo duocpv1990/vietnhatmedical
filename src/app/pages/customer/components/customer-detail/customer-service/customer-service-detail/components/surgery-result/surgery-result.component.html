@@ -1,0 +1,81 @@
+<div class="container-fluid h-100">
+  <div class="row">
+    <div class="col-10 px-0">
+      <span class="titleBox"> Kết quả </span>
+    </div>
+    <div class="col-2">
+      <button class="add-button" matTooltip="Thêm kết quả phẫu thuật" (click)="openCreateForm()"
+        [hidden]="!!surgeryResult">
+        <i class="material-icons">add_circle_outline</i>
+      </button>
+    </div>
+  </div>
+  <br />
+  <div class="surgeryResult" *ngIf="surgeryResult !== null">
+    <div class="col d-flex flex-column justify-content-center" (click)="openDetailForm()">
+      <div class="row">
+        <div class="col-3">
+          <mat-label>Đánh giá</mat-label>
+        </div>
+        <div class="col-8 pl-0">
+          <mat-form-field class="w-100" *ngIf="surgeryResult !== null">
+            <input matInput class="w-100" name="resultRating" [value]="
+                surgeryResult?.ResultRating == 1
+                  ? 'Xấu'
+                  : surgeryResult?.ResultRating == 2
+                  ? 'Tốt'
+                  : 'Rất tốt'
+              " readonly />
+          </mat-form-field>
+        </div>
+      </div>
+      <br />
+      <div class="row">
+        <div class="col-3">
+          <mat-label>Note</mat-label>
+        </div>
+        <div class="col-8 pl-0">
+          <mat-form-field class="w-100" *ngIf="surgeryResult !== null">
+            <input matInput class="w-100" name="notes" [value]="surgeryResult?.Notes" readonly />
+          </mat-form-field>
+        </div>
+      </div>
+      <!-- <div class="row">
+        <div class="col text-center">
+          <div class="needHelp mt-3">
+            <label for="sos_btn2" [ngStyle]="isSOS? newStyle : oldStyle">S.O.S</label>
+          </div>
+        </div>
+
+      </div> -->
+
+    </div>
+    <!-- <div class="row mx-0">
+            <div class="col-6 pr-0">
+                <div class="surgeryImg">
+                    <span>Trước</span>
+                    <a href="{{surgeryResult.BeforeImageURL}}" *ngIf="surgeryResult !== undefined" target="_blank">
+                        <img [src]="surgeryResult.BeforeImageURL" class="w-100 h-100">
+                    </a>
+                </div>
+            </div>
+            <div class="col-6 pl-0">
+                <div class="surgeryImg">
+                    <span>Sau</span>
+                    <a href="{{surgeryResult.AfterImageURL}}" *ngIf="surgeryResult !== undefined" target="_blank">
+                        <img [src]="surgeryResult.AfterImageURL" class="w-100 h-100">
+                    </a>
+                </div>
+            </div>
+        </div> -->
+    <br />
+  </div>
+  <div class="row" *ngIf="surgeryResult == null">
+    <div class="col text-center">
+      <br />
+      <h2>Chưa có kết quả</h2>
+    </div>
+  </div>
+
+
+</div>

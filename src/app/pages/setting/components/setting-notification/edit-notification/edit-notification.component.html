@@ -1,0 +1,38 @@
+<div class="dialog-container container" *ngIf="notification">
+    <div class="row">
+        <div class="col-10">
+            <div class="dialog-title">Sửa thông báo</div>
+        </div>
+        <div class="col-2 pl-4">
+            <span class="material-icons close-button" (click)="closeDialog()">
+                close
+            </span>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-3">
+            <mat-label>Tiêu đề:</mat-label>
+        </div>
+        <div class="col-9">
+            <input class="form-control" name="name" [(ngModel)]="notification.Name">
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-3"><br>
+            <mat-label>Nội dung:</mat-label>
+        </div>
+        <div class="col-9">
+            <textarea class="form-control" rows="6" name="description"
+                [(ngModel)]="notification.Description"></textarea>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col text-center text-light">
+            <button class="btn customBtn" (click)="editNotification()">Cập nhật</button>
+        </div>
+    </div>
+
+</div>

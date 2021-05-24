@@ -1,0 +1,86 @@
+.setting-title {
+  padding: 10px 5px;
+  border-radius: 12px;
+  display: inline-flex;
+  padding-right: 13px;
+  width: 490px;
+  font-weight: 600;
+  font-size: 1.2rem;
+  text-align: center;
+  span {
+    width: 55%;
+    height: 40px;
+    background: #375384;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 10px;
+    margin-left: -3px;
+    margin-right: 3px;
+    box-shadow: 5px 5px 8px #cccccc, -5px -5px 8px #ffffff;
+  }
+}
+
+tr.mat-header-row {
+  height: 35px !important;
+  th {
+    font-size: 14px;
+    font-weight: 600;
+    font-family: "Segoe UI", sans-serif !important;
+  }
+}
+
+.privilege-table {
+  ::ng-deep th.mat-header-cell:first-of-type,
+  td.mat-cell:first-of-type,
+  td.mat-footer-cell:first-of-type {
+    padding-right: 16px !important;
+    padding-left: 16px !important;
+  }
+}
+
+th.mat-header-cell[_ngcontent-jsn-c196]:first-of-type {
+  padding-left: unset !important;
+}
+
+.selected {
+  background: #d0dbee;
+}
+
+.setting-content {
+  table {
+    width: 100%;
+  }
+}
+
+.position-content {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  span {
+    width: 100%;
+    margin-top: 6px;
+    cursor: pointer;
+  }
+  ::ng-deep .mat-menu-item {
+    display: flex !important;
+    justify-content: space-between;
+  }
+}
+
+.role-content {
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.table-container {
+  height: 50vh;
+  overflow: auto;
+}
+
+.header-row {
+  .mat-form-field {
+    margin-right: 45px;
+  }
+}

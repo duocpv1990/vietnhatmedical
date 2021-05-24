@@ -1,0 +1,107 @@
+<div class="container-fluid">
+  <div class="row" *ngIf="isShow">
+    <div class="col">
+      <!-- <button class="add-button my-2" matTooltip="Thêm dịch vụ" (click)="showCreatePage()" *ngIf="!isShowCreate">
+        <i class="material-icons">
+          add_circle_outline
+        </i>
+      </button>
+      <div *ngIf="isShowCreate">
+        <app-create-customer-service (messageEvent)="receiveMessage($event)"></app-create-customer-service>
+      </div> -->
+      <br>
+      <div *ngIf="!isShowCreate">
+        <table mat-table [dataSource]="dataSource" matSort
+          class=" table-hover table-striped text-center customTableStyle">
+          <ng-container matColumnDef="Tên đơn hàng">
+            <th mat-header-cell *matHeaderCellDef> Tên đơn hàng </th>
+            <td mat-cell *matCellDef="let operations" (click)="showServiceDetail(operations)">
+              <div *ngFor="let contract of listContract">
+                <span *ngIf="operations.ContractId == contract.ContractId">{{contract.ContractCode}}</span>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="Giá trị">
+            <th mat-header-cell *matHeaderCellDef> Giá trị </th>
+            <td mat-cell *matCellDef="let operations" (click)="showServiceDetail(operations)">
+              <div *ngFor="let contract of listContract">
+                <span *ngIf="operations.ContractId == contract.ContractId">{{contract.Amount | number:'.'}}</span>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="Đã thu">
+            <th mat-header-cell *matHeaderCellDef> Đã thu </th>
+            <td mat-cell *matCellDef="let operations" (click)="showServiceDetail(operations)">
+              <div *ngFor="let contract of listContract">
+                <span *ngIf="operations.ContractId == contract.ContractId">{{contract.PaymentTotal | number:'.'}}</span>
+              </div>
+            </td>
+          </ng-container>
+          <ng-container matColumnDef="Ngày thực hiện">
+            <th mat-header-cell *matHeaderCellDef> Ngày thực hiện </th>
+            <td mat-cell *matCellDef="let operations" (click)="showServiceDetail(operations)">
+              {{operations.OperationDate | date : 'dd/MM/yyyy'}}
+            </td>
+          </ng-container>
+
+          <ng-container matColumnDef="Dịch vụ">
+            <th mat-header-cell *matHeaderCellDef>Dịch vụ</th>
+            <td mat-cell *matCellDef="let operations" (click)="showServiceDetail(operations)">
+              {{operations.SurgerySubServiceName}}
+
+            </td>
+          </ng-container>
+
+          <!-- <ng-container matColumnDef="Trạng thái">
+            <th mat-header-cell *matHeaderCellDef> Trạng thái </th>
+            <td mat-cell *matCellDef="let operations">
+              <div class="operationStatus" (click)="updateStatus(operations.OperationId, operations.Status)">
+                <input type="checkbox" id="{{operations.OperationId}}" [checked]="operations.Status == 2" hidden>
+                <label for="{{operations.OperationId}}"><i class="material-icons">close</i></label>
+                <label for="{{operations.OperationId}}"><i class="material-icons">check</i></label>
+              </div>
+            </td>
+          </ng-container> -->
+
+          <ng-container matColumnDef="Đánh giá">
+            <th mat-header-cell *matHeaderCellDef>Đánh giá</th>
+            <td mat-cell *matCellDef="let operations" (click)="showServiceDetail(operations)">
+              <!-- <div class="rate-container">
+                <div class="rate">
+                  <input disabled [checked]="operations.Rating == 5" type="radio" />
+                  <label title="text">5 stars</label>
+                  <input disabled [checked]="operations.Rating == 4" type="radio" />
+                  <label title="text">4 stars</label>
+                  <input disabled [checked]="operations.Rating == 3" type="radio" />
+                  <label title="text">3 stars</label>
+                  <input disabled [checked]="operations.Rating == 2" type="radio" />
+                  <label title="text">2 stars</label>
+                  <input disabled [checked]="operations.Rating == 1" type="radio" />
+                  <label title="text">1 star</label>
+                </div>
+              </div> -->
+              <div class="rate">
+                <div class="rating">
+                  <span [class.checked]="operations?.Rating >= 1">★</span>
+                  <span [class.checked]="operations?.Rating >= 2">★</span>
+                  <span [class.checked]="operations?.Rating >= 3">★</span>
+                  <span [class.checked]="operations?.Rating >= 4">★</span>
+                </div>
+              </div>
+            </td>
+          </ng-container>
+
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+        <mat-paginator [pageSizeOptions]="[10, 25, 100]" [pageSize]="10" showFirstLastButtons="true">
+        </mat-paginator>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="!isShow">
+    <div class="col">
+      <app-customer-service-detail [currentService]="service"></app-customer-service-detail>
+    </div>
+  </div>
+</div>

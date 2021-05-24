@@ -1,0 +1,118 @@
+<form ngNativeValidate #createForm="ngForm">
+    <div>
+        <div class="row">
+            <div class="col text-center"><br>
+                <h1>Tạo đơn hàng</h1>
+            </div>
+        </div><br>
+        <div class="row justify-content-center mx-auto">
+            <div class="col-5 contractInfo">
+                <div>
+                    <mat-label>Tên đơn hàng</mat-label>
+                    <mat-form-field>
+                        <input matInput name="contractCode" [(ngModel)]="contractCode" required>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-label>Ngày</mat-label>
+                    <mat-form-field>
+                        <input type="date" matInput name="signedDate" [(ngModel)]="signedDate" required>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-label>Dịch vụ</mat-label>
+                    <!-- <mat-form-field>
+                    <mat-select name="surgeryServiceId" [(ngModel)]="surgeryServiceId" (selectionChange)="getChildService($event.value)" required>
+                        <mat-option *ngFor="let service of parentServiceList" [value]="service.SurgeryServiceId">{{service.Name}}</mat-option>
+                    </mat-select>
+                </mat-form-field> -->
+                    <mat-form-field>
+                        <mat-select multiple name="selectedParentService" [(ngModel)]="selectedParentService"
+                            (openedChange)="chooseParentService($event)" required>
+                            <mat-option *ngFor="let service of parentServiceList" [value]="service.SurgeryServiceId">
+                                {{service.Name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-label>Dịch vụ con</mat-label>
+                    <!-- <mat-form-field>
+                    <mat-select name="surgerySubServiceId" [(ngModel)]="surgerySubServiceId" required>
+                        <mat-option *ngFor="let subService of childServiceList" [value]="subService.SurgerySubServiceId">{{subService.Name}}</mat-option>
+                    </mat-select>
+                </mat-form-field> -->
+                    <mat-form-field>
+                        <mat-select multiple name="selectedChildService" [(ngModel)]="selectedChildService" required>
+                            <mat-option *ngFor="let subService of childServiceList"
+                                [value]="subService.SurgerySubServiceId">{{subService.Name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-label>Giá trị</mat-label>
+                    <mat-form-field>
+                        <input matInput currencyMask [(ngModel)]="amount" name="amount" />
+                    </mat-form-field>
+                </div>
+
+                <div class="text-note">
+                    <mat-label>Ghi chú</mat-label>
+                    <mat-form-field>
+                        <textarea matInput cdkTextareaAutosize name="contractContent" [(ngModel)]="contractContent">
+                            </textarea>
+                    </mat-form-field>
+                </div>
+
+            </div>
+            <div class="col-5 contractInfo">
+                <div class="mt-2">
+                    <!-- <mat-label class="">Trạng thái</mat-label> -->
+                    <div class="customerStatus insideShadow">
+                        <span *ngFor="let i of level">
+                            <input type="radio" name="potentialLevelId" id="{{i.LevelValue}}"
+                                [(ngModel)]="potentialLevelId" value="{{i.PotentialLevelId}}" hidden>
+                            <label for="{{i.LevelValue}}">{{i.Name}}</label>
+                        </span>
+                    </div>
+                </div>
+                <div>
+                    <mat-label>Trạng thái</mat-label>
+                    <mat-form-field>
+                        <input matInput name="staus" type="text" value="Đang chăm sóc" readonly />
+                    </mat-form-field>
+                </div>
+
+
+                <form [formGroup]="reminderForm" (ngSubmit)="createCustomerReminder()" action="">
+                    <div class="form-group">
+                        <mat-label>Loại lịch</mat-label>
+                        <mat-form-field>
+                            <mat-select formControlName="type">
+                                <mat-option value="2">Gọi</mat-option>
+                                <mat-option value="1">Hẹn</mat-option>
+                                <mat-option value="3">Lịch gọi chăm sóc</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group">
+                        <mat-label>Ngày</mat-label>
+                        <mat-form-field>
+                            <input matInput type="date" formControlName="dayDate" />
+                        </mat-form-field>
+                    </div>
+                    <div class="form-group">
+                        <mat-label>Giờ</mat-label>
+                        <mat-form-field>
+                            <input matInput type="time" formControlName="hourDate" />
+                        </mat-form-field>
+                    </div>
+                </form>
+
+            </div>
+        </div><br>
+        <div class="insideShadow btnGroup">
+            <button class="btn customBtn" (click)="createContract()" [disabled]="createForm.invalid ">Tạo</button>
+            <button class="btn cancelBtn" (click)="cancelCreate()">Hủy</button>
+        </div>
+    </div>
+</form>

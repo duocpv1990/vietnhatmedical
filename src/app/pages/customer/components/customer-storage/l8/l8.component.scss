@@ -1,0 +1,77 @@
+tr.mat-header-row {
+    height: 35px !important ;
+  
+    th {
+      font-size: 14px;
+      font-weight: 600;
+      font-family: "Segoe UI", sans-serif !important;
+    }
+  }
+  th.mat-header-cell[_ngcontent-jsn-c196]:first-of-type {
+    padding-left: unset !important;
+  }
+  
+  th.mat-header-cell:first-of-type,
+  td.mat-cell:first-of-type,
+  td.mat-footer-cell:first-of-type {
+    padding-left: unset !important;
+    label {
+      background-color: #fff;
+      border: 1px solid #000000;
+      border-radius: 50%;
+      cursor: pointer;
+      height: 15px;
+      width: 15px;
+      margin-bottom: 0 !important;
+    }
+    input[type="checkbox"] {
+      visibility: hidden;
+    }
+  
+    input[type="checkbox"]:checked + label {
+      background-color: #375384;
+      border-color: #375384;
+    }
+  
+    input[type="checkbox"]:checked + label:after {
+      opacity: 1;
+    }
+  }
+
+  .search-box {
+    display: flex;
+    position: fixed;
+    right: 15px;
+    width: 290px;
+    top: 7rem;
+    .searchInput {
+      border: 1px solid white;
+      border-radius: 10px;
+      background: #ffffff;
+      box-shadow: inset 5px 5px 10px #cccccc, inset -5px -5px 10px #ffffff;
+      height: 40px;
+      padding-left: 20px !important;
+      position: absolute;
+      width: 100%;
+    }
+    i {
+      position: absolute;
+      color: #224177;
+      right: 0px;
+      margin-top: 7px;
+      margin-right: 10px;
+    }
+    .clearStr {
+      position: absolute;
+      right: 30px;
+      mat-icon {
+        margin-bottom: 5px;
+        font-size: medium;
+      }
+    }
+  }
+  @media only screen and (max-width: 1366px) {
+    .search-box {
+      top: 5.8rem;
+    }
+  }

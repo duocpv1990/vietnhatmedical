@@ -1,0 +1,207 @@
+<form ngNativeValidate #createForm="ngForm">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <div class="createCustomer">
+                    <span>Tạo hồ sơ khách hàng mới</span>
+                </div>
+            </div>
+        </div>
+        <div class="row customerInfo customScrollbars">
+            <div class="col-2">
+                <div class="avatar insideShadow">
+                    <img [src]="profileImageString" *ngIf="profileImageString" class="img-fluid"
+                        class="w-100 h-100 mb-1 ">
+                    <label for="profileImage">
+                        <span class="material-icons">
+                            add_a_photo
+                        </span>
+                    </label>
+                    <input #ProfileImage type="file" accept='image/*' id="profileImage"
+                        (change)="processFileProfileImage(ProfileImage.files)" hidden>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="info-col">
+                    <div>
+                        <mat-label> Họ tên <span class="red-marker">*</span> </mat-label>
+                        <mat-form-field>
+                            <input matInput name="lastName" #username="ngModel" [(ngModel)]="customer.LastName"
+                                required>
+
+                            <mat-error
+                                *ngIf="username.errors?.required && username.invalid && (username.dirty || username.touched)">
+                                Nhập đầy đủ họ tên!</mat-error>
+                        </mat-form-field>
+                    </div>
+                    <!-- <div>
+                        <mat-label> <span class="red-marker">*</span> Tên</mat-label>
+                        <mat-form-field>
+                            <input matInput name="firstName" [(ngModel)]="customer.LastName" required>
+                        </mat-form-field>
+                    </div><br> -->
+                    <div class="mt-3">
+                        <div class="create-form mb-3">
+                            <mat-label style="padding: 0;"> Giới tính <span class="red-marker">*</span></mat-label>
+                            <span class="pr-3"><input type="radio" name="gender" (change)="chooseGenderType(1)">
+                                Nam</span>
+                            <input type="radio" name="gender" (change)="chooseGenderType(2);" checked> Nữ
+                        </div>
+                    </div>
+                    <div>
+                        <mat-label> Ngày sinh</mat-label>
+                        <mat-form-field>
+                            <input type="date" matInput name="birthDay" [(ngModel)]="customer.BirthDay">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-label> Điện thoại <span class="red-marker">*</span> </mat-label>
+                        <mat-form-field>
+                            <input matInput name="phone" [(ngModel)]="customer.Phone" #validPhone="ngModel"
+                                minlength="10" maxlength="10" required>
+                        </mat-form-field>
+                        <div class="validForm">
+                            <p
+                                *ngIf="validPhone.touched && (validPhone.errors?.required || validPhone.errors?.minlength || validPhone.errors?.maxlength || isNumber(customer.Phone))">
+                                Yêu cầu 10 chữ số!</p>
+                        </div>
+                    </div>
+                    <div>
+                        <mat-label>Quốc gia</mat-label>
+                        <mat-form-field>
+                            <mat-select name="countryId" [(ngModel)]="customer.CountryId"
+                                (selectionChange)="getAllProvinceByCountryId($event.value)">
+                                <mat-option *ngFor="let country of countryList" [value]="country.CountryId">
+                                    {{country.Name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-label> Tỉnh/Thành phố <span class="red-marker">*</span></mat-label>
+
+                        <mat-form-field class="customer-full-width">
+                            <input type="text" matInput [formControl]="myControl" [matAutocomplete]="auto">
+                            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn"
+                                (optionSelected)="getAllDistrictByProvinceId($event)">
+                                <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                    {{option.Name}}
+                                </mat-option>
+                            </mat-autocomplete>
+                        </mat-form-field>
+                    </div>
+
+                    <div>
+                        <mat-label> Quận/Huyện <span class="red-marker">*</span> </mat-label>
+                        <mat-form-field>
+                            <mat-select name="districtId" [(ngModel)]="customer.DistrictId">
+                                <mat-option *ngFor="let district of districtList" [value]="district.DistrictId">
+                                    {{district.Name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-label>Địa chỉ</mat-label>
+                        <mat-form-field>
+                            <input matInput name="address" [(ngModel)]="customer.Address">
+                        </mat-form-field>
+                    </div>
+
+                </div>
+                <div class="btnGroup insideShadow">
+                    <button type="submit" class="btn customBtn" [disabled]="createForm.invalid"
+                        (click)="createCustomer()">Tạo</button>
+                    <button class="btn cancelBtn" (click)="cancelCreate()" type="button">Hủy</button>
+                </div><br>
+            </div>
+            <div class="col-5">
+                <div>
+                    <mat-label>Số CMND</mat-label>
+                    <mat-form-field>
+                        <input type="number" matInput name="idCardNumber" [(ngModel)]="customer.IdCardNumber">
+                    </mat-form-field>
+                    <!-- <div class="validForm">
+                        <p
+                            *ngIf="validIdCard.touched && (validIdCard.errors?.required || validIdCard.errors?.minlength || isNumber(customer.IdCardNumber))">
+                            Tối thiểu 9 chữ số!</p>
+                    </div> -->
+                </div>
+                <div>
+                    <mat-label>Email</mat-label>
+                    <mat-form-field>
+                        <input type="email" matInput name="email" [(ngModel)]="customer.Email" #validEmail="ngModel"
+                            email>
+                    </mat-form-field>
+                    <div class="validForm">
+                        <p *ngIf="validEmail.touched && validEmail.errors?.email">
+                            Email chưa đúng!</p>
+                    </div>
+                </div>
+                <div>
+                    <mat-label>Facebook</mat-label>
+                    <mat-form-field>
+                        <input type="text" matInput name="facebook" [(ngModel)]="customer.CustomerNetworkURL">
+                    </mat-form-field>
+
+                </div>
+                <div>
+                    <mat-label>Nguồn KH</mat-label>
+                    <mat-form-field>
+                        <mat-select [(value)]="customer.Type">
+                            <mat-option value="1">Hot line</mat-option>
+                            <mat-option value="2">Khách giới thiệu</mat-option>
+                            <mat-option value="3">Facebook</mat-option>
+                            <mat-option value="4">Web</mat-option>
+                            <mat-option value="5">Data</mat-option>
+                            <mat-option value="6">Cộng tác viên</mat-option>
+                            <mat-option value="7">Affiliate</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div class="text-note">
+                    <mat-label>Ghi chú</mat-label>
+                    <mat-form-field>
+                        <textarea matInput name="noteContent" cdkTextareaAutosize [(ngModel)]="customer.NoteContent">
+                                  </textarea>
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <mat-label> Dịch vụ cha</mat-label>
+                    <mat-form-field>
+                        <mat-select name="selectedParentService" [(ngModel)]="selectedParentService"
+                            (selectionChange)="chooseParentService($event.value)">
+                            <mat-option *ngFor="let service of parentServices" [value]="service.SurgeryServiceId">
+                                {{service.Name}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <mat-label> Dịch vụ con</mat-label>
+
+                    <mat-form-field>
+                        <mat-select name="selectedChildService" [(ngModel)]="selectedChildService"
+                            (selectionChange)="chooseSubService($event.value)">
+                            <mat-option *ngFor="let subService of childServices"
+                                [value]="subService.SurgerySubServiceId">
+                                {{subService.Name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <!-- <div>
+                    <label class="my-2">Trạng thái</label>
+                    <div class="customerStatus insideShadow">
+                        <span *ngFor="let i of level">
+                            <input type="radio" name="potentialLevelId" id="{{i.LevelValue}}"
+                                [(ngModel)]="potentialLevelId" value="{{i.PotentialLevelId}}" hidden>
+                            <label for="{{i.LevelValue}}">{{i.Name}}</label>
+                        </span>
+                    </div>
+                </div> -->
+
+            </div>
+        </div>
+    </div>
+</form>

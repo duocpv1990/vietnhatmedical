@@ -1,0 +1,12 @@
+.edit-positon {
+    width: 30vw;
+    min-height: auto;
+    .row {
+        margin-bottom: 1em;
+    }
+    .role-list {
+        ::ng-deep .mat-form-field {
+          width: 100%;
+        }
+    }
+}

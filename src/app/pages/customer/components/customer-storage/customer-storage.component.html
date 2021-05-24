@@ -1,0 +1,46 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <div class="storage-title">
+                <!-- <span>Kho</span> -->
+                <button mat-button [matMenuTriggerFor]="menu">
+                    Kho
+                    <span class="material-icons ml-2">
+                      unfold_more
+                    </span>
+                  </button>
+                  <mat-menu #menu="matMenu">
+                    <button mat-menu-item routerLink="/pages/customer">Danh sách khách hàng</button>
+                    <button mat-menu-item routerLink="/pages/customer/file-upload">File upload</button>
+                  </mat-menu>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <mat-tab-group [(selectedIndex)]="selectedIndex" class="storage-mat-tab"  (selectedTabChange)="onTabChanged($event)">
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <p>Sales</p>
+                    </ng-template>
+                  <app-sales></app-sales>
+                </mat-tab>
+        
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <button class="load-button" (click)="loadMarketingStorage()">Marketing</button>
+                    </ng-template>
+                    <div #marketing></div>
+                </mat-tab>
+        
+                <mat-tab>
+                    <ng-template mat-tab-label>
+                        <button class="load-button" (click)="loadL8Storage()">L8</button>
+                    </ng-template>
+                    <div #l8></div>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
+</div>

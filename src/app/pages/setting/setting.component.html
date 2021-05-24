@@ -1,0 +1,46 @@
+<div class="containet-fluid">
+    <div class="setting">
+        <div class="setting-head">
+            <div class="setting-head-title">
+                Thiết lập
+            </div>
+            <ul class="setting-head-menu">
+                <li class="setting-head-menu-list" (click)="showSelected(1)" [class.active]="selected == 1">
+                    <span class="material-icons">
+                    miscellaneous_services
+                    </span> Chức năng</li>
+                <li class="setting-head-menu-list" (click)="showSelected(2)" [class.active]="selected == 2">
+                    <span class="material-icons">
+                        device_hub
+                        </span>Chi nhánh</li>
+                <li class="setting-head-menu-list" (click)="showSelected(3)" [class.active]="selected == 3">
+                    <span class="material-icons">
+                        date_range
+                        </span>Lịch chăm sóc</li>
+
+                <li class="setting-head-menu-list" (click)="showSelected(4)" [class.active]="selected == 4">
+                    <span class="material-icons">
+                        add_alert
+                        </span>Thông báo</li>
+
+            </ul>
+        </div>
+        <br>
+        <div class="setting-show">
+            <ul class="setting-show-list">
+                <li *ngIf="selected == 1">
+                    <app-setting-function></app-setting-function>
+                </li>
+                <li *ngIf="selected == 2">
+                    <app-setting-branch></app-setting-branch>
+                </li>
+                <li *ngIf="selected == 3">
+                    <app-care-schedule></app-care-schedule>
+                </li>
+                <li *ngIf="selected == 4">
+                    <app-setting-notification></app-setting-notification>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>

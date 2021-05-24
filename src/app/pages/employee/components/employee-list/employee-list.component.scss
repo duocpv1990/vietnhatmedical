@@ -1,0 +1,85 @@
+::ng-deep .employee-table .search-box {
+    top: 9px !important;
+}
+
+.employee-header {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.employeeList {
+    cursor: pointer;
+    padding: 10px 5px;
+    border-radius: 12px;
+    display: inline-flex;
+    padding-right: 13px;
+    width: 490px;
+    font-weight: 600;
+    font-size: 1.2rem;
+    text-align: center;
+    span {
+        font-size: 16px;
+        font-weight: 500;
+        width: 50%;
+        height: 40px;
+        background: #375384;
+        color: #fff;
+        padding: 10px 15px;
+        border-radius: 15px;
+        margin-left: -3px;
+        margin-right: 3px;
+        box-shadow: 5px 5px 8px #cccccc, -5px -5px 8px #ffffff;
+    }
+    .position-select {
+        height: 40px;
+        width: 40%;
+        margin-left: 1.2em;
+        border-radius: 10px;
+        color: #375384;
+        font-weight: 400;
+        text-align: center;
+        box-shadow: 5px 5px 8px #cccccc, -5px -5px 8px #ffffff;
+    }
+}
+
+// .add-button {
+//     position: absolute;
+//     top: 70px;
+// }
+.search-box {
+    display: flex;
+    position: absolute;
+    right: 15px;
+    width: 290px;
+    .searchInput {
+        border: 1px solid white;
+        border-radius: 10px;
+        background: #ffffff;
+        box-shadow: inset 5px 5px 10px #cccccc, inset -5px -5px 10px #ffffff;
+        height: 40px;
+        padding-left: 20px !important;
+        position: absolute;
+        width: 100%;
+    }
+    i {
+        position: absolute;
+        color: #224177;
+        right: 0px;
+        margin-top: 7px;
+        margin-right: 10px;
+    }
+    .clearStr {
+        position: absolute;
+        right: 30px;
+        mat-icon {
+            margin-bottom: 5px;
+            font-size: medium;
+        }
+    }
+}
+
+::ng-deep .employeePaginator .mat-paginator-page-size {
+    visibility: hidden;
+}

@@ -1,0 +1,44 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <button class="add-button my-2" matTooltip="Thêm phiếu xét nghiệm" (click)="openCreateForm()"
+                *ngIf="isAccessAdd">
+                <i class="material-icons">
+                    add_circle_outline
+                </i>
+            </button>
+            <!-- <app-shared-table [displayedColumns]="displayedColumns" [backendDisplayColumns]="backendDisplayColumns"
+                [displayedData]="examList">
+            </app-shared-table> -->
+            <table mat-table [dataSource]="dataSource" class="table-hover table-striped text-center customTableStyle">
+                <ng-container matColumnDef="Ngày">
+                    <th mat-header-cell *matHeaderCellDef>Ngày</th>
+                    <td mat-cell *matCellDef="let exam" (click)="openDetailForm(exam.CustomerExamId)">
+                        {{ exam.ExaminationDate | date: "dd/MM/yyyy" }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="Mô tả">
+                    <th mat-header-cell *matHeaderCellDef>Mô tả</th>
+                    <td mat-cell *matCellDef="let exam" (click)="openDetailForm(exam.CustomerExamId)">
+                        {{ exam.Description }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="Ảnh">
+                    <th mat-header-cell *matHeaderCellDef>Ảnh</th>
+                    <td mat-cell *matCellDef="let exam" [style.overflow]="'auto'">
+                        <div class="exam_img">
+                            <span *ngFor="let img of exam.ImageList; let i = index"
+                                (click)="openImageDialog(exam.CustomerExamId,img)">
+                                <img [src]="img.ImageUrl" style="width: 120px; height: 80px;">
+                            </span>
+                        </div>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let exam; columns: displayedColumns"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons="false">
+            </mat-paginator>
+        </div>
+    </div>
+</div>

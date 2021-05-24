@@ -1,0 +1,76 @@
+<div class="dialog-container">
+    <div class="row">
+        <div class="col-10">
+            <span class="dialog-title">Tạo lịch tư vấn</span>
+        </div>
+        <div class="col-2 pl-4">
+            <span class="material-icons close-button" (click)="closeDialog()">
+                close
+            </span>
+        </div>
+    </div>
+    <form class="mt-3" action="" ngNativeValidate (ngSubmit)="createAdvisorySchedule()">
+        <div class="container" style="min-width: 32em;">
+
+            <div class="row">
+                <div class="col-6">
+                    <mat-form-field>
+                        <label for="">Ngày tư vấn</label>
+                        <input matInput type="date" name="date" [(ngModel)]="date" required />
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field>
+                        <label for="">Giờ tư vấn</label>
+                        <input matInput type="time" name="time" [(ngModel)]="time" required />
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <mat-form-field>
+                        <label>Bác sĩ</label>
+                        <mat-select name="doctorId" [(ngModel)]="doctorId" required>
+                            <mat-option *ngFor="let doctor of doctorList" [value]="doctor.ProviderId">
+                                {{doctor.FullName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field>
+                        <label>Điều dưỡng chính</label>
+                        <mat-select name="assisstantId" [(ngModel)]="assisstantId" required>
+                            <mat-option *ngFor="let assitant of assisstantList" [value]="assitant.ProviderId">
+                                {{assitant.FullName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <mat-form-field>
+                        <label>Tình trạng</label>
+                        <mat-select name="status" [(ngModel)]="status" required>
+                            <mat-option value="1">Đã hẹn</mat-option>
+                            <mat-option value="2">Đã xong</mat-option>
+                            <mat-option value="3">Hủy</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field class="w-100">
+                        <label for="">Ghi chú</label>
+                        <textarea matInput name="notes" [(ngModel)]="notes"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-center">
+                    <button class="btn customBtn">Tạo</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

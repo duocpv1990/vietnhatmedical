@@ -1,0 +1,73 @@
+<div class="dialog-container container">
+    <div class="row">
+        <div class="col-10">
+            <span class="dialog-title">Sửa phiếu tư vấn</span>
+        </div>
+        <div class="col-2 pl-4">
+            <span class="material-icons close-button" (click)="closeDialog()">
+                close
+            </span>
+        </div>
+    </div><br>
+    <form action="">
+        <div class="row">
+            <div class="col-3">
+                <mat-label for="">Ngày:</mat-label>
+            </div>
+            <div class="col-9">
+                <input type="date" matInput name="consultationDate" [(ngModel)]="consultationDate" required>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3"><br>
+                <mat-label>Mô tả:</mat-label>
+            </div>
+            <div class="col-9">
+                <mat-form-field class="w-100">
+                    <textarea (keyup)="autoGrowTextZone($event)" matInput name="imageDescription"
+                        [(ngModel)]="imageDescription"> </textarea>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3"><br>
+                <mat-label for="">Thêm ảnh:</mat-label>
+            </div>
+            <div class="col-9 text-center">
+                <!-- <div class="imageForm">
+                    <label for="consultantNote" class="w-100 h-100"><img [src]="consultantNoteImageString" *ngIf="consultantNoteImageString"
+                            class="img-fluid mb-1"></label>
+                    <label for="consultantNote"><span class="material-icons">add_a_photo</span></label>
+                </div>
+                <input #ConsultantNote type="file" accept='image/*' id="consultantNote"
+                    (change)="processFileConsultantNoteImage(ConsultantNote.files)" hidden> -->
+                <div class="imageForm" *ngIf="imagesPick.getValue().length == 0">
+                    <label for="exam" class="w-100 h-100"><img [src]="imageString" *ngIf="imageString && imagesName"
+                            class="img-fluid mb-1" /></label>
+
+                    <label for="exam"><span class="material-icons">add_a_photo</span></label>
+                </div>
+                <div class="imagePicking imageForm" *ngIf="imagesPick.getValue().length > 0">
+                    <ul class="list-group" *ngFor="let img of imagesName; let i = index">
+                        <li class="list-group-item" *ngIf="i < 3">
+                            {{ img | Overflow: ["30", "..."] }}
+                        </li>
+                    </ul>
+                    <div class="list-group-item" *ngIf="imagesName.length > 3">
+                        ...
+                    </div>
+                </div>
+                <input #Input type="file" accept="image/*" id="exam" multiple (change)="processFileImage(Input.files)"
+                    required hidden />
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <div class="mx-auto insideShadow" style="max-width: 7rem;">
+                    <button class="btn customBtn" (click)="updateConsultantNote()">Lưu</button>
+                    <button class="btn cancelBtn" (click)="deleteConsultantNote()">Xóa</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

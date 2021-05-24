@@ -1,0 +1,54 @@
+<div class="container-fluid customer-table">
+    <div class="row">
+        <div class="col">
+            <div class="customer-header">
+                <div class="customer-title">
+                    <button mat-button [matMenuTriggerFor]="menu">
+                        File upload
+                        <span class="material-icons">
+                          unfold_more
+                        </span>
+                      </button>
+                      <mat-menu #menu="matMenu">
+                        <button mat-menu-item routerLink="/pages/customer">Danh sách khách hàng</button>
+                        <button mat-menu-item routerLink="/pages/customer/storage">Kho</button>
+                      </mat-menu>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <br>
+            <table mat-table [dataSource]="dataSource"
+                class=" table-hover table-striped text-center customTableStyle">
+                <ng-container matColumnDef="Ngày">
+                    <th mat-header-cell *matHeaderCellDef> Ngày </th>
+                    <td mat-cell *matCellDef="let fileUpload">
+                        {{fileUpload.CreatedOn | date : 'dd/MM/yyyy'}}</td>
+                </ng-container>
+                <ng-container matColumnDef="Tên">
+                    <th mat-header-cell *matHeaderCellDef> Tên </th>
+                    <td mat-cell *matCellDef="let fileUpload" class="text-left pl-3">
+                        {{fileUpload.Name}}</td>
+                </ng-container>
+                <ng-container matColumnDef="Số lượng KH">
+                    <th mat-header-cell *matHeaderCellDef>Số lượng KH</th>
+                    <td mat-cell *matCellDef="let fileUpload">{{fileUpload.CustomerCount}}</td>
+                </ng-container>
+                <ng-container matColumnDef="Giá tiền">
+                    <th mat-header-cell *matHeaderCellDef>Giá tiền</th>
+                    <td mat-cell *matCellDef="let fileUpload">{{fileUpload.Price}}</td>
+                </ng-container>
+                <ng-container matColumnDef="Trạng thái">
+                    <th mat-header-cell *matHeaderCellDef>Trạng thái</th>
+                    <td mat-cell *matCellDef="let fileUpload">{{fileUpload.StatusString}}</td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let fileUpload; columns: displayedColumns;" routerLink="/pages/customer/file-upload/{{fileUpload.MarketingFileUploadId}}"></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10" showFirstLastButtons="false">
+            </mat-paginator>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,263 @@
+p,
+h1 {
+  margin: 0;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: 600;
+}
+
+.tool-bar {
+  margin: 0;
+}
+
+.line-footer {
+  text-align: center;
+  color: #6e809f;
+  p {
+    font-size: 10px;
+  }
+}
+
+.donut-chart {
+  margin-top: 10px;
+}
+
+.circle-chart {
+  height: 80%;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.col-chart {
+  margin-top: 10px;
+}
+
+.chart-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #6c80a5;
+  color: #fff;
+  border-radius: 10px;
+  padding: 5px 10px;
+  margin-top: 10px;
+}
+
+.lifecycle {
+  margin-top: 10px;
+}
+
+.border-shadow {
+  border-radius: 15px;
+  box-shadow: 5px 5px 4px #dbdbdb, -5px -5px 4px #ffffff;
+}
+
+.left-percent {
+  border-right: thin solid #dbdbdb;
+  text-align: center;
+  padding: 10px;
+  div:first-child {
+    p {
+      font-size: 12px;
+    }
+  }
+  .not-first {
+    h1 {
+      color: #6c80a5;
+      font-size: 20px;
+    }
+    p {
+      font-size: 10px;
+    }
+  }
+}
+
+.right-percent {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #9d3b3a;
+  p {
+    font-size: 10px;
+  }
+}
+
+.customer-title {
+  border-radius: 15px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: white;
+  padding-right: 13px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.16);
+  height: 50px;
+  span {
+    background: #375384;
+    font-weight: 500;
+    color: #fff;
+    border-radius: 15px;
+    margin-left: -3px;
+    margin-right: 30px;
+    height: 48px;
+    width: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.dateSelectParent {
+  margin-top: 10px;
+  padding: 0;
+  color: #6c80a5;
+  .dateSelect {
+    height: 50px;
+    padding: 15px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: white;
+    padding-right: 13px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.16);
+    font-weight: 600;
+    font-size: 1.2rem;
+    input {
+      border: none;
+      text-align: center;
+      font-size: medium;
+    }
+  }
+}
+
+$labelWidth: 70px;
+.switch {
+  position: relative;
+  // height: 26px;
+  // width: $labelWidth * 2 + 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.switch-label {
+  position: relative;
+  z-index: 2;
+  float: left;
+  width: 100px;
+  // line-height: 26px;
+  padding-top: 10px;
+  font-size: 14px;
+  text-align: center;
+  opacity: 0.2;
+  cursor: pointer;
+  transition: all ease-in-out 0.3s;
+  &:active {
+    // font-weight: bold;
+  }
+  &:hover {
+    // font-weight: 600;
+    opacity: 1;
+  }
+  div {
+    font-weight: 500;
+    color: #375384;
+    position: relative;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    // margin-right: 10px;
+    svg {
+      width: 20px;
+      height: 20px;
+      object-fit: cover;
+      fill: #375384;
+    }
+    span {
+      font-size: 14px !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 20px;
+      width: 20px;
+    }
+  }
+}
+
+.switch-label-off {
+  padding-left: 2px;
+}
+
+.switch-label-on {
+  padding-right: 2px;
+}
+
+.switch-input {
+  display: none;
+  &:checked + .switch-label {
+    font-weight: 500;
+    opacity: 1;
+    transition: all ease-in-out 0.3s;
+    div::after {
+      background: none repeat scroll 0 0 transparent;
+      content: "";
+      display: block;
+      height: 2px;
+      border-radius: 15px;
+      background: #375384;
+      transition: all ease-in-out 0.5s;
+      transition: width 0.3s ease 0s, left 0.3s ease 0s;
+      // margin-bottom: -7px;
+      width: 100%;
+      bottom: 0px;
+      left: 0;
+    }
+  }
+  &:checked + .switch-label-on ~ .switch-selection {
+    left: $labelWidth + 2px;
+    /* Note: left: 50% doesn't transition in WebKit */
+  }
+}
+
+.switch-selection {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: 2px;
+  left: 2px;
+  width: $labelWidth;
+  height: 50px;
+  border-radius: 3px;
+  .switch-yellow & {
+    background: white;
+    opacity: 0.5;
+  }
+}
+
+::ng-deep .lineChart .chartjs-render-monitor {
+  animation: none !important;
+}
+
+.search-report:hover {
+  color: #5885d3;
+  cursor: pointer;
+}
+
+.serach-report {
+  color: #375384;
+}
+
+.report-container {
+  height: 100%;
+  padding: 1em 2em;
+  iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+}

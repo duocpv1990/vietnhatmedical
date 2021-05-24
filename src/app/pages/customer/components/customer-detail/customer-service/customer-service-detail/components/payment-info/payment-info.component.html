@@ -1,0 +1,36 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-9 px-0">
+      <span class="titleBox">
+        Thông tin thanh toán
+      </span>
+    </div>
+  </div><br>
+  <div class="row paymentInfo justify-content-start" (click)="redirectContractTab()">
+    <div class="col-7 mx-auto">
+      <div class="imgContract">
+        <img src="{{contract.ContractImageURL}}" *ngIf="contract !== undefined" class="img-fluid">
+      </div>
+    </div>
+    <div class="col-12">
+      <table class="mt-3">
+        <tr>
+          <th>Giá trị: </th>
+          <td *ngIf="contract !== undefined">
+            <mat-form-field>
+              <input matInput value=" {{contract.Amount | number:'.'}} VNĐ " readonly>
+            </mat-form-field>
+          </td>
+        </tr>
+        <tr>
+          <th>Đã thanh toán: </th>
+          <td *ngIf="contract !== undefined">
+            <mat-form-field>
+              <input matInput value=" {{contract.PaymentTotal | number:'.'}} VNĐ " readonly>
+            </mat-form-field>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="container-fluid m-0">
+  <div class="tab-info">
+    <img class="avatar" *ngIf="currentEmployee !== undefined" [src]="currentEmployee.ProfileImageURL">
+    <div *ngIf="currentEmployee !== undefined">
+      <h4>{{currentEmployee.FullName}}</h4>
+      <h4> Mã NV:{{currentEmployee.EmployeeId}}</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      <mat-tab-group class="employee-detail-tab-group customScrollbars tab-group-customer" [(selectedIndex)]="selectedIndex">
+        <div>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon class="example-tab-icon">person</mat-icon>
+              <span>Thông tin</span>
+            </ng-template><br>
+            <div class="px-3">
+              <app-employee-info (messageEvent)="receiveMessage($event)"></app-employee-info>
+            </div>
+
+          </mat-tab>
+
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon class="example-tab-icon" (click)="loadMyCustomer()">supervisor_account</mat-icon>
+              <span>Khách hàng</span>
+            </ng-template>
+            <div #myCustomer></div>
+          </mat-tab>
+
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon class="example-tab-icon" (click)="loadCalender()">calendar_today</mat-icon>
+              <span>Lịch</span>
+            </ng-template>
+            <div #calender></div>
+          </mat-tab>
+          <mat-tab>
+            <ng-template mat-tab-label>
+              <mat-icon class="example-tab-icon" (click)="loadKpi()">assessment</mat-icon>
+              <span>KPI</span>
+            </ng-template>
+            <div #kpi></div>
+          </mat-tab>
+        </div>
+      </mat-tab-group>
+
+    </div>
+  </div>

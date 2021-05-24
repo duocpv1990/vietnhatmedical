@@ -1,0 +1,177 @@
+<!-- Lịch phẫu thuật -->
+<div class="row">
+    <div class="col-1">
+      <div class="scheduleType" style="margin-top: 35px;">
+        <h5>Phẫu thuật</h5>
+      </div>
+    </div>
+    <div class="col-11 pl-0 operationSchedule">
+      <div *ngIf="operationSchedules && operationSchedules.length > 0">
+      <table mat-table [dataSource]="dataSourceOperation"
+        class=" table-hover table-striped text-center customTableStyle">
+        <ng-container matColumnDef="ScheduleTime">
+          <th mat-header-cell *matHeaderCellDef> Giờ </th>
+          <td mat-cell class="pl-0" *matCellDef="let operationSchedule" >
+            {{operationSchedule.ScheduleTime}}</td>
+        </ng-container>
+        <ng-container matColumnDef="CustomerId">
+          <th mat-header-cell *matHeaderCellDef> Mã KH </th>
+          <td mat-cell *matCellDef="let operationSchedule" >
+            {{operationSchedule.CustomerId}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Customer">
+          <th mat-header-cell *matHeaderCellDef>Khách hàng</th>
+          <td mat-cell *matCellDef="let operationSchedule" >
+            {{operationSchedule.CustomerFullnameAndId}}</td>
+        </ng-container>
+        <ng-container matColumnDef="SurgeryServices">
+          <th mat-header-cell *matHeaderCellDef> Dịch vụ </th>
+          <td mat-cell *matCellDef="let operationSchedule" >{{operationSchedule.SurgeryServices}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Notes">
+          <th mat-header-cell *matHeaderCellDef> Ghi chú </th>
+          <td mat-cell *matCellDef="let operationSchedule" class="text-left pl-2">
+            {{operationSchedule.Notes}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Status">
+          <th mat-header-cell *matHeaderCellDef> Trạng thái </th>
+          <td mat-cell class="pr-0" *matCellDef="let operationSchedule">
+            <div class="scheduleStatus">
+              <mat-form-field>
+                <mat-select name="status" [(ngModel)]="operationSchedule.StatusString" (selectionChange)="updateStatus(operationSchedule.ScheduleId, $event.value)">
+                  <mat-option value="1">Đã hẹn</mat-option>
+                  <mat-option value="2">Đã xong</mat-option>
+                  <mat-option value="3">Hủy</mat-option>
+              </mat-select>
+              </mat-form-field>
+            </div>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columnsSchedule"></tr>
+        <tr mat-row *matRowDef="let operationSchedule; columns: columnsSchedule;"></tr>
+      </table>
+      <mat-paginator #paginatorOperation [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="3">
+      </mat-paginator>
+    </div>
+    <h1 class="text-center mt-5" *ngIf="operationSchedules && operationSchedules.length == 0">Chưa có lịch</h1>
+    </div>
+  </div>
+
+  <!-- Lịch khám/tái khám -->
+  <div class="row">
+    <div class="col-1">
+      <div class="scheduleType" style="margin-top: 30px;">
+        <h5>Khám/<br>tái khám</h5>
+      </div>
+    </div>
+    <div class="col-11 pl-0 examinationSchedule">
+      <div *ngIf="examinationSchedules && examinationSchedules.length > 0">
+      <table mat-table [dataSource]="dataSourceExamination"
+        class=" table-hover table-striped text-center customTableStyle">
+        <ng-container matColumnDef="ScheduleTime">
+          <th mat-header-cell *matHeaderCellDef> Giờ </th>
+          <td mat-cell class="pl-0" *matCellDef="let examinationSchedule" >
+            {{examinationSchedule.ScheduleTime}}</td>
+        </ng-container>
+        <ng-container matColumnDef="CustomerId">
+          <th mat-header-cell *matHeaderCellDef> Mã KH </th>
+          <td mat-cell *matCellDef="let examinationSchedule" >
+            {{examinationSchedule.CustomerId}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Customer">
+          <th mat-header-cell *matHeaderCellDef>Khách hàng</th>
+          <td mat-cell *matCellDef="let examinationSchedule" >
+            {{examinationSchedule.CustomerFullnameAndId}}</td>
+        </ng-container>
+        <ng-container matColumnDef="SurgeryServices">
+          <th mat-header-cell *matHeaderCellDef> Dịch vụ </th>
+          <td mat-cell *matCellDef="let examinationSchedule" >{{examinationSchedule.SurgeryServices}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Notes">
+          <th mat-header-cell *matHeaderCellDef> Ghi chú </th>
+          <td mat-cell *matCellDef="let examinationSchedule" class="text-left pl-2">
+            {{examinationSchedule.Notes}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Status">
+          <th mat-header-cell *matHeaderCellDef> Trạng thái </th>
+          <td mat-cell class="pr-0" *matCellDef="let examinationSchedule">
+            <div class="scheduleStatus">
+              <mat-form-field>
+                <mat-select name="status" [(ngModel)]="examinationSchedule.StatusString" (selectionChange)="updateStatus(examinationSchedule.ScheduleId, $event.value)">
+                  <mat-option value="1">Đã hẹn</mat-option>
+                  <mat-option value="2">Đã xong</mat-option>
+                  <mat-option value="3">Hủy</mat-option>
+              </mat-select>
+              </mat-form-field>
+              
+            </div>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columnsSchedule"></tr>
+        <tr mat-row *matRowDef="let examinationSchedule; columns: columnsSchedule;"></tr>
+      </table>
+      <mat-paginator #paginatorExamination [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="3">
+      </mat-paginator>
+    </div>
+    <h1 class="text-center mt-5" *ngIf="examinationSchedules && examinationSchedules.length == 0">Chưa có lịch</h1>
+    </div>
+  </div>
+
+  <!-- Lịch Thay băng -->
+  <div class="row">
+    <div class="col-1">
+      <div class="scheduleType" style="margin-top: 30px;">
+        <h5>Thay băng, cắt chỉ</h5>
+      </div>
+    </div>
+    <div class="col-11 pl-0 examinationSchedule">
+      <div *ngIf="bandageChangingSchedules && bandageChangingSchedules.length > 0">
+      <table mat-table [dataSource]="dataSourceBandageChanging"
+        class=" table-hover table-striped text-center customTableStyle">
+        <ng-container matColumnDef="ScheduleTime">
+          <th mat-header-cell *matHeaderCellDef> Giờ </th>
+          <td mat-cell class="pl-0" *matCellDef="let bandageChanging" >
+            {{bandageChanging.ScheduleTime}}</td>
+        </ng-container>
+        <ng-container matColumnDef="CustomerId">
+          <th mat-header-cell *matHeaderCellDef> Mã KH </th>
+          <td mat-cell *matCellDef="let bandageChanging" >
+            {{bandageChanging.CustomerId}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Customer">
+          <th mat-header-cell *matHeaderCellDef>Khách hàng</th>
+          <td mat-cell *matCellDef="let bandageChanging" >
+            {{bandageChanging.CustomerFullnameAndId}}</td>
+        </ng-container>
+        <ng-container matColumnDef="SurgeryServices">
+          <th mat-header-cell *matHeaderCellDef> Dịch vụ </th>
+          <td mat-cell *matCellDef="let bandageChanging" >{{bandageChanging.SurgeryServices}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Notes">
+          <th mat-header-cell *matHeaderCellDef> Ghi chú </th>
+          <td mat-cell *matCellDef="let bandageChanging" class="text-left pl-2">
+            {{bandageChanging.Notes}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Status">
+          <th mat-header-cell *matHeaderCellDef> Trạng thái </th>
+          <td mat-cell class="pr-0" *matCellDef="let bandageChanging">
+            <div class="scheduleStatus">
+              <mat-form-field>
+                <mat-select name="status" [(ngModel)]="bandageChanging.StatusString" (selectionChange)="updateStatus(bandageChanging.ScheduleId, $event.value)">
+                  <mat-option value="1">Đã hẹn</mat-option>
+                  <mat-option value="2">Đã xong</mat-option>
+                  <mat-option value="3">Hủy</mat-option>
+              </mat-select>
+              </mat-form-field>
+            </div>
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="columnsSchedule"></tr>
+        <tr mat-row *matRowDef="let bandageChangingSchedule; columns: columnsSchedule;"></tr>
+      </table>
+      <mat-paginator #paginatorBandageChanging [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="3">
+      </mat-paginator>
+    </div>
+    <h1 class="text-center mt-5" *ngIf="bandageChangingSchedules && bandageChangingSchedules.length == 0">Chưa có lịch</h1>
+    </div>
+  </div>

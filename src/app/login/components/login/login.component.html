@@ -1,0 +1,32 @@
+<form [formGroup]="loginForm" (ngSubmit)="login()">
+  <div class="background">
+    <div class="login">
+      <div class="login-logo">
+        <img src="assets/images/logo2.png" alt="" width="150px">
+      </div>
+      <div class="login-form">
+        <div class="login-title">
+          <h1>Welcome!</h1>
+        </div>
+        <div class="input-form">
+          <input type="text" placeholder="Username" formControlName="username">
+        </div>
+
+        <div class="input-form">
+          <input type="password" placeholder="Password" formControlName="password">
+          <p *ngIf="hasError">Sai tên đăng nhập hoặc mật khẩu. Hãy thử lại</p>
+        </div>
+
+        <!-- <div class="info-toggle">
+       <p>Lưu thông tin đăng nhập</p>
+       <input type="checkbox" id="switch" /><label for="switch">Toggle</label>
+     </div> -->
+
+        <div class="login-button">
+          <button type="submit" [disabled]="loginForm.invalid">Đăng nhập</button>
+          <!-- <p routerLink="forgot-password">Quên mật khẩu ?</p> -->
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

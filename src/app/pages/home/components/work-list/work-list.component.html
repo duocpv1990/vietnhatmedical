@@ -1,0 +1,350 @@
+<div class="container home-content">
+  <div class="header">
+    <div class="home-header ">
+      <span>Công việc</span>
+      <div>{{currentTime}}</div>
+    </div><br>
+    <div class="search-block">
+      <div class="selected-day" *ngIf="isShow === 2 || isShow === 4">
+        <span>Chọn ngày</span>
+        <mat-form-field>
+          <input matInput type="date" name="selectedDay" [(ngModel)]="selectedDay">
+        </mat-form-field>
+      </div>
+      <div class="search-item" *ngIf="isShow === 3 || isShow === 1">
+        <input matTooltip="Từ ngày" type="date" name="fromDate" [(ngModel)]="fromDate">
+      </div>
+      <div class="search-item" *ngIf="isShow === 3 || isShow === 1">
+        <input matTooltip="Đến ngày" type="date" name="toDate" [(ngModel)]="toDate">
+      </div>
+      <div class="px-2 search-item" style="cursor: pointer;" *ngIf="isShow === 3">
+        <i class="material-icons searchBtn" matTooltip="Tìm kiếm" style="font-size: x-large;"
+          (click)="getCustomerReminder(fromDate, toDate)">search</i>
+      </div>
+      <div class="px-2 search-item" style="cursor: pointer;" *ngIf="isShow === 1">
+        <i class="material-icons searchBtn" matTooltip="Tìm kiếm" style="font-size: x-large;"
+          (click)="getScheduleToday(fromDate, toDate)">search</i>
+      </div>
+
+    </div>
+    <div class="schedule-select" *ngIf="isShow === 2">
+      <small class="">Loại</small>
+      <select name="scheduleType" [(ngModel)]="scheduleType" (change)="chooseScheduleType($event.target.value)">
+        <option value="0">Lịch chăm sóc</option>
+        <option value="1">Lịch chuyên môn</option>
+      </select>
+    </div>
+  </div>
+  <div class="home-content insideShadow" *ngIf="isShow === 3">
+    <div class="row">
+      <div class="col-1">
+        <div class="reminderType">
+          <h3>Gọi</h3>
+        </div>
+      </div>
+      <div class="col-11 pl-0 callSchedule">
+        <div *ngIf="callSchedule && callSchedule.length > 0">
+          <table mat-table [dataSource]="dataSourceCallSchedule"
+            class=" table-hover table-striped text-center customTableStyle">
+            <ng-container matColumnDef="Giờ">
+              <th mat-header-cell *matHeaderCellDef> Giờ </th>
+              <td mat-cell class="pl-0" *matCellDef="let callSchedule" (click)="openDetailForm(callSchedule)">
+                {{callSchedule.ReminderTime}}</td>
+            </ng-container>
+            <ng-container matColumnDef="Mã KH">
+              <th mat-header-cell *matHeaderCellDef> Mã KH </th>
+              <td mat-cell *matCellDef="let callSchedule" (click)="openDetailForm(callSchedule)">
+                {{callSchedule.CustomerID}}</td>
+            </ng-container>
+            <ng-container matColumnDef="Họ tên">
+              <th mat-header-cell *matHeaderCellDef>Họ tên</th>
+              <td mat-cell *matCellDef="let callSchedule" (click)="openDetailForm(callSchedule)">
+                {{callSchedule.CustomerFullNameAndId}}</td>
+            </ng-container>
+            <ng-container matColumnDef="Điện thoại">
+              <th mat-header-cell *matHeaderCellDef> Điện thoại </th>
+              <td mat-cell *matCellDef="let callSchedule" (click)="openDetailForm(callSchedule)">
+                {{callSchedule.CustomerPhone}}</td>
+            </ng-container>
+            <ng-container matColumnDef="Ghi chú">
+              <th mat-header-cell *matHeaderCellDef> Ghi chú </th>
+              <td mat-cell *matCellDef="let callSchedule" (click)="openDetailForm(callSchedule)" class="text-left pl-2">
+                {{callSchedule.Description}}</td>
+            </ng-container>
+            <ng-container matColumnDef="Trạng thái">
+              <th mat-header-cell *matHeaderCellDef> Trạng thái </th>
+              <td mat-cell class="pr-0" *matCellDef="let callSchedule">
+
+                <div class="scheduleReminderStatus"
+                  (click)="updateStatus(callSchedule.CustomerRemindersID, callSchedule.Status)">
+                  <input type="checkbox" id="{{callSchedule.CustomerRemindersID}}" [checked]="callSchedule.Status == 2"
+                    hidden>
+                  <label for="{{callSchedule.CustomerRemindersID}}"><i class="material-icons">close</i></label>
+                  <label for="{{callSchedule.CustomerRemindersID}}"><i class="material-icons">check</i></label>
+                </div>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsCallSchedule"></tr>
+            <tr mat-row *matRowDef="let callSchedule; columns: displayedColumnsCallSchedule;"></tr>
+          </table>
+          <mat-paginator #paginatorCallSchedule [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="4">
+          </mat-paginator>
+        </div>
+        <h1 class="text-center mt-5" *ngIf="callSchedule && callSchedule.length == 0">Chưa có lịch</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-1">
+        <div class="reminderType">
+          <h3>Hẹn</h3>
+        </div>
+      </div>
+      <div class="col-11 pl-0 scheduleReminder">
+        <div *ngIf="scheduleReminder && scheduleReminder.length > 0">
+          <table mat-table [dataSource]="dataSourceScheduleReminder"
+            class=" table-hover table-striped text-center customTableStyle">
+            <ng-container matColumnDef="Giờ">
+              <th mat-header-cell *matHeaderCellDef> Giờ </th>
+              <td mat-cell class="pl-0" *matCellDef="let scheduleReminder" (click)="openDetailForm(scheduleReminder)">
+                {{scheduleReminder.ReminderTime}}</td>
+            </ng-container>
+            <ng-container matColumnDef="Mã KH">
+              <th mat-header-cell *matHeaderCellDef> Mã KH </th>
+              <td mat-cell *matCellDef="let scheduleReminder" (click)="openDetailForm(scheduleReminder)">
+                {{scheduleReminder.CustomerID}}</td>
+            </ng-container>
+            <ng-container matColumnDef="Họ tên">
+              <th mat-header-cell *matHeaderCellDef>Họ tên</th>
+              <td mat-cell *matCellDef="let scheduleReminder" (click)="openDetailForm(scheduleReminder)">
+                {{scheduleReminder.CustomerFullNameAndId}}</td>
+            </ng-container>
+            <ng-container matColumnDef="Điện thoại">
+              <th mat-header-cell *matHeaderCellDef> Điện thoại </th>
+              <td mat-cell *matCellDef="let scheduleReminder" (click)="openDetailForm(scheduleReminder)">
+                {{scheduleReminder.CustomerPhone}}</td>
+            </ng-container>
+            <ng-container matColumnDef="Ghi chú">
+              <th mat-header-cell *matHeaderCellDef> Ghi chú </th>
+              <td mat-cell *matCellDef="let scheduleReminder" (click)="openDetailForm(scheduleReminder)">
+                {{scheduleReminder.Description}}</td>
+            </ng-container>
+            <ng-container matColumnDef="Trạng thái">
+              <th mat-header-cell *matHeaderCellDef> Trạng thái </th>
+              <td mat-cell class="pr-0" *matCellDef="let scheduleReminder">
+                <div class="scheduleReminderStatus"
+                  (click)="updateStatus(scheduleReminder.CustomerRemindersID, scheduleReminder.Status)">
+                  <input type="checkbox" id="{{scheduleReminder.CustomerRemindersID}}"
+                    [checked]="scheduleReminder.Status == 2" hidden>
+                  <label for="{{scheduleReminder.CustomerRemindersID}}"><i class="material-icons">close</i></label>
+                  <label for="{{scheduleReminder.CustomerRemindersID}}"><i class="material-icons">check</i></label>
+                </div>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumnsScheduleReminder"></tr>
+            <tr mat-row *matRowDef="let scheduleReminder; columns: displayedColumnsScheduleReminder;"></tr>
+          </table>
+          <mat-paginator #paginatorScheduleReminder [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="4"
+            *ngIf="scheduleReminder.length > 0">
+          </mat-paginator>
+        </div>
+        <h1 class="text-center mt-5" *ngIf="scheduleReminder && scheduleReminder.length == 0">Chưa có lịch</h1>
+      </div>
+    </div>
+  </div>
+  <div class="schedule-container insideShadow" *ngIf="isShow === 1">
+    <!-- Lịch phẫu thuật -->
+    <div class="row padding-bot">
+      <div class="col-1">
+        <div class="scheduleType" style="">
+          <h5>Phẫu thuật</h5>
+        </div>
+      </div>
+      <div class="col-11 pl-0 operationSchedule">
+        <div *ngIf="operationSchedules && operationSchedules.length > 0" class="center">
+          <table mat-table [dataSource]="dataSourceOperation"
+            class=" table-hover table-striped text-center customTableStyle">
+            <ng-container matColumnDef="ScheduleTime">
+              <th mat-header-cell *matHeaderCellDef> Giờ </th>
+              <td mat-cell class="pl-0" *matCellDef="let operationSchedule">
+                {{operationSchedule.ScheduleTime}}</td>
+            </ng-container>
+            <ng-container matColumnDef="CustomerId">
+              <th mat-header-cell *matHeaderCellDef> Mã KH </th>
+              <td mat-cell *matCellDef="let operationSchedule">
+                {{operationSchedule.CustomerId}}</td>
+            </ng-container>
+            <ng-container matColumnDef="Customer">
+              <th mat-header-cell *matHeaderCellDef>Khách hàng</th>
+              <td mat-cell *matCellDef="let operationSchedule">
+                {{operationSchedule.CustomerFullnameAndId}}</td>
+            </ng-container>
+            <ng-container matColumnDef="SurgeryServices">
+              <th mat-header-cell *matHeaderCellDef> Dịch vụ </th>
+              <td mat-cell *matCellDef="let operationSchedule">{{operationSchedule.SurgeryServices}}</td>
+            </ng-container>
+            <ng-container matColumnDef="Notes">
+              <th mat-header-cell *matHeaderCellDef> Ghi chú </th>
+              <td mat-cell *matCellDef="let operationSchedule" class="text-left pl-2">
+                {{operationSchedule.Notes}}</td>
+            </ng-container>
+            <ng-container matColumnDef="Status">
+              <th mat-header-cell *matHeaderCellDef> Trạng thái </th>
+              <td mat-cell class="pr-0" *matCellDef="let operationSchedule">
+                <div class="scheduleStatus">
+                  <mat-form-field>
+                    <mat-select name="status" [(ngModel)]="operationSchedule.StatusString"
+                      (selectionChange)="updateScheduleStatus(operationSchedule.ScheduleId, $event.value)">
+                      <mat-option value="1">Đã hẹn</mat-option>
+                      <mat-option value="2">Đã xong</mat-option>
+                      <mat-option value="3">Hủy</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columnsSchedule"></tr>
+            <tr mat-row *matRowDef="let operationSchedule; columns: columnsSchedule;"></tr>
+          </table>
+          <mat-paginator #paginatorOperation [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="4">
+          </mat-paginator>
+        </div>
+        <h1 class="text-center mt-5" *ngIf="operationSchedules && operationSchedules.length == 0">Chưa có lịch</h1>
+      </div>
+    </div>
+
+    <!-- Lịch khám/tái khám -->
+    <div class="row padding-bot">
+      <div class="col-1">
+        <div class="scheduleType" style="">
+          <h5>Khám/<br>tái khám</h5>
+        </div>
+      </div>
+      <div class="col-11 pl-0 examinationSchedule">
+        <div *ngIf="examinationSchedules && examinationSchedules.length > 0" class="center">
+          <table mat-table [dataSource]="dataSourceExamination"
+            class=" table-hover table-striped text-center customTableStyle">
+            <ng-container matColumnDef="ScheduleTime">
+              <th mat-header-cell *matHeaderCellDef> Giờ </th>
+              <td mat-cell class="pl-0" *matCellDef="let examinationSchedule">
+                {{examinationSchedule.ScheduleTime}}</td>
+            </ng-container>
+            <ng-container matColumnDef="CustomerId">
+              <th mat-header-cell *matHeaderCellDef> Mã KH </th>
+              <td mat-cell *matCellDef="let examinationSchedule">
+                {{examinationSchedule.CustomerId}}</td>
+            </ng-container>
+            <ng-container matColumnDef="Customer">
+              <th mat-header-cell *matHeaderCellDef>Khách hàng</th>
+              <td mat-cell *matCellDef="let examinationSchedule">
+                {{examinationSchedule.CustomerFullnameAndId}}</td>
+            </ng-container>
+            <ng-container matColumnDef="SurgeryServices">
+              <th mat-header-cell *matHeaderCellDef> Dịch vụ </th>
+              <td mat-cell *matCellDef="let examinationSchedule">{{examinationSchedule.SurgeryServices}}</td>
+            </ng-container>
+            <ng-container matColumnDef="Notes">
+              <th mat-header-cell *matHeaderCellDef> Ghi chú </th>
+              <td mat-cell *matCellDef="let examinationSchedule" class="text-left pl-2">
+                {{examinationSchedule.Notes}}</td>
+            </ng-container>
+            <ng-container matColumnDef="Status">
+              <th mat-header-cell *matHeaderCellDef> Trạng thái </th>
+              <td mat-cell class="pr-0" *matCellDef="let examinationSchedule">
+                <div class="scheduleStatus">
+                  <mat-form-field>
+                    <mat-select name="status" [(ngModel)]="examinationSchedule.StatusString"
+                      (selectionChange)="updateScheduleStatus(examinationSchedule.ScheduleId, $event.value)">
+                      <mat-option value="1">Đã hẹn</mat-option>
+                      <mat-option value="2">Đã xong</mat-option>
+                      <mat-option value="3">Hủy</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+
+                </div>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columnsSchedule"></tr>
+            <tr mat-row *matRowDef="let examinationSchedule; columns: columnsSchedule;"></tr>
+          </table>
+          <mat-paginator #paginatorExamination [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="4">
+          </mat-paginator>
+        </div>
+        <h1 class="text-center mt-5" *ngIf="examinationSchedules && examinationSchedules.length == 0">Chưa có lịch
+        </h1>
+      </div>
+    </div>
+
+    <!-- Lịch Thay băng -->
+    <div class="row padding-bot">
+      <div class="col-1">
+        <div class="scheduleType" style="">
+          <h5>Thay băng, cắt chỉ</h5>
+        </div>
+      </div>
+      <div class="col-11 pl-0 examinationSchedule">
+        <div *ngIf="bandageChangingSchedules && bandageChangingSchedules.length > 0" class="center">
+          <table mat-table [dataSource]="dataSourceBandageChanging"
+            class=" table-hover table-striped text-center customTableStyle">
+            <ng-container matColumnDef="ScheduleTime">
+              <th mat-header-cell *matHeaderCellDef> Giờ </th>
+              <td mat-cell class="pl-0" *matCellDef="let bandageChanging">
+                {{bandageChanging.ScheduleTime}}</td>
+            </ng-container>
+            <ng-container matColumnDef="CustomerId">
+              <th mat-header-cell *matHeaderCellDef> Mã KH </th>
+              <td mat-cell *matCellDef="let bandageChanging">
+                {{bandageChanging.CustomerId}}</td>
+            </ng-container>
+            <ng-container matColumnDef="Customer">
+              <th mat-header-cell *matHeaderCellDef>Khách hàng</th>
+              <td mat-cell *matCellDef="let bandageChanging">
+                {{bandageChanging.CustomerFullnameAndId}}</td>
+            </ng-container>
+            <ng-container matColumnDef="SurgeryServices">
+              <th mat-header-cell *matHeaderCellDef> Dịch vụ </th>
+              <td mat-cell *matCellDef="let bandageChanging">{{bandageChanging.SurgeryServices}}</td>
+            </ng-container>
+            <ng-container matColumnDef="Notes">
+              <th mat-header-cell *matHeaderCellDef> Ghi chú </th>
+              <td mat-cell *matCellDef="let bandageChanging" class="text-left pl-2">
+                {{bandageChanging.Notes}}</td>
+            </ng-container>
+            <ng-container matColumnDef="Status">
+              <th mat-header-cell *matHeaderCellDef> Trạng thái </th>
+              <td mat-cell class="pr-0" *matCellDef="let bandageChanging">
+                <div class="scheduleStatus">
+                  <mat-form-field>
+                    <mat-select name="status" [(ngModel)]="bandageChanging.StatusString"
+                      (selectionChange)="updateScheduleStatus(bandageChanging.ScheduleId, $event.value)">
+                      <mat-option value="1">Đã hẹn</mat-option>
+                      <mat-option value="2">Đã xong</mat-option>
+                      <mat-option value="3">Hủy</mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="columnsSchedule"></tr>
+            <tr mat-row *matRowDef="let bandageChangingSchedule; columns: columnsSchedule;"></tr>
+          </table>
+          <mat-paginator #paginatorBandageChanging [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="4">
+          </mat-paginator>
+        </div>
+        <h1 class="text-center mt-5" *ngIf="bandageChangingSchedules && bandageChangingSchedules.length == 0">Chưa có
+          lịch</h1>
+      </div>
+    </div>
+
+
+  </div>
+
+  <!-- Lễ tân -->
+  <div class="home-content insideShadow mt-4" *ngIf="isShow === 2">
+    <app-receptionist-calendar [scheduleType]="scheduleType" [selectedDay]="selectedDay"></app-receptionist-calendar>
+  </div>
+
+  <!-- CSKH -->
+  <div class="home-content insideShadow mt-4" *ngIf="isShow === 4">
+    <app-customer-care [scheduleType]="scheduleType" [selectedDay]="selectedDay"></app-customer-care>
+  </div>
+</div>

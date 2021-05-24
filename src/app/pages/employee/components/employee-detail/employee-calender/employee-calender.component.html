@@ -1,0 +1,46 @@
+<div class="container-fluid ">
+    <div class="schedule">
+        <!-- <button class="add-button my-2">
+            <i class="material-icons">
+                add_circle_outline
+            </i>
+        </button> -->
+        <div class="schedule-select">
+                <select name="sortScheduleType" class="form-control p-0" style="height: auto; border: none;"
+                    [(ngModel)]="sortScheduleType" (change)="sortSchedule()">
+                    <option style="font-size: 1.1rem; color:#375384 ;" value="0">Lịch chăm sóc</option>
+                    <option value="1">Lịch phẫu thuật</option>
+                    <option value="2">Lịch khám/ tái khám</option>
+                    <option value="3">Lịch thay băng cắt chỉ</option>
+                </select>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col" *ngIf="sortScheduleType == 0" >          
+            <app-shared-table [displayedColumns]="displayedColumnsCareCalender" [backendDisplayColumns]="backendDisplayCalender"
+              [displayedData]="careCalender">
+            </app-shared-table>
+        </div>
+        <div class="col" *ngIf="sortScheduleType != 0" >   
+            <app-shared-table [displayedColumns]="displayedColumns" [backendDisplayColumns]="backendDisplayColumns"
+                [displayedData]="displayData">
+            </app-shared-table>
+        </div>
+        <!-- <div class="col" *ngIf="sortScheduleType == 1" >   
+            <app-shared-table [displayedColumns]="displayedColumns" [backendDisplayColumns]="backendDisplayColumns"
+                [displayedData]="operationSchedules">
+            </app-shared-table>
+        </div>
+        <div class="col" *ngIf="sortScheduleType == 3">   
+            <app-shared-table [displayedColumns]="displayedColumns" [backendDisplayColumns]="backendDisplayColumns"
+              [displayedData]="bandageChangingSchedules">
+            </app-shared-table>
+        </div>
+        <div class="col" *ngIf="sortScheduleType == 2">   
+            <app-shared-table [displayedColumns]="displayedColumns" [backendDisplayColumns]="backendDisplayColumns"
+                [displayedData]="examinationSchedules">
+            </app-shared-table>
+        </div> -->
+
+    </div>
+</div>

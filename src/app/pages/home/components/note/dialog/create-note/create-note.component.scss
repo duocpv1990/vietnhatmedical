@@ -1,0 +1,14 @@
+.row{
+    margin-bottom: 1em;
+    align-items: center;
+}
+.note-form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+mat-form-field{
+    width: 100%;
+}

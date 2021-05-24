@@ -1,0 +1,33 @@
+<div class="note customScrollbars">
+  <div class="note-header">
+    <h2>Note</h2>
+  <button class="add-button my-2" matTooltip="Thêm ghi chú mới" (click) = "openCreateForm()">
+    <i class="material-icons">
+      add_circle_outline
+    </i>
+  </button>
+  </div>
+  <div class="note-table">
+    <div class="note-content" *ngFor="let list of employeeNoteList">
+      <div class="note-content-title">
+        <div class="note-content-title-date">
+          <p>{{list.CreatedOn | date : 'dd/MM/yyyy'}}</p>
+        </div>
+        <div class="note-content-title-info" >
+          <p>{{list.NoteTitle}}<i class="material-icons" [matMenuTriggerFor]="menu">more_vert</i></p>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item style="outline: none;" (click) = "openEditForm(list.EmployeeNoteId)">
+              Sửa
+            </button>
+            <button mat-menu-item style="outline: none;" (click) = "openDeleteForm(list.EmployeeNoteId)">
+              Xóa
+            </button>
+          </mat-menu>
+        </div>
+      </div>
+      <div class="note-content-des">
+       <p>{{list.NoteContent}}</p>
+      </div>
+    </div>
+  </div>
+</div>

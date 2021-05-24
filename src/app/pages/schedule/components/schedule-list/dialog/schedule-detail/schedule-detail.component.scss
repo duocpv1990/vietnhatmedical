@@ -1,0 +1,11 @@
+.row .col, .col-6{
+    display: flex;
+    flex-direction: column;
+}
+
+.nameCustomer{
+    padding: .5rem;
+    &:hover{
+        cursor: pointer;
+    }
+}

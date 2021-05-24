@@ -1,0 +1,56 @@
+<div class="dialog-container container create-role">
+    <div class="row">
+        <div class="col-10">
+            <span class="dialog-title" style="padding: 0.3rem 0.75rem;">Tạo nhóm chức năng</span>
+        </div>
+        <div class="col-2 pl-4">
+            <span class="material-icons close-button" (click)="closeDialog()">
+                close
+            </span>
+        </div>
+    </div><br>
+    <!-- <h1 mat-dialog-title>Hi</h1> -->
+    <form ngNativeValidate #createForm="ngForm">
+        <div class="row">
+            <div class="col-4">
+                <mat-label for="">Nhóm chức năng:</mat-label>
+            </div>
+            <div class="col-8">
+                <input matInput name="name" [(ngModel)]="name" required>
+            </div>
+        </div>
+        <!-- <div class="row">
+            <div class="col-4"><br>
+                <mat-label>Mô tả:</mat-label>
+            </div>
+            <div class="col-8">
+                <mat-form-field class="w-100">
+                    <textarea matInput name="description" [(ngModel)]="description"></textarea>
+                </mat-form-field>
+            </div>
+        </div> -->
+
+        <div class="row role-list">
+            <div class="col-4">
+                <mat-label>Tên chức năng:</mat-label>
+            </div>
+            <div class="col-8">
+                <mat-form-field>
+                    <mat-select multiple>
+                        <mat-option *ngFor="let privilege of privileges" [value]="privilege.PrivilegeId" (click)="selectedPrivilege(privilege.PrivilegeId)">
+                            {{ privilege.Description }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            
+
+        </div>
+
+        <div class="row">
+            <div class="col text-center text-light">
+                <button class="btn customBtn" [disabled]="createForm.invalid" (click)="createRole()">Tạo</button>
+            </div>
+        </div>
+    </form>
+</div>

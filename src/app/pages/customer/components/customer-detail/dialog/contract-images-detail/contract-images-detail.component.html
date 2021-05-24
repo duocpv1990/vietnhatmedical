@@ -1,0 +1,59 @@
+<div class="dialog-container container">
+    <div class="row">
+        <div class="col-10">
+            <span class="dialog-title" *ngIf="data.ContractImageId">Ảnh đơn hàng</span>
+            <span class="dialog-title" *ngIf="data.examImageId">Ảnh xét nghiệm</span>
+        </div>
+        <div class="col-2 pl-4">
+            <span class="material-icons close-button" (click)="closeDialog()">
+                close
+            </span>
+        </div>
+    </div><br>
+    <form action="">
+        <div class="row">
+            <div class="col" *ngIf="data.ContractImageId">
+                <mat-label for="">Tên ĐH: &nbsp; {{contractCode}}</mat-label>
+
+                <!-- <mat-form-field class="w-100">
+                <input matInput name="contractImageId" [(ngModel)]="contractImageId" disabled>
+            </mat-form-field> -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-label for="">Ngày Upload: &nbsp; {{createdOn | date: 'dd/MM/yyyy'}}</mat-label>
+                <!-- <mat-form-field class="w-100">
+                <input matInput name="contractImageId" [(ngModel)]="contractImageId" disabled>
+            </mat-form-field> -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="">Ảnh</label>
+                <div class="imagePicking imageForm">
+                    <label for="" class="w-100 h-100">
+                        <a href="{{imageUrl}}" target="_blank" *ngIf="imageUrl">
+                            <img [src]="imageUrl" class="img-fluid mb-1">
+                        </a></label>
+                    <label for="imageUrl"><span class="material-icons p-1" matTooltip="Chọn ảnh"
+                            matTooltipPosition="right">
+                            add_a_photo
+                        </span></label>
+                </div>
+                <input #contractImage type="file" accept='image/*' id="imageUrl"
+                    (change)="processFileContractImg(contractImage.files)" hidden required>
+            </div>
+        </div><br>
+        <div class="row">
+            <div class="col text-center">
+                <div class="mx-auto insideShadow" style="max-width: 7rem;">
+                    <button class="btn customBtn" (click)="updateContractImg()"
+                        *ngIf="data.ContractImageId">Lưu</button>
+                    <button class="btn customBtn" (click)="updateNewExamImage()" *ngIf="data.examImageId">Lưu</button>
+                    <button class="btn cancelBtn" (click)="deleteContractImg()">Xóa</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

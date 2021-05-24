@@ -1,0 +1,46 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-10 px-0">
+        <span class="titleBox">
+            Lịch thay băng cắt chỉ
+          </span>
+    </div>
+    <div class="col-2">
+      <button class="add-button" matTooltip="Thêm lịch mới" (click)="openCreateForm()">
+          <i class="material-icons">
+              add_circle_outline
+          </i>
+      </button>
+  </div>
+</div>
+      <div class="row" *ngIf="onShow !== ''">
+        <div class="col text-center mt-5">
+            <b>{{onShow}}</b>
+        </div>
+      </div>
+      <div *ngIf="onShow == ''" class="col changebandage-table">  
+        <table mat-table [dataSource]="dataSource" matSort
+        class=" table-hover table-striped text-center customTableStyle">
+        <ng-container matColumnDef="Ngày">
+          <th mat-header-cell *matHeaderCellDef> Ngày </th>
+          <td mat-cell *matCellDef="let changeBandage" (click) = "openDetailForm(changeBandage.OperationScheduleId)">
+           {{changeBandage.ScheduleDate | date: "dd/MM/yyyy"}} 
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Giờ">
+          <th mat-header-cell *matHeaderCellDef >Giờ</th>
+          <td mat-cell *matCellDef="let changeBandage" (click) = "openDetailForm(changeBandage.OperationScheduleId)">
+            {{changeBandage.ScheduleDate | date: "hh:mm a"}} 
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Bác sĩ">
+          <th mat-header-cell *matHeaderCellDef >Bác sĩ</th>
+          <td mat-cell *matCellDef="let changeBandage" (click) = "openDetailForm(changeBandage.OperationScheduleId)">
+            {{changeBandage.MainProviderString}} 
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true "></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+    </div>
+</div>

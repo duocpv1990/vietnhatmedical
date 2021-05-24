@@ -1,0 +1,25 @@
+.schedule-body {
+  height: 52vh;
+  justify-content: center;
+  align-items: center;
+  p {
+    color: #6b80a4;
+  }
+  .form-input {
+    text-align: center;
+    position: relative;
+    input {
+      border: none;
+      border-bottom: 1px solid;
+      outline: none;
+    }
+  }
+  .submit-btn {
+    border: none;
+    color: #ffffff;
+    background: #224177;
+    margin-top: 1.5em;
+    padding: 0.5em 1.2em;
+    border-radius: 10px;
+  }
+}

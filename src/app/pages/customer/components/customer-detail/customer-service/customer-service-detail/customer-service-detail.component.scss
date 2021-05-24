@@ -1,0 +1,55 @@
+* {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif !important;
+}
+
+.service {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  padding-top: 2vh;
+}
+
+.service-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 33vh);
+  grid-template-areas: "a a b c" "d e f g ";
+  grid-gap: 15px;
+  // height: 70vh;
+  height: 100%;
+  padding: 15px 0px 15px 0px;
+  div {
+    border-radius: 15px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.16);
+  }
+}
+
+.detail {
+  grid-area: a;
+}
+
+.result {
+  grid-area: b;
+}
+
+.payment {
+  grid-area: c;
+}
+
+.medical-schedule {
+  grid-area: d;
+}
+
+.change-bandage {
+  grid-area: e;
+}
+
+.advisory-schedule {
+  grid-area: f;
+}
+
+.carecallschedule {
+  grid-area: g;
+}

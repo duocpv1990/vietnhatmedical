@@ -1,0 +1,124 @@
+<div class="dialog-container container" style="max-width: 50em;">
+    <div class="row">
+        <div class="col-11">
+            <span class="dialog-title" style="padding: .4em .7em;">Thông tin phẫu thuật</span>
+        </div>
+        <div class="col-1">
+            <span class="material-icons close-button" (click)="closeDialog()">
+                close
+            </span>
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="col">
+            <mat-label for="">Ngày phẫu thuật</mat-label>
+            <mat-form-field>
+                <input matInput type="date" name="operationDate" [(ngModel)]="operationDate">
+                <!-- <input matInput type="datetime-local" name="operationDate" [(ngModel)]="operationDate" [value]="operationDate | date:'yyyy-MM-ddTHH:mm'"> -->
+            </mat-form-field>
+        </div>
+        <div class="col">
+            <mat-label>Giờ phẫu thuật</mat-label>
+            <mat-form-field>
+                <input matInput type="time" name="operationTime" [(ngModel)]="operationTime">
+            </mat-form-field>
+        </div>
+        <div class="col">
+            <mat-label>Giờ kết thúc</mat-label>
+            <mat-form-field>
+                <input matInput type="time" name="completedTime" [(ngModel)]="completedTime">
+            </mat-form-field>
+        </div>
+
+    </div>
+    <div class="row">
+        <div class="col">
+            <mat-label for="">Ngày nhập viện</mat-label>
+            <mat-form-field>
+                <input matInput type="date" name="admissionDate" [(ngModel)]="admissionDate">
+            </mat-form-field>
+        </div>
+        <div class="col">
+            <mat-label for="">Ngày xuất viện</mat-label>
+            <mat-form-field>
+                <input matInput type="date" name="dischargeDate" [(ngModel)]="dischargeDate">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <mat-label>Bác sĩ chính</mat-label>
+            <mat-form-field class="w-100">
+                <mat-select multiple name="selectedMainDoctor" [(ngModel)]="selectedMainDoctor">
+                    <mat-option *ngFor="let doctor of doctorList" [value]="doctor.ProviderId"
+                        (click)="chooseMainDoctor(doctor.ProviderId)">{{doctor.FullName}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-6">
+            <mat-label>Điều dưỡng chính</mat-label>
+            <mat-form-field class="w-100 chooseProvider">
+                <mat-select multiple name="selectedMainNurse" [(ngModel)]="selectedMainNurse">
+                    <mat-option *ngFor="let nurse of assistantList" [value]="nurse.ProviderId"
+                        (click)="chooseMainNurse(nurse.ProviderId)">{{nurse.FullName}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <mat-label>Bác sĩ phụ</mat-label>
+            <mat-form-field class="w-100 chooseProvider">
+                <mat-select multiple name="selectedAssistantDoctor " [(ngModel)]="selectedAssistantDoctor">
+                    <mat-option *ngFor="let doctor of doctorList" [value]="doctor.ProviderId"
+                        (click)="chooseAssistantDoctor(doctor.ProviderId)">{{doctor.FullName}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-6">
+            <mat-label>Điều dưỡng phụ</mat-label>
+            <mat-form-field class="w-100 chooseProvider">
+                <mat-select multiple name="selectedAssistantNurse" [(ngModel)]="selectedAssistantNurse">
+                    <mat-option *ngFor="let assitant of assistantList" [value]="assitant.ProviderId"
+                        (click)="chooseAssistantNurse(assitant.ProviderId)">{{assitant.FullName}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <mat-label>Đánh giá</mat-label>
+
+
+            <div class="rate-container">
+                <div class="rate">
+                    <input (change)="chooseRating(5)" [checked]="rating == 5" type="radio" id="vote-5" name="rate" />
+                    <label for="vote-5" title="text">5 stars</label>
+                    <input (change)="chooseRating(4)" [checked]="rating == 4" type="radio" id="vote-4" name="rate" />
+                    <label for="vote-4" title="text">4 stars</label>
+                    <input (change)="chooseRating(3)" [checked]="rating == 3" type="radio" id="vote-3" name="rate" />
+                    <label for="vote-3" title="text">3 stars</label>
+                    <input (change)="chooseRating(2)" [checked]="rating == 2" type="radio" id="vote-2" name="rate" />
+                    <label for="vote-2" title="text">2 stars</label>
+                    <input (change)="chooseRating(1)" [checked]="rating == 1" type="radio" id="vote-1" name="rate" />
+                    <label for="vote-1" title="text">1 star</label>
+                </div>
+            </div>
+
+        </div>
+        <div class="col">
+            <mat-label>Ghi chú</mat-label>
+            <mat-form-field class="w-100">
+                <textarea (keyup)="autoGrowTextZone($event)" matInput name="notes" [(ngModel)]="notes"> </textarea>
+            </mat-form-field>
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="col text-center">
+            <div class="insideShadow mx-auto" style="max-width: 7rem;">
+                <button class="btn customBtn" (click)="updateSurgeryInfo()">Lưu</button>
+                <!-- <button class="btn cancelBtn" (click)="deleteSurgeryInfo()">Xóa</button> -->
+            </div>
+        </div>
+    </div>
+</div>

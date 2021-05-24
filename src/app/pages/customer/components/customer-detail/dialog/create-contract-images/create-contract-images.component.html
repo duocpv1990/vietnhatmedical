@@ -1,0 +1,170 @@
+<div class="dialog-container container">
+  <div class="row">
+    <div class="col-10">
+      <span class="dialog-title">Thêm ảnh</span>
+    </div>
+    <div class="col-2 pl-4">
+      <span class="material-icons close-button" (click)="closeDialog()">
+        close
+      </span>
+    </div>
+  </div>
+  <br />
+  <form action="" #createForm="ngForm">
+    <div class="row">
+      <div class="col">
+        <mat-form-field class="w-100">
+          <mat-label for="">Tên đơn hàng</mat-label>
+          <mat-select name="contractId" [(ngModel)]="contractId" required>
+            <mat-option
+              *ngFor="let contract of contractList"
+              [value]="contract.ContractId"
+            >
+              {{ contract.ContractCode }}</mat-option
+            >
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </div>
+        <div class="row">
+          <div class="col-6">
+            <label class="title" for="beforeSurgeryImage">
+              <span style="font-size: 1.5em;"> Ảnh trước </span> &nbsp; &nbsp;
+              <i class="material-icons">
+                add_a_photo
+              </i>
+            </label>
+
+            <div class="imagePicking imageForm">
+              <ul class="list-group">
+                <li
+                  class="list-group-item"
+                  *ngFor="let img of BeforeImageNameList"
+                >
+                  {{ img }}
+                </li>
+              </ul>
+            </div>
+            <input
+              #beforeSurgery
+              type="file"
+              accept="image/*"
+              id="beforeSurgeryImage"
+              multiple
+              (change)="processFileBeforeSurgeryImg(beforeSurgery.files)"
+              hidden
+              required
+            />
+          </div>
+          <div class="col-6">
+            <label class="title" for="afterSurgeryImage">
+              <span style="font-size: 1.5em;"> Ảnh sau </span> &nbsp; &nbsp;
+              <i class="material-icons">
+                add_a_photo
+              </i>
+            </label>
+
+            <div class="imagePicking imageForm">
+              <ul class="list-group">
+                <li
+                  class="list-group-item"
+                  *ngFor="let img of AfterImageNameLst"
+                >
+                  {{ img }}
+                </li>
+              </ul>
+            </div>
+            <input
+              #afterSurgery
+              type="file"
+              accept="image/*"
+              id="afterSurgeryImage"
+              multiple
+              (change)="processFileAfterSurgeryImg(afterSurgery.files)"
+              hidden
+              required
+            />
+          </div>
+        </div>
+        <br />
+        <div class="row">
+          <div class="col-6">
+            <label class="title" for="bandageImage">
+              <span style="font-size: 1.5em;"> Ảnh thay băng cắt chỉ </span>
+              &nbsp; &nbsp;
+              <i class="material-icons">
+                add_a_photo
+              </i>
+            </label>
+
+            <div class="imagePicking imageForm">
+              <ul class="list-group">
+                <li
+                  class="list-group-item"
+                  *ngFor="let img of BandageImageNameList"
+                >
+                  {{ img }}
+                </li>
+              </ul>
+            </div>
+            <input
+              #bandage
+              type="file"
+              accept="image/*"
+              id="bandageImage"
+              multiple
+              (change)="processFileBandageImg(bandage.files)"
+              hidden
+              required
+            />
+          </div>
+          <div class="col-6">
+            <label class="title" for="visitImage">
+              <span style="font-size: 1.5em;"> Ảnh khám, tái khám </span> &nbsp;
+              &nbsp;
+              <i class="material-icons">
+                add_a_photo
+              </i>
+            </label>
+            <div class="imagePicking imageForm">
+              <ul class="list-group">
+                <li
+                  class="list-group-item"
+                  *ngFor="let img of VisitImageNameLst"
+                >
+                  {{ img }}
+                </li>
+              </ul>
+            </div>
+            <input
+              #visitImg
+              type="file"
+              accept="image/*"
+              id="visitImage"
+              multiple
+              (change)="processFileVisitImg(visitImg.files)"
+              hidden
+              required
+            />
+          </div>
+        </div>
+    <br />
+    <div class="row">
+      <div class="col text-center text-light">
+        <button
+          class="btn customBtn"
+          [disabled]="
+            createForm.invalid ||
+            (!beforeImageString &&
+              !afterImageString &&
+              !bandageImageString &&
+              !visitImageString)
+          "
+          (click)="createContractImage()"
+        >
+          Tạo
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

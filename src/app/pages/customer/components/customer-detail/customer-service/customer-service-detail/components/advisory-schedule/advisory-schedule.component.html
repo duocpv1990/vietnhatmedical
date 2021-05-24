@@ -1,0 +1,49 @@
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-10 px-0">
+            <span class="titleBox">
+                Lịch tư vấn
+            </span>
+        </div>
+        <div class="col-2 d-flex justify-content-end">
+            <button class="add-button" matTooltip="Thêm lịch mới" (click)="openCreateAdvisoryScheduleDialog()">
+                <i class="material-icons">
+                    add_circle_outline
+                </i>
+            </button>
+        </div>
+    </div>
+    <div class="row" *ngIf="onShow !== ''">
+        <div class="col text-center mt-5">
+            <b>{{onShow}}</b>
+        </div>
+    </div>
+    <div *ngIf="onShow == ''" class=" col medical-table">
+        <table mat-table [dataSource]="displayedData" matSort class=" table-hover table-striped text-center customTableStyle">
+
+            <ng-container matColumnDef="Ngày">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Ngày </th>
+                <td mat-cell *matCellDef="let advisorySchedule">
+                    &nbsp;&nbsp; {{advisorySchedule.DateString}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Giờ">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Giờ </th>
+                <td mat-cell *matCellDef="let advisorySchedule">
+                    {{advisorySchedule.TimeString}}
+                </td>
+            </ng-container>
+
+            <ng-container matColumnDef="Bác sĩ">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Bác sĩ </th>
+                <td mat-cell *matCellDef="let advisorySchedule">
+                    {{advisorySchedule.MainProviderString}}
+                </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns; let advisorySchedule" (click)="openDetailAdvisoryScheduleDialog(advisorySchedule.OperationScheduleId)"></tr>
+        </table>
+    </div>
+</div>

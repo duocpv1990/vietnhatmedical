@@ -1,0 +1,282 @@
+.home-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 15px;
+}
+
+.schedule-container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 15px;
+}
+
+.header {
+  display: flex;
+  margin-bottom: 10px;
+  height: 45px;
+  .home-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 15px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.16);
+    // width: 460px;
+    width: max-content;
+    font-weight: 500;
+    font-size: 16px;
+    span {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #375384;
+      height: 100%;
+      color: #fff;
+      padding: 0 16px;
+      border-radius: 15px;
+      padding: 10px 27px;
+    }
+    div {
+      color: #375384;
+      padding: 0 10px;
+    }
+  }
+  .search-block {
+    display: flex;
+    padding-top: 3px;
+    .search-item {
+      margin-top: 7px;
+      margin-left: 10px;
+      input {
+        border: none;
+        width: 18vh;
+      }
+    }
+    .selected-day {
+      margin-left: 1.2em;
+      display: flex;
+      align-items: center;
+      span {
+        margin-right: 0.8em;
+      }
+    }
+  }
+}
+
+.customTableStyle {
+  box-shadow: none !important;
+  tr.mat-row {
+    height: 5vh !important;
+  }
+}
+
+.reminderType {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #6b80a4;
+  border-radius: 10px;
+  height: 26vh;
+  text-align: center;
+  color: #fff;
+}
+
+::ng-deep .callSchedule {
+  .mat-paginator .mat-paginator-container {
+    justify-content: flex-end !important;
+    .mat-paginator-page-size {
+      display: none;
+    }
+  }
+}
+
+::ng-deep .scheduleReminder {
+  table thead {
+    visibility: collapse;
+  }
+  .mat-paginator .mat-paginator-container {
+    justify-content: flex-end !important;
+    .mat-paginator-page-size {
+      display: none;
+    }
+  }
+}
+
+.scheduleReminderStatus {
+  height: 23.7px;
+  background: #fff;
+  border-radius: 15px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.16);
+  display: inline-block;
+  label {
+    background: #a7c3e6;
+    color: #fff;
+    border-radius: 15px;
+    padding: 0px 15px;
+    cursor: pointer;
+  }
+  label:last-child {
+    background: #fff;
+    color: #dddddd;
+    border-radius: 15px;
+    padding: 0px 15px;
+    cursor: pointer;
+  }
+  .material-icons {
+    margin-top: 1px;
+    font-size: 17px;
+  }
+}
+
+.scheduleReminderStatus input[type="checkbox"]:checked + label {
+  background: #fff !important;
+  color: #dddddd;
+  & + label {
+    background: #a7c3e6 !important;
+    color: #fff;
+  }
+}
+
+//schedule
+// :host{
+//   display: block;
+//   // background: #6b80a4;
+// }
+.customTableStyle {
+  box-shadow: none !important;
+}
+
+tr.mat-row {
+  height: 36px !important;
+}
+
+.scheduleType {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: #6b80a4;
+  border-radius: 10px;
+  height: 100%;
+  // height: 15.5vh;
+  text-align: center;
+  color: #fff;
+  padding: 5px;
+}
+
+mat-paginator {
+  max-height: 35px;
+}
+
+::ng-deep .operationSchedule {
+  .mat-paginator .mat-paginator-container {
+    justify-content: flex-end !important;
+    .mat-paginator-page-size {
+      display: none;
+    }
+  }
+}
+
+::ng-deep .examinationSchedule {
+  table thead {
+    display: none;
+    max-height: 30px;
+  }
+  .mat-paginator .mat-paginator-container {
+    justify-content: flex-end !important;
+    .mat-paginator-page-size {
+      display: none;
+    }
+  }
+}
+
+.scheduleStatus {
+  width: 80px;
+  margin: 0 auto;
+  mat-form-field {
+    width: 100%;
+  }
+  ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+    padding-bottom: 0.5em !important;
+  }
+  ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline {
+    height: 0px !important;
+  }
+  ::ng-deep .mat-form-field-infix {
+    border-top-width: 0px;
+    padding-top: 10px;
+    padding-bottom: 0px;
+  }
+}
+
+.rate {
+  // padding-left: 18%;
+}
+
+.rate:not(:checked) > input {
+  position: absolute;
+  top: -9999px;
+}
+
+.rate:not(:checked) > label {
+  // float: right;
+  width: 1em;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 26px;
+  color: #ccc;
+}
+
+.rate:not(:checked) > label:before {
+  content: "★ ";
+}
+
+.rate > input:checked ~ label {
+  color: #ffc700;
+}
+
+// .rate:not(:checked) > label:hover,
+// .rate:not(:checked) > label:hover ~ label {
+//   color: #deb217;
+// }
+// .rate > input:checked + label:hover,
+// .rate > input:checked + label:hover ~ label,
+// .rate > input:checked ~ label:hover,
+// .rate > input:checked ~ label:hover ~ label,
+// .rate > label:hover ~ input:checked ~ label {
+//   color: #c59b08;
+// }
+
+.schedule-select {
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-left: 1.2em;
+  padding-left: 1em;
+  border: 1px solid #375384;
+  border-radius: 10px;
+  color: #375384;
+  height: 40px;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.16);
+  small {
+    font-size: 1rem;
+  }
+  select {
+    box-shadow: none;
+    border: none;
+    margin-left: 1.2em;
+    outline-style: none;
+  }
+}
+.padding-bot {
+  padding-bottom: 15px;
+  height: 32%;
+}
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}

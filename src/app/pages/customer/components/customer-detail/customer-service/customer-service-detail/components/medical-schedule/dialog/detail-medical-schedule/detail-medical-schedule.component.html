@@ -1,0 +1,101 @@
+<div class="dialog-container">
+
+    <div class="row">
+        <div class="col-10">
+            <span class="dialog-title">Sửa lịch khám</span>
+        </div>
+        <div class="col-2 pl-4">
+            <span class="material-icons close-button" (click)="closeDialog()">
+                close
+            </span>
+        </div>
+    </div>
+    <form class="mt-1" action="" ngNativeValidate>
+        <div class="container" style="min-width: 32em;">
+            <div class="row">
+                <div class="col-6">
+                    <mat-form-field>
+                        <label for="">Ngày khám</label>
+                        <input matInput type="date" name="date" [(ngModel)]="date" required />
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field>
+                        <label for="">Giờ khám</label>
+                        <input matInput type="time" name="time" [(ngModel)]="time" required />
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <mat-form-field>
+                        <label>Bác sĩ khám</label>
+                        <mat-select name="provider" id="provider" [(ngModel)]="providerId" required>
+                            <mat-option *ngFor="let provider of providers" [value]="provider.ProviderId"
+                                [selected]="provider.ProviderId == providerId">
+                                {{provider.FullNameAndId}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field>
+                        <label>Điều dưỡng</label>
+                        <mat-select name="mainNurseId" [(ngModel)]="mainNurseId" required>
+                            <mat-option *ngFor="let item of assisstantList" [value]="item.ProviderId"
+                                [selected]="item.ProviderId == mainNurseId">
+                                {{item.FullNameAndId}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+               
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <mat-form-field>
+                        <label>Tình trạng</label>
+                        <mat-select name="status" [(ngModel)]="status" required>
+                            <mat-option value="1">Đã hẹn</mat-option>
+                            <mat-option value="2">Đã xong</mat-option>
+                            <mat-option value="3">Hủy</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field class="w-100">
+                        <label for="">Ghi chú</label>
+                        <textarea (keyup)="autoGrowTextZone($event)" matInput rows="4" name="notes"
+                            [(ngModel)]="notes"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-6">
+                        <label for="">Đánh giá</label>
+                        <div class="rate">
+                            <input (change)="chooseRating(5)" [checked]="rating == 5" type="radio" id="star5" name="rate" />
+                            <label  for="star5" title="text">5 stars</label>
+                            <input (change)="chooseRating(4)" [checked]="rating == 4" type="radio" id="star4" name="rate" />
+                            <label for="star4" title="text">4 stars</label>
+                            <input (change)="chooseRating(3)" [checked]="rating == 3" type="radio" id="star3" name="rate" />
+                            <label for="star3" title="text">3 stars</label>
+                            <input (change)="chooseRating(2)" [checked]="rating == 2" type="radio" id="star2" name="rate" />
+                            <label for="star2" title="text">2 stars</label>
+                            <input (change)="chooseRating(1)" [checked]="rating == 1" type="radio" id="star1" name="rate" />
+                            <label for="star1" title="text">1 star</label>
+                          </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-center">
+                    <div class="mx-auto insideShadow" style="max-width: 7rem;">
+                        <button class="btn customBtn" (click)="updateMedicalSchedule()">Lưu</button>
+                        <button class="btn cancelBtn" (click)="deleteMedicalSchedule()">Xóa</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

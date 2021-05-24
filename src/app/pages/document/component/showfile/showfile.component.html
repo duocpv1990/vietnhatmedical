@@ -1,0 +1,18 @@
+<div class="showFile">
+    <div class="showFile-head">
+        <div class="showFile-head-name">
+            Danh sách tài liệu
+        </div>
+        <div class="showFile-head-btn" (click)="closeDialog()">
+            <span class="material-icons">
+                clear
+            </span>
+        </div>
+    </div>
+    <ul>
+        <li *ngFor="let item of showFileName">
+            <a href="{{item.ImageUrl}}" download>{{item.Name }}</a>
+        </li>
+    </ul>
+
+</div>

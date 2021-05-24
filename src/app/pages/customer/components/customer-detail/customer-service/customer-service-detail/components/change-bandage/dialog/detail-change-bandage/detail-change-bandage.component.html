@@ -1,0 +1,98 @@
+<div class="dialog-container">
+    <div class="row">
+        <div class="col-10">
+            <span class="dialog-title">Sửa lịch thay băng, cắt chỉ</span>
+        </div>
+        <div class="col-2 pl-4">
+            <span class="material-icons close-button" (click)="closeDialog()">
+                close
+            </span>
+        </div>
+    </div><br>
+    <form action="">
+        <div class="container" style="min-width: 32em;">
+            <div class="row">
+                <div class="col-6">
+                    <mat-form-field>
+                        <label for="">Ngày làm</label>
+                        <input matInput type="date" name="date" [(ngModel)]="date" required />
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field>
+                        <label for="">Giờ làm</label>
+                        <input matInput type="time" name="time" [(ngModel)]="time" required />
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <mat-form-field>
+                        <label>Bác sĩ</label>
+                        <mat-select name="doctorId" [(ngModel)]="doctorId" required
+                            (selectionChange)="pushToDoctorList($event.value)">
+                            <mat-option *ngFor="let doctor of doctorList" [value]="doctor.ProviderId">
+                                {{doctor.FullName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field>
+                        <label>Điều dưỡng</label>
+                        <mat-select name="assisstantId" [(ngModel)]="assisstantId" required
+                            (selectionChange)="pushToNureList($event.value)">
+                            <mat-option *ngFor="let assitant of assisstantList" [value]="assitant.ProviderId">
+                                {{assitant.FullName}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-6">
+                    <mat-form-field>
+                        <label>Tình trạng</label>
+                        <mat-select name="status" [(ngModel)]="status" required>
+                            <mat-option value="1">Đã hẹn</mat-option>
+                            <mat-option value="2">Đã xong</mat-option>
+                            <mat-option value="3">Hủy</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="col-6">
+                    <mat-form-field>
+                        <label for="">Ghi chú</label>
+                        <textarea matInput rows="1" name="notes" [(ngModel)]="notes"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-6">
+                        <label for="">Đánh giá</label>
+                        <div class="rate">
+                            <input (change)="chooseRating(5)" [checked]="rating == 5" type="radio" id="star5" name="rate" />
+                            <label  for="star5" title="text">5 stars</label>
+                            <input (change)="chooseRating(4)" [checked]="rating == 4" type="radio" id="star4" name="rate" />
+                            <label for="star4" title="text">4 stars</label>
+                            <input (change)="chooseRating(3)" [checked]="rating == 3" type="radio" id="star3" name="rate" />
+                            <label for="star3" title="text">3 stars</label>
+                            <input (change)="chooseRating(2)" [checked]="rating == 2" type="radio" id="star2" name="rate" />
+                            <label for="star2" title="text">2 stars</label>
+                            <input (change)="chooseRating(1)" [checked]="rating == 1" type="radio" id="star1" name="rate" />
+                            <label for="star1" title="text">1 star</label>
+                          </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col text-center">
+                    <div class="mx-auto insideShadow" style="max-width: 7rem;">
+                        <button class="btn customBtn" (click)="updateChangeBandage()">Lưu</button>
+                        <button class="btn cancelBtn" (click)="deleteChangeBandage()">Xóa</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,71 @@
+<div class="dialog-container container">
+    <div class="row">
+        <div class="col-10">
+            <span class="dialog-title">Tạo kết quả phẫu thuật</span>
+        </div>
+        <div class="col-2 pl-4">
+            <span class="material-icons close-button" (click)="closeDialog()">
+                close
+            </span>
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="col-6">
+            <mat-label>Đánh giá kết quả</mat-label>
+            <mat-form-field>
+                <mat-select name="resultRating" [(ngModel)]="resultRating">
+                    <mat-option value="1">Xấu</mat-option>
+                    <mat-option value="2">Tốt</mat-option>
+                    <mat-option value="3">Rất tốt</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-6">
+            <div class="needHelp mt-3">
+                <input type="checkbox" id="sos_btn" hidden (change)="chooseSOS();">
+                <label for="sos_btn" [hidden]="resultRating != 1">S.O.S</label>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="row">
+        <div class="col-6">
+            <label for="">Ảnh trước</label>
+            <div class="imagePicking imageForm">
+                <label for="beforeSurgeryImage" class="w-100 h-100"><img [src]="beforeImageString"
+                        *ngIf="beforeImageString" class="img-fluid mb-1"></label>
+                <label for="beforeSurgeryImage"><span class="material-icons">
+                        add_a_photo
+                    </span></label>
+            </div>
+            <input #beforeSurgery type="file" accept='image/*' id="beforeSurgeryImage"
+                (change)="processFileBeforeSurgeryImg(beforeSurgery.files)" hidden>
+        </div>
+        <div class="col-6">
+            <label for="">Ảnh sau</label>
+            <div class="imagePicking imageForm">
+                <label for="afterSurgeryImage" class="w-100 h-100"><img [src]="afterImageString"
+                        *ngIf="afterImageString" class="img-fluid mb-1"></label>
+                <label for="afterSurgeryImage"><span class="material-icons">
+                        add_a_photo
+                    </span></label>
+            </div>
+            <input #afterSurgery type="file" accept='image/*' id="afterSurgeryImage"
+                (change)="processFileAfterSurgeryImg(afterSurgery.files)" hidden>
+        </div>
+    </div> -->
+    <br>
+    <div class="row">
+        <div class="col">
+            <label>Ghi chú</label>
+            <mat-form-field class="w-100">
+                <textarea (keyup)="autoGrowTextZone($event)" matInput name="notes" [(ngModel)]="notes"> </textarea>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col text-center">
+            <button class="btn customBtn" (click)="createSurgeryResult()">Tạo</button>
+        </div>
+    </div>
+
+</div>

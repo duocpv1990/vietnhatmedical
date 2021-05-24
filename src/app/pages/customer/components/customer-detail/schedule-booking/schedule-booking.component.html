@@ -1,0 +1,82 @@
+<form action="">
+  <div class="container schedule-booking">
+    <div>
+      <h1 class="text-center mt-3" style="margin-left: -2em">Đặt lịch hẹn</h1>
+    </div>
+    <div class="row">
+      <div class="col-6">
+        <div>
+          <mat-label>Loại lịch</mat-label>
+          <mat-form-field>
+            <mat-select [(value)]="type">
+              <mat-option value="2">Gọi</mat-option>
+              <mat-option value="1">Hẹn</mat-option>
+              <mat-option value="3">Lịch gọi chăm sóc</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-label>Sale phụ trách</mat-label>
+          <mat-form-field>
+            <input matInput type="text" name="sale" [(ngModel)]="sale" readonly />
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-label>Liên hệ</mat-label>
+          <mat-form-field>
+            <mat-select [(value)]="contactType">
+              <mat-option value="1">Zalo</mat-option>
+              <mat-option value="2">Email </mat-option>
+              <mat-option value="3">Gọi điện </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-label>Ngày</mat-label>
+          <mat-form-field>
+            <input matInput type="date" name="dayDate" [(ngModel)]="dayDate" />
+          </mat-form-field>
+        </div>
+
+        <div>
+          <mat-label>Giờ</mat-label>
+          <mat-form-field>
+            <input matInput type="time" name="hourDate" [(ngModel)]="hourDate" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="col-6">
+        <div *ngIf="type == 3">
+          <mat-label>Dịch vụ</mat-label>
+          <mat-form-field>
+            <mat-select name="operationId" [(ngModel)]="operationId"
+              (selectionChange)="chooseOperationId($event.value)">
+              <mat-option value="" *ngFor="let operation of operations" [value]="operation.OperationId">
+                {{operation?.SurgerySubServiceName}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+        </div>
+
+        <div class="text-note">
+          <mat-label>Ghi chú</mat-label>
+          <mat-form-field>
+            <textarea matInput cdkTextareaAutosize name="description" [(ngModel)]="description">
+            </textarea>
+          </mat-form-field>
+        </div>
+
+      </div>
+    </div>
+    <div class="insideShadow btnGroup" *ngIf="isAccessAdd">
+      <button class="btn customBtn" (click)="createCustomerReminder()">
+        Tạo
+      </button>
+      <button class="btn cancelBtn" (click)="cancelCreate()">Hủy</button>
+    </div>
+    <br />
+  </div>
+</form>

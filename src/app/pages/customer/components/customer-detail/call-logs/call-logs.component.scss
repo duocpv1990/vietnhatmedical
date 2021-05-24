@@ -1,0 +1,18 @@
+.container-fluid {
+  .customTableStyle {
+    margin-top: 0.8em;
+  }
+  ::ng-deep .mat-tab-label-container {
+    margin-left: 0px !important;
+    margin-top: 0px !important;
+  }
+  ::ng-deep .mat-tab-label.mat-tab-disabled {
+    pointer-events: none !important;
+    opacity: 0.5 !important;
+  }
+
+  ::ng-deep .mat-tab-nav-bar,
+  .mat-tab-header {
+    margin-bottom: unset !important;
+  }
+}

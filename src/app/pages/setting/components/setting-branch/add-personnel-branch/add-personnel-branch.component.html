@@ -1,0 +1,68 @@
+<div class="container addPersonnel">
+    <div class="row">
+        <div class="head">
+            <div class="head-text">
+                Thêm nhân sự
+            </div>
+            <div class="head-icon" (click)="Close()">
+                <span class="material-icons">clear</span>
+            </div>
+        </div>
+        <br>
+        <div class="choose_branch">
+            <div class="choose_branch-text"> Chi nhánh</div>
+            <div class="choose_branch-list">
+                <mat-form-field appearance="fill">
+                    <mat-select disableRipple>
+                        <mat-option *ngFor="let branch of branches" value="branch.BranchId" (click)="chooseBranch(branch.BranchId)">{{branch.FullName}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="add_personnel">
+
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z8 table table-hover table-striped text-center customTableStyle">
+
+                <ng-container matColumnDef="choose">
+                    <th mat-header-cell *matHeaderCellDef>Chọn</th>
+
+                    <td mat-cell *matCellDef="let EmployeeList">
+                        <input type="checkbox" id="checkbox" class="checkbox" (click)="chooseEmp(EmployeeList.EmployeeId)" />
+                        <label for="checkbox"></label>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="employeeId">
+                    <th mat-header-cell *matHeaderCellDef> Mã NV </th>
+                    <td mat-cell *matCellDef="let EmployeeList"> {{EmployeeList.EmployeeId}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Họ tên </th>
+                    <td mat-cell *matCellDef="let EmployeeList"> {{EmployeeList.FullName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="position">
+                    <th mat-header-cell *matHeaderCellDef> Chức vụ </th>
+                    <td mat-cell *matCellDef="let EmployeeList"> {{EmployeeList.ListPosition}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="dapartment">
+                    <th mat-header-cell *matHeaderCellDef> Phòng ban </th>
+                    <td mat-cell *matCellDef="let EmployeeList"> {{EmployeeList.DepartmentName}} </td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedEmployeeColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedEmployeeColumns;"></tr>
+            </table>
+        </div>
+
+        <div class="confirm">
+            <div class="confirm-btn">
+                <div class="confirm-btn-left" (click)="addEmpInBarnch()"> Xác nhận</div>
+                <div class="confirm-btn-right" (click)="Close()"> Hủy</div>
+            </div>
+        </div>
+    </div>
+</div>

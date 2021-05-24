@@ -1,0 +1,32 @@
+.customer-table {
+    height: 100%;
+  }
+  .customer-header {
+    display: inline-flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    cursor: pointer;
+  }
+  .text-start {
+    text-align: start !important;
+  }
+  .customer-title {
+    font-weight: 600;
+    font-size: 1.2rem;
+    ::ng-deep .mat-button {
+      background: #375384;
+      color: #fff;
+      border-radius: 10px;
+      font-size: .8em;
+    }
+    
+    span {
+      background: #375384;
+      color: #fff;
+      padding: 10px 15px;
+      border-radius: 10px;
+      margin-left: -3px;
+      margin-right: 3px;
+    }
+  }

@@ -1,0 +1,37 @@
+::ng-deep .employee-customer-table .search-box {
+top: -9px !important;
+}
+#overlayChooseCustomer{
+    position: fixed;
+    top: 0; left: 0; bottom: 0; right: 0;
+    z-index: 110;
+    display: none;
+    background: rgba(0,0,0,.5);
+}
+#chooseCustomer{
+    height: 100vh;
+    width: 0;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    background-color: #fff;
+    overflow-x: hidden;
+    transition: 1s;
+    border-radius: 30px 0 0 30px;
+    padding: 15px;
+    text-align: center;
+    button {
+        background: #E4BC65; 
+        color: #ffffff;
+        
+    }
+}
+
+#chooseCustomer .closebtn {
+    position: absolute;
+    top: 10px;
+    right: 25px;
+    font-size: 36px;
+    text-decoration: none;
+  }

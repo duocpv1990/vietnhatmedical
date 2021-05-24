@@ -1,0 +1,17 @@
+.text-note {
+  width: 12vw;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+::ng-deep .tooltip-class {
+  font-size: 0.8em !important;
+}
+
+::ng-deep td.mat-cell:nth-child(6),
+td.mat-footer-cell:nth-child(6),
+th.mat-header-cell:nth-child(6) {
+  width: 2rem;
+}

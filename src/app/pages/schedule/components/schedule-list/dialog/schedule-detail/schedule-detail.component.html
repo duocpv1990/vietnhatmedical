@@ -1,0 +1,80 @@
+<div class="dialog-container container" style="max-width: 50em;">
+    <div class="row">
+        <div class="col-11">
+            <span class="dialog-title" style="padding: .4em .7em;">Chi tiết lịch</span><span class="nameCustomer"
+                style="font-weight: bold;"
+                (click)="redirectCustomerInfo()">{{currentSchedule?.CustomerFullNameAndId}}</span>
+        </div>
+        <div class="col-1">
+            <span class="material-icons close-button" (click)="closeDialog()">
+                close
+            </span>
+        </div>
+    </div><br>
+    <div class="row">
+        <div class="col-6">
+            <mat-label>Loại lịch</mat-label>
+            <mat-form-field>
+                <mat-select name="type" [(ngModel)]="type">
+                    <mat-option value="1">Hẹn</mat-option>
+                    <mat-option value="2">Gọi</mat-option>
+                    <mat-option value="3">Lịch gọi chăm sóc</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="col-6">
+            <mat-label>Liên hệ</mat-label>
+            <mat-form-field>
+                <mat-select [(value)]="contactType">
+                    <mat-option value="1">Zalo</mat-option>
+                    <mat-option value="2">Email </mat-option>
+                    <mat-option value="3">Gọi điện </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <mat-label>Sale phụ trách</mat-label>
+            <mat-form-field>
+                <input matInput type='text' name='sale' [(ngModel)]="sale" readonly>
+            </mat-form-field>
+        </div>
+        <div class="col-6">
+            <mat-label>Trạng thái</mat-label>
+            <mat-form-field>
+                <mat-select name="status" [(ngModel)]="status" required>
+                    <mat-option value="1">Đã hẹn</mat-option>
+                    <mat-option value="2">Đã xong</mat-option>
+                    <mat-option value="3">Hủy</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <mat-label>Ngày</mat-label>
+            <mat-form-field>
+                <input matInput type='date' name="dayDate" [(ngModel)]="dayDate">
+            </mat-form-field>
+        </div>
+        <div class="col-6">
+            <mat-label>Giờ</mat-label>
+            <mat-form-field>
+                <input matInput type='time' name="hourDate" [(ngModel)]="hourDate">
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <mat-label>Ghi chú</mat-label>
+            <mat-form-field>
+                <textarea matInput name="description" [(ngModel)]="description"> </textarea>
+            </mat-form-field>
+        </div>
+    </div><br>
+    <div class="insideShadow mx-auto" style="max-width: 10em;">
+        <button class="btn customBtn" (click)="updateCustomerHistory()">Lưu</button>
+        <button class="btn cancelBtn" (click)="deleteCustomerHistory()">Xóa</button>
+    </div><br>
+</div>

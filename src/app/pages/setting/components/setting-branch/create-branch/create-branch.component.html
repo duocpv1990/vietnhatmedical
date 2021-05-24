@@ -1,0 +1,28 @@
+<div class="dialog-container container">
+    <div class="row">
+        <div class="col-10">
+            <div class="dialog-title">Tạo chi nhánh</div>
+        </div>
+        <div class="col-2 pl-4">
+            <span class="material-icons close-button" (click)="closeDialog()">
+                close
+            </span>
+        </div>
+    </div>
+    <div class="row mt-5">
+        <div class="col-3">
+            <mat-label>Tên chi nhánh:</mat-label>
+        </div>
+        <div class="col-9">
+            <input class="form-control" name="fullName" [(ngModel)]="fullName">
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col text-center text-light">
+            <button class="btn customBtn" (click)="createBranch()">Tạo</button>
+        </div>
+    </div>
+
+</div>

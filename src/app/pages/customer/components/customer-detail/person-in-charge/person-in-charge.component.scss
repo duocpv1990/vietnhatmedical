@@ -1,0 +1,8 @@
+.person-in-charge {
+  margin-top: 50px;
+}
+
+::ng-deep .person-in-charge .search-box {
+ top: 15px !important;
+ right: 15px !important;
+} 

@@ -1,0 +1,69 @@
+<div class="dialog-container container">
+  <div class="row">
+    <div class="col-10">
+      <span class="dialog-title">Sửa phiếu xét nghiệm</span>
+    </div>
+    <div class="col-2 pl-4">
+      <span class="material-icons close-button" (click)="closeDialog()">
+        close
+      </span>
+    </div>
+  </div>
+  <br />
+  <!-- <h1 mat-dialog-title>Hi</h1> -->
+  <form action="">
+    <div class="row">
+      <div class="col-3">
+        <mat-label for="">Ngày:</mat-label>
+      </div>
+      <div class="col-9">
+        <input type="date" matInput name="examinationDate" [(ngModel)]="examinationDate" required />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <br />
+        <mat-label>Mô tả:</mat-label>
+      </div>
+      <div class="col-9">
+        <mat-form-field class="w-100">
+          <textarea (keyup)="autoGrowTextZone($event)" matInput name="description" [(ngModel)]="description"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <br />
+        <mat-label for="">Thêm ảnh xét nghiệm khác:</mat-label>
+      </div>
+      <div class="col-9 text-center">
+        <div class="imageForm" *ngIf="imagesPick.getValue().length == 0">
+          <label for="exam" class="w-100 h-100"><img [src]="customerExamImageString"
+              *ngIf="customerExamImageString && imagesName" class="img-fluid mb-1" /></label>
+
+          <label for="exam"><span class="material-icons">add_a_photo</span></label>
+        </div>
+        <div class="imagePicking imageForm" *ngIf="imagesPick.getValue().length > 0">
+          <ul class="list-group" *ngFor="let img of imagesName; let i = index">
+            <li class="list-group-item" *ngIf="i < 3">
+              {{ img | Overflow: ["30", "..."] }}
+            </li>
+          </ul>
+          <div class="list-group-item" *ngIf="imagesName.length > 3">
+            ...
+          </div>
+        </div>
+        <input #Exam type="file" accept="image/*" id="exam" multiple (change)="processFileExamImage(Exam.files)"
+          required hidden />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-center">
+        <div class="mx-auto insideShadow" style="max-width: 7rem;">
+          <button class="btn customBtn" (click)="updateExam()">Lưu</button>
+          <button class="btn cancelBtn" (click)="deleteExam()">Xóa</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

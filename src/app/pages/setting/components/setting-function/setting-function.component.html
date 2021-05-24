@@ -1,0 +1,142 @@
+<div class="container-fluid">
+    <!-- <div class="row">
+        <div class="col">
+            <div class="setting-title">
+                <span>Thiết lập chức năng</span>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="row justify-content-between header-row">
+        <button class="add-button" mat-button [matMenuTriggerFor]="menu">
+            <i class="material-icons">
+                add_circle_outline
+            </i>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="createPosition()">
+                    Tạo chức vụ
+                </button>
+                <button mat-menu-item (click)="createRole()">
+                    Tạo nhóm chức năng
+                </button>
+                <!-- <button mat-menu-item (click)="createPrivilege()">
+                    Tạo phân quyền
+                </button> -->
+            </mat-menu>
+        </button>
+        <mat-form-field>
+            <mat-label> Tìm phân quyền </mat-label>
+            <input matInput (keyup)="applyFilter($event)" #input>
+        </mat-form-field>
+    </div>
+
+    <div class="row setting-content">
+        <div class="col table-container">
+            <table [dataSource]="positionDataSource" mat-table matSort
+                class="customTableStyle table-hover table-striped">
+                <ng-container matColumnDef="Chức vụ">
+                    <th mat-header-cell *matHeaderCellDef>
+                        Chức vụ
+                    </th>
+                    <td mat-cell *matCellDef="let position"
+                        [class.selected]="selectedPositionId === position.PositionId">
+                        <div class="position-content">
+                            <span (click)="getRolesByPositionId(position.PositionId)"> {{position.Name}}</span>
+
+                            <button mat-button [matMenuTriggerFor]="positionFnt">
+                                <i class="material-icons">
+                                    more_horiz
+                                </i>
+                                <mat-menu #positionFnt="matMenu">
+                                    <button mat-menu-item (click)="editPosition(position.PositionId)">
+                                        <i class="material-icons"> edit </i>
+                                        <span style=" position: relative; top: -6px; left: 10px;"> Sửa </span>
+                                    </button>
+                                    <button mat-menu-item (click)=deletePosition(position.PositionId)>
+                                        <i class="material-icons"> delete </i>
+                                        <span style=" position: relative; top: -6px; left: 10px;"> Xóa </span>
+                                    </button>
+                                </mat-menu>
+                            </button>
+                        </div>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedPositonColumns; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedPositonColumns;"></tr>
+            </table>
+            <!-- <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10" showFirstLastButtons="false">
+            </mat-paginator> -->
+        </div>
+
+        <div class="col table-container">
+            <table [dataSource]="roleDataSource" mat-table matSort class="customTableStyle table-hover table-striped">
+
+                <ng-container matColumnDef="Nhóm chức năng">
+                    <th mat-header-cell *matHeaderCellDef>
+                        Nhóm chức năng
+                    </th>
+                    <td mat-cell *matCellDef="let role" (click)="getPrivilegesByRoleId(role.RoleID)"
+                        [class.selected]="selectedRoleId === role.RoleID">
+                        <div class="role-content">
+                            <span> {{role.Name}} </span>
+                            <button mat-button [matMenuTriggerFor]="roleMenu">
+                                <i class="material-icons">
+                                    more_horiz
+                                </i>
+                                <mat-menu #roleMenu="matMenu">
+                                    <button mat-menu-item (click)="editRole(role.RoleID)">
+                                        <i class="material-icons"> edit </i>
+                                        <span style=" position: relative; top: -6px; left: 10px;"> Sửa </span>
+                                    </button>
+
+                                </mat-menu>
+                            </button>
+                        </div>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedRoleColumns; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedRoleColumns;"></tr>
+            </table>
+        </div>
+
+        <div class="col privilege-table table-container">
+
+            <table [dataSource]="privilegeDataSource" mat-table matSort class=" 
+            table-hover table-striped customTableStyle">
+                <ng-container matColumnDef="select">
+                    <th *matHeaderCellDef mat-header-cell>
+                        <mat-checkbox class="header-checkbox" color="primary" (change)="$event ? masterToggle() : null"
+                            [checked]="selection.hasValue() && isAllSelected()"
+                            [indeterminate]="selection.hasValue() && !isAllSelected()">
+                        </mat-checkbox>
+                    </th>
+                    <td *matCellDef="let privilege">
+                        <mat-checkbox color="primary"
+                            (click)="$event.stopPropagation();choosePrivilege(privilege.PrivilegeId)"
+                            (change)="$event ? selection.toggle(privilege) : null"
+                            [checked]="selection.isSelected(privilege) || privilege.checked">
+                        </mat-checkbox>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="Tên chức năng">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Phân quyền
+                    </th>
+                    <td mat-cell *matCellDef="let privilege">
+                        {{privilege.Description}}
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedPrivilegeColumns; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedPrivilegeColumns; let privilege"></tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="row mt-5">
+        <div class="col text-center">
+            <button class="btn customBtn" (click)="updatePrivilege()"> Lưu </button>
+        </div>
+
+    </div>
+</div>

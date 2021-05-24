@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" viewBox="0 0 35 35">
+  <g id="_vertical_align_bottom" data-name=" vertical_align_bottom" transform="translate(-202 -2058)">
+    <rect id="Path" width="35" height="35" transform="translate(202 2058)" fill="rgba(0,0,0,0)"/>
+    <path id="Icon" d="M26,29H1a1,1,0,0,1-1-1V26.778a1,1,0,0,1,1-1H26a1,1,0,0,1,1,1V28A1,1,0,0,1,26,29ZM13.5,22.217a1.652,1.652,0,0,1-1.687-1.611V6.1H8.792A.827.827,0,0,1,8,5.583a.759.759,0,0,1,.2-.847L12.91.241a.863.863,0,0,1,1.2,0l4.708,4.495A.762.762,0,0,1,19,5.584a.833.833,0,0,1-.794.52h-3.02v14.5A1.652,1.652,0,0,1,13.5,22.217Z" transform="translate(206 2061)" fill="#375384"/>
+  </g>
+</svg>

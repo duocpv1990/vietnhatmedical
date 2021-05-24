@@ -1,0 +1,88 @@
+<div class="container-fluid setting-container">
+
+    <div class="row">
+        <button class="add-button" mat-button [matMenuTriggerFor]="menu">
+            <i class="material-icons">
+                add_circle_outline
+            </i>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="createBranch()">Thêm chi nhánh</button>
+                <button mat-menu-item (click)="addPersonnelBranch()">Thêm nhân sự vào chi nhánh</button>
+            </mat-menu>
+        </button>
+    </div>
+
+    <div class="row">
+        <div class="col-3">
+            <div class="mat-list-header">Chi nhánh</div>
+            <mat-selection-list #branch [multiple]="false">
+                <mat-list-option *ngFor="let branch of branches" [value]="branch" class="d-flex">
+                    <div class="list-item">
+                        <div (click)="getEmployee(branch.BranchId)">{{branch?.FullName}}</div>
+                        <button mat-button [matMenuTriggerFor]="branchOption">
+                            <i class="material-icons">
+                                more_horiz
+                            </i>
+                            <mat-menu #branchOption="matMenu">
+                                <button class="menu-item" mat-menu-item (click)="editBranch(branch)">
+                                    <i class="material-icons"> edit </i>
+                                    <span> Sửa </span>
+                                </button>
+                                <button mat-menu-item (click)="deleteBranch(branch.BranchId)">
+                                    <i class="material-icons"> delete </i>
+                                    <span> Xóa </span>
+                                </button>
+                            </mat-menu>
+                        </button>
+
+                    </div>
+
+                </mat-list-option>
+            </mat-selection-list>
+
+        </div>
+
+        <div class="col-9">
+            <table mat-table [dataSource]="employees"
+                class="mat-elevation-z8 table table-hover table-striped text-center customTableStyle">
+
+
+                <!-- EmployeeId Column -->
+                <ng-container matColumnDef="employeeId">
+                    <th mat-header-cell *matHeaderCellDef> Mã NV </th>
+                    <td mat-cell *matCellDef="let employee"> {{employee.EmployeeId}} </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Họ tên </th>
+                    <td mat-cell *matCellDef="let employee"> {{employee.FullName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="position">
+                    <th mat-header-cell *matHeaderCellDef> Chức vụ </th>
+                    <td mat-cell *matCellDef="let employee"> {{employee.PositionName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="dapartment">
+                    <th mat-header-cell *matHeaderCellDef> Phòng ban </th>
+                    <td mat-cell *matCellDef="let employee"> {{employee.DepartmentName}} </td>
+                </ng-container>
+
+                <!-- Header row group -->
+                <ng-container matColumnDef="header-row-group">
+                    <th mat-header-cell *matHeaderCellDef [attr.colspan]="4">
+                        Nhân sự
+                    </th>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="['header-row-group']"></tr>
+                <tr mat-header-row *matHeaderRowDef="displayedEmployeeColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedEmployeeColumns;"></tr>
+
+
+            </table>
+        </div>
+
+
+    </div>
+</div>

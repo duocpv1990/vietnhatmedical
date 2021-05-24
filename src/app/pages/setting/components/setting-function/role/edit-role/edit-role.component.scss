@@ -1,0 +1,12 @@
+.edit-role {
+    width: 37vw;
+    min-height: auto;
+    .row {
+        margin-bottom: 1em;
+    }
+    .privilege-list {
+        ::ng-deep .mat-form-field {
+          width: 100%;
+        }
+    }
+}

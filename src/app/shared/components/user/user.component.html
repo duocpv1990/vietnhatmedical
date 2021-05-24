@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="row">
+        <div class="col-8 info">
+            <!-- <span *ngIf="user !== undefined" style="font-size: 20px;">{{user.FullName}}</span> -->
+            <!-- <span>Sale Leader</span> -->
+            <button class="noti-btn" (click)="openNotification()">
+                <mat-icon>notifications</mat-icon>
+            </button>
+        </div>
+        <div class="col-4" *ngIf="user">
+            <img src="{{user.ProfileImageURL}}" [matMenuTriggerFor]="menu" class="profile-img">
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item style="outline: none;" routerLink="employee/{{user.EmployeeId}}">
+                    <mat-icon>account_circle</mat-icon> Trang cá nhân
+                </button>
+                <button mat-menu-item style="outline: none;" (click)="openLogoutForm();">
+                    <mat-icon>exit_to_app</mat-icon> Đăng xuất
+                </button>
+            </mat-menu>
+        </div>
+    </div>
+</div>

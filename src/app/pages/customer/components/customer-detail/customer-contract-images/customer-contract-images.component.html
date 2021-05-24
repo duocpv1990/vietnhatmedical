@@ -1,0 +1,63 @@
+<div class="container-fluid mx-auto">
+    <button class="add-button my-2" matTooltip="Thêm ảnh" (click)="openCreateForm()">
+                <i class="material-icons">
+                  add_circle_outline
+                </i>
+              </button>
+    <div class="row contractImgList" >
+        <div class="col">
+            <table mat-table [dataSource]="dataSource"
+                class="table-striped text-center customTableStyle">
+                <ng-container matColumnDef="Tên ĐH">
+                    <th mat-header-cell *matHeaderCellDef> Tên đơn hàng </th>
+                    <td mat-cell *matCellDef="let contract">{{contract.ContractCode}}</td>
+                </ng-container>
+                <ng-container matColumnDef="Ảnh trước">
+                    <th mat-header-cell *matHeaderCellDef> Ảnh trước </th>
+                    <td mat-cell *matCellDef="let contract">
+                        <div class="contractImg">
+                            <span *ngFor="let img of contract.BeforeImageObjectList" (click)="openDetailForm(contract.ContractCode, img)">
+                            <img [src]="img.ImageUrl" style="width: 120px; height: 80px;"></span>
+                        </div>
+                        
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="Ảnh sau">
+                    <th mat-header-cell *matHeaderCellDef>Ảnh sau</th>
+                    <td mat-cell *matCellDef="let contract">
+                        <div class="contractImg">
+                            <span *ngFor="let img of contract.AfterImageObjectList" (click)="openDetailForm(contract.ContractCode, img)">
+                            <img [src]="img.ImageUrl" style="width: 120px; height: 80px;"></span>
+                        </div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="thay băng cắt chỉ">
+                    <th mat-header-cell *matHeaderCellDef>Thay băng, cắt chỉ</th>
+                    <td mat-cell *matCellDef="let contract">
+                        <div class="contractImg">
+                            <span *ngFor="let img of contract.BandageImageObjectList " (click)="openDetailForm(contract.ContractCode, img)">
+                            <img [src]="img.ImageUrl" style="width: 120px; height: 80px;"></span>
+                        </div>
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="khám, tái khám">
+                    <th mat-header-cell *matHeaderCellDef>Khám, tái khám</th>
+                    <td mat-cell *matCellDef="let contract">
+                        <div class="contractImg">
+                            <span *ngFor="let img of contract.VisitImageObjectList" (click)="openDetailForm(contract.ContractCode, img)">
+                            <img [src]="img.ImageUrl" style="width: 120px; height: 80px;"></span>
+                        </div>
+                    </td>
+                </ng-container>
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let contract; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons="false">
+            </mat-paginator>
+        </div>
+    </div>
+</div>

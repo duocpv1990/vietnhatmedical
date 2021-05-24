@@ -1,0 +1,102 @@
+<form ngNativeValidate #createForm="ngForm">
+    <div class="container schedule-booking">
+        <div>
+            <h1 class="text-center mt-3" style="margin-left: -3em;">Tạo dịch vụ</h1>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                <div>
+                    <mat-label>Chọn hợp đồng</mat-label>
+                    <mat-form-field>
+                        <mat-select name="contractId" id="" [(ngModel)]="contractId"
+                            (selectionChange)="chooseContract($event.value)" required>
+                            <mat-option [value]="c.ContractId" *ngFor="let c of contracts ">{{c.ContractCode}}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+
+
+                <div>
+                    <mat-label>Dịch vụ thực hiện</mat-label>
+                    <mat-form-field>
+                        <input matInput type="text" name="surgeryServiceName" [(ngModel)]="surgeryServiceName" readonly>
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <mat-label>Dịch vụ con</mat-label>
+                    <mat-form-field>
+                        <input matInput type="text" name="surgerySubServiceName" [(ngModel)]="surgerySubServiceName"
+                            readonly>
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <mat-label>Ngày thực hiện</mat-label>
+                    <mat-form-field>
+                        <input matInput type='date' name="operationDate" [(ngModel)]="operationDate">
+                    </mat-form-field>
+                </div>
+
+                <div>
+                    <mat-label>Trạng thái</mat-label>
+                    <mat-form-field>
+                        <mat-select [(value)]="priority">
+                            <mat-option value="1">Làm ngay</mat-option>
+                            <mat-option value="2">Làm sau</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                </div>
+                <div class="col-6">
+                    <div>
+                        <mat-label>Bác sĩ chính</mat-label>
+                        <mat-form-field >
+                            <mat-select multiple name="selectedMainDoctor" [(ngModel)]="selectedMainDoctor" required>
+                                <mat-option *ngFor="let doctor of doctorList" [value]="doctor.ProviderId"
+                                    (click)="chooseMainDoctor(doctor.ProviderId)">{{doctor.FullName}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-label>Điều dưỡng chính</mat-label>
+                        <mat-form-field class="chooseProvider">
+                            <mat-select multiple name="selectedMainNurse" [(ngModel)]="selectedMainNurse" required>
+                                <mat-option *ngFor="let nurse of assistantList" [value]="nurse.ProviderId"
+                                    (click)="chooseMainNurse(nurse.ProviderId)">{{nurse.FullName}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-label>Bác sĩ phụ</mat-label>
+                        <mat-form-field class="chooseProvider">
+                            <mat-select multiple name="selectedAssistantDoctor " [(ngModel)]="selectedAssistantDoctor" required>
+                                <mat-option *ngFor="let doctor of doctorList" [value]="doctor.ProviderId"
+                                    (click)="chooseAssitantDoctor(doctor.ProviderId)">{{doctor.FullName}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-label>Điều dưỡng phụ</mat-label>
+                        <mat-form-field class="chooseProvider">
+                            <mat-select multiple name="selectedAssistantNurse" [(ngModel)]="selectedAssistantNurse" required>
+                                <mat-option *ngFor="let assitant of assistantList" [value]="assitant.ProviderId"
+                                    (click)="chooseAssistantNurseIdList(assitant.ProviderId)">{{assitant.FullName}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-label>Ghi chú</mat-label>
+                        <mat-form-field>
+                            <textarea (keyup)="autoGrowTextZone($event)" matInput name="notes" [(ngModel)]="notes"> </textarea>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <div class="insideShadow btnGroup">
+                <button class="btn customBtn" [disabled]="createForm.invalid" (click)="createOperation()">Tạo</button>
+                <button class="btn cancelBtn" (click)="cancelCreate()">Hủy</button>
+            </div><br>
+        </div>
+</form>

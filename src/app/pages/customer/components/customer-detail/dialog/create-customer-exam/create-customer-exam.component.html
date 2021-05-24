@@ -1,0 +1,70 @@
+<div class="dialog-container container">
+  <div class="row">
+    <div class="col-10">
+      <span class="dialog-title">Tạo phiếu xét nghiệm</span>
+    </div>
+    <div class="col-2 pl-4">
+      <span class="material-icons close-button" (click)="closeDialog()">
+        close
+      </span>
+    </div>
+  </div>
+  <br />
+  <!-- <h1 mat-dialog-title>Hi</h1> -->
+  <form ngNativeValidate #createForm="ngForm">
+    <div class="row">
+      <div class="col-3">
+        <mat-label for="">Ngày:</mat-label>
+      </div>
+      <div class="col-9">
+        <input type="date" matInput name="examinationDate" [(ngModel)]="examinationDate" required />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <br />
+        <mat-label>Mô tả:</mat-label>
+      </div>
+      <div class="col-9">
+        <mat-form-field class="w-100">
+          <textarea (keyup)="autoGrowTextZone($event)" matInput name="description" [(ngModel)]="description"></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-3">
+        <br />
+        <mat-label for="">Ảnh:</mat-label>
+      </div>
+      <div class="col-9 text-center">
+
+        <label for="exam" class="photo_icon"><span class="material-icons">add_a_photo</span></label>
+        <div class="imagePicking imageForm">
+          <ul class="list-group" *ngFor="let img of imagesName; let i = index">
+            <!-- <li class="list-group-item" *ngIf="i < 1">
+              <label for="exam"
+                ><span class="material-icons">add_a_photo</span>
+              </label>
+            </li> -->
+            <li class="list-group-item">
+              {{ img | Overflow: ["30", "..."] }}
+            </li>
+          </ul>
+          <!-- <div class="list-group-item" *ngIf="imagesName.length > 3">
+            ...
+          </div> -->
+        </div>
+        <input #Exam type="file" accept="image/*" id="exam" multiple (change)="processFileExamImage(Exam.files)"
+          required hidden />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col text-center text-light">
+        <button class="btn customBtn" [disabled]="createForm.invalid || !customerExamImageString"
+          (click)="createExam()">
+          Tạo
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

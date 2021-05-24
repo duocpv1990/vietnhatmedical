@@ -1,0 +1,108 @@
+<div class="container call-dialog">
+    <div class="row justify-content-end pt-3">
+        <div class="col-7">
+            <div class="form-group" *ngIf="!isShow">
+                <mat-label for="">Tên đơn hàng</mat-label>
+                <mat-form-field class="w-100">
+                    <mat-select name="contractId" [(ngModel)]="contractId"
+                        (selectionChange)="choosedCustomerContract($event.value)">
+                        <mat-option value="0"></mat-option>
+                        <mat-option *ngFor="let contract of contractList" [value]="contract.ContractId">
+                            {{contract.ContractCode}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+            <div class="form-group" *ngIf="isShow">
+                <mat-label for="">Dịch vụ</mat-label>
+                <mat-form-field class="w-100">
+                    <mat-select name="operationId" [(ngModel)]="operationId"
+                        (selectionChange)="chooseSurgeryService($event.value)">
+                        <mat-option *ngFor="let surgeryService of surgeryServiceList"
+                            [value]="surgeryService.OperationId">
+                            {{surgeryService.SurgerySubServiceName}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+
+
+            <div class="customerStatus insideShadow" *ngIf="choosedContract !== undefined">
+                <span *ngFor="let level of potentialLevelList">
+                    <input type="radio" name="potentialLevel" id="{{level.fakeId }}"
+                        [checked]="level.PotentialLevelId == potentialLevelId" [value]="level.PotentialLevelId"
+                        (click)="choosePotentialLevel(level.PotentialLevelId)" hidden />
+                    <label for="{{ level.fakeId }}">{{ level.Name }}</label>
+                </span>
+            </div>
+
+            <div class="form-group" *ngIf="isShow">
+                <mat-label>Ngày làm dịch vụ</mat-label>
+
+                <div> {{surgeryService?.OperationDateString}} </div>
+            </div>
+            <div class="form-group" *ngIf="isShow">
+                <mat-label>Người thực hiện</mat-label>
+                <div> {{surgeryService?.MainProviderListString}} </div>
+            </div>
+            <div class="form-group" *ngIf="isShow">
+                <label for="">Đánh giá</label>
+                <div class="rate">
+                    <input (change)="chooseRating(5)" [checked]="rating == 5" type="radio" id="star5" name="rate" />
+                    <label for="star5" title="text">5 stars</label>
+                    <input (change)="chooseRating(4)" [checked]="rating == 4" type="radio" id="star4" name="rate" />
+                    <label for="star4" title="text">4 stars</label>
+                    <input (change)="chooseRating(3)" [checked]="rating == 3" type="radio" id="star3" name="rate" />
+                    <label for="star3" title="text">3 stars</label>
+                    <input (change)="chooseRating(2)" [checked]="rating == 2" type="radio" id="star2" name="rate" />
+                    <label for="star2" title="text">2 stars</label>
+                    <input (change)="chooseRating(1)" [checked]="rating == 1" type="radio" id="star1" name="rate" />
+                    <label for="star1" title="text">1 star</label>
+                </div>
+            </div>
+            <div class="form-group">
+                <mat-label>Ghi chú</mat-label>
+                <mat-form-field class="w-100">
+                    <textarea matInput cdkTextareaAutosize style="overflow-y: hidden;" name="noteContent"
+                        [(ngModel)]="noteContent"></textarea>
+                </mat-form-field>
+            </div>
+
+            <form [formGroup]="reminderForm" (ngSubmit)="createCustomerReminder()" action="">
+                <div class="form-group">
+                    <mat-label>Loại lịch</mat-label>
+                    <mat-form-field class="w-100">
+                        <mat-select formControlName="type">
+                            <mat-option value="2">Gọi</mat-option>
+                            <mat-option value="1">Hẹn</mat-option>
+                            <mat-option value="3">Lịch gọi chăm sóc</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <mat-label>Ngày</mat-label>
+                    <mat-form-field class="w-100">
+                        <input matInput type="date" formControlName="dayDate" />
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <mat-label>Giờ</mat-label>
+                    <mat-form-field class="w-100">
+                        <input matInput type="time" formControlName="hourDate" />
+                    </mat-form-field>
+                </div>
+            </form>
+
+
+            <div class="text-center">
+                <div class="insideShadow">
+
+                    <button class="btn customBtn" (click)="createCallLog()">Lưu</button>
+
+                    <button class="btn cancelBtn" (click)=" closeDialog()">Hủy</button>
+                </div>
+
+                <!-- <button class="btn customBtn" (click)="createCallLog()">Lưu</button> -->
+            </div><br>
+        </div>
+    </div>
+</div>

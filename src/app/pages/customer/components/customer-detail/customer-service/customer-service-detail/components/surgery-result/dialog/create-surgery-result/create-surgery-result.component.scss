@@ -1,0 +1,21 @@
+.needHelp{
+    text-align: center;
+    label{
+        padding: 3%;
+        background: #ddd;
+        border-radius: 5px;
+        color: #000;
+        width: 6vw;
+    } 
+    input:checked + label{
+            background: red !important;
+            color: #fff;
+            
+        }
+}
+
+.imagePicking{
+    width: 200px;
+    height: 150px;
+    margin: 0 auto;
+}

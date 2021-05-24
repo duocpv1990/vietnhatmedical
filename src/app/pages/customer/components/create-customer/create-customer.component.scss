@@ -1,0 +1,85 @@
+.info-col {
+  height: 60vh;
+}
+.avatar {
+  width: 100%;
+  height: 200px;
+  border: 1px solid;
+  margin-top: 2em;
+  position: relative;
+
+  img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .material-icons {
+    position: absolute;
+    bottom: 5px;
+    right: 7px;
+    color: #375384;
+    font-size: 2rem;
+  }
+}
+
+.customerInfo .col-5 {
+  mat-label {
+    display: inline-block;
+    width: 130px;
+  }
+
+  mat-form-field {
+    width: 60%;
+    height: 6.5vh;
+  }
+}
+
+.customerStatus {
+  display: flex;
+  justify-content: center;
+  padding: 2px;
+  label {
+    margin: 0;
+    padding: 0.5rem 0.9rem;
+    // border: 1px solid;
+  }
+}
+
+.customerStatus input:checked + label {
+  background: #375384;
+  color: #fff;
+  border: 1px solid #000;
+  border-radius: 10px;
+}
+.createCustomer {
+  padding: 10px 5px;
+  // max-width: 35%;
+  border-radius: 12px;
+
+  span {
+    box-shadow: 4px 3px 10px 0px #b3b3b3;
+    background: #375384;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 10px;
+    font-weight: 600;
+    font-size: 1.2rem;
+  }
+}
+
+.validForm p {
+  color: red;
+  margin-left: 130px;
+}
+
+.red-marker {
+  color: red;
+}
+
+.text-note {
+  display: flex;
+  align-items: center;
+  .textarea {
+    overflow-y: hidden;
+  }
+}

@@ -1,0 +1,63 @@
+.needHelp{
+    text-align: center;
+    label{
+        padding: 3%;
+        background: #ddd;
+        border-radius: 5px;
+        color: #000;
+        width: 6vw;
+    } 
+    input:checked + label{
+            background: red !important;
+            color: #fff;
+            
+        }
+}
+.surgeryImg{
+    width: 92%;
+    height: 14vh;
+    margin: 0 auto;
+    position: relative;
+    border: 1px solid; 
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    span{
+        position: absolute;
+        padding-left: 15px;
+        color: #fff;
+        font-weight: 600;
+        background-color: rgba(0, 0, 0, 0.5);
+        width: 100%;
+    }
+}
+
+mat-label{
+    display: inline-block;
+    margin-top: 10px;
+}
+
+::ng-deep .surgeryResult .mat-form-field-infix{
+    border-top: none !important;
+}
+.surgeryResult {
+    color: #6b80a4;
+    font-weight: 600;
+    height: 60%;
+    display: flex;
+    mat-form-field {
+        color: #375384;
+        font-weight: 600;
+    }
+    .col-3 {
+        margin-left: 20px;
+    }
+}
+.surgeryResult:hover{
+        background-color: #f2f2f2;
+        cursor: pointer;
+}
+.add-button{
+    padding-top: 5px;
+}

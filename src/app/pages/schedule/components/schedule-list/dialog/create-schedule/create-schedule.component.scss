@@ -1,0 +1,46 @@
+.createSchedule{
+    position: absolute !important;
+    width: 30rem !important;
+    height: 100vh !important;
+    top: 0;
+    right: 0;
+    background: #fff;
+    padding: 3rem 0;
+    border-top-left-radius: 50px;
+    border-bottom-left-radius: 50px;
+    overflow: hidden scroll;
+    ::ng-deep .search-box{
+        top: -50px;
+    }
+}
+
+.search-box {
+    display: flex;
+    position: absolute;
+    right: 90px;
+    margin-top: -2px;
+    right: 17px;
+    width: 290px;
+    .searchInput {
+        border: 1px solid white;
+        border-radius: 10px;
+        background: #ffffff;
+        box-shadow: inset 5px 5px 10px #cccccc, inset -5px -5px 10px #ffffff;
+        height: 40px;
+        padding-left: 20px !important;
+        position: absolute;
+      }
+      i {
+          position: absolute;
+          color: #224177;
+          right: 0px;
+          margin-top: 7px;
+          margin-right: 10px;
+          cursor: pointer;
+
+          &:hover{
+              font-weight: bold;
+              font-size: x-large;
+          }
+      }
+  }

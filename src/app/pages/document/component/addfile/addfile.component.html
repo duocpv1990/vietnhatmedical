@@ -1,0 +1,40 @@
+<div class="addfile">
+    <div class="addfile-icon">
+        <div> <img src="assets/svg/vertical_align_bottom.svg" alt=""> Tải lên</div>
+    </div>
+
+    <div class="forms-group upload">
+        <label for="file">File <span class="material-icons upload-icon">attachment</span>
+            <input type="file" id="file" #document (change)="processFile(document.files)"></label>
+        <input type="text" id="showfile" [(ngModel)]="fileName" name="show">
+        <!-- <p>{{ShowFile}}</p> -->
+    </div>
+    <div class="forms-group">
+        <label for="name">Đặt tên</label>
+        <input type="text" id="name" placeholder="Tên tài liệu" [(ngModel)]="Name">
+    </div>
+    <div class="forms-group">
+        <label for="file">Chọn thư mục</label>
+        <div class="forms-group-select">
+            <mat-form-field appearance="fill">
+                <!-- <mat-label>Select an option</mat-label> -->
+                <mat-select disableRipple>
+                    <mat-option *ngFor="let item of folders" [value]="item.DepartmentfolderId"
+                        (click)="changeClient(item.DepartmentfolderId)">
+                        {{item.Name}}
+                    </mat-option>
+
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+    <div class="forms-group">
+        <label for="description">Mô tả</label>
+        <textarea name="text" id="description" rows="10" [(ngModel)]="Description"></textarea>
+    </div>
+
+    <div class="submit" (click)="uploadFile()">
+        <input type="submit" value="Tải lên">
+    </div>
+
+</div>

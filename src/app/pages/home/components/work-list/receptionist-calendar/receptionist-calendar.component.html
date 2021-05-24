@@ -1,0 +1,93 @@
+<div *ngIf="scheduleType != 0">
+
+    <table mat-table [dataSource]="scheduleData" class=" table-hover table-striped text-center customTableStyle">
+        <ng-container matColumnDef="Giờ">
+            <th mat-header-cell *matHeaderCellDef> Giờ </th>
+            <td mat-cell class="pl-0" *matCellDef="let svcSchedule">
+                {{svcSchedule.ScheduleTime}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Mã KH">
+            <th mat-header-cell *matHeaderCellDef> Mã KH </th>
+            <td mat-cell *matCellDef="let svcSchedule">
+                {{svcSchedule.CustomerId}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Họ tên">
+            <th mat-header-cell *matHeaderCellDef>Họ tên</th>
+            <td mat-cell *matCellDef="let svcSchedule">
+                {{svcSchedule.CustomerFullnameAndId}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Điện thoại">
+            <th mat-header-cell *matHeaderCellDef>Điện thoại</th>
+            <td mat-cell *matCellDef="let svcSchedule">
+                {{svcSchedule.Phone | PhoneNumberPipe}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Bác sĩ">
+            <th mat-header-cell *matHeaderCellDef> Bác sĩ </th>
+            <td mat-cell *matCellDef="let svcSchedule">{{svcSchedule.MainProviderString}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Loại lịch">
+            <th mat-header-cell *matHeaderCellDef> Loại lịch </th>
+            <td mat-cell *matCellDef="let svcSchedule">{{svcSchedule.TypeDescription}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Ghi chú">
+            <th mat-header-cell *matHeaderCellDef> Ghi chú </th>
+            <td mat-cell *matCellDef="let svcSchedule" class="text-left pl-2">
+                {{svcSchedule.Notes}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Trạng thái">
+            <th mat-header-cell *matHeaderCellDef> Trạng thái </th>
+            <td mat-cell *matCellDef="let svcSchedule">
+                <div class="scheduleStatus">
+                    {{svcSchedule.StatusDescription}}
+                </div>
+            </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="scheduleColumns"></tr>
+        <tr mat-row *matRowDef="let svcSchedule; columns: scheduleColumns;"></tr>
+    </table>
+    <mat-paginator #paginatorSchedule [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10" showFirstLastButtons="false">
+    </mat-paginator>
+</div>
+
+
+
+<div *ngIf="scheduleType == 0">
+    <table mat-table [dataSource]="reminderData" class=" table-hover table-striped text-center customTableStyle">
+        <ng-container matColumnDef="Giờ">
+            <th mat-header-cell *matHeaderCellDef> Giờ </th>
+            <td mat-cell *matCellDef="let reminder">{{reminder.ReminderTime}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Mã KH">
+            <th mat-header-cell *matHeaderCellDef>Mã KH</th>
+            <td mat-cell *matCellDef="let reminder">{{reminder.CustomerID}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Họ tên">
+            <th mat-header-cell *matHeaderCellDef>Họ tên</th>
+            <td mat-cell *matCellDef="let reminder" class="text-left pl-2">{{reminder.CustomerFullNameAndId}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Điện thoại">
+            <th mat-header-cell *matHeaderCellDef>Điện thoại</th>
+            <td mat-cell *matCellDef="let reminder">{{reminder.CustomerPhone | PhoneNumberPipe}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Sale phụ trách">
+            <th mat-header-cell *matHeaderCellDef>Sale phụ trách</th>
+            <td mat-cell *matCellDef="let reminder">{{reminder.EmployeeFullName}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Loại lịch">
+            <th mat-header-cell *matHeaderCellDef>Loại lịch</th>
+            <td mat-cell *matCellDef="let reminder">{{reminder.TypeDescription}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Ghi chú">
+            <th mat-header-cell *matHeaderCellDef>Ghi chú</th>
+            <td mat-cell *matCellDef="let reminder" class="text-left pl-2">{{reminder.Description}}</td>
+        </ng-container>
+        <ng-container matColumnDef="Trạng thái">
+            <th mat-header-cell *matHeaderCellDef>Trạng thái</th>
+            <td mat-cell *matCellDef="let reminder">{{reminder.StatusDescription}}</td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="reminderColumns"></tr>
+        <tr mat-row *matRowDef="let reminder; columns: reminderColumns;"></tr>
+    </table>
+    <mat-paginator #paginatorReminder [pageSizeOptions]="[5, 10]" [pageSize]="10" showFirstLastButtons="false">
+    </mat-paginator>
+</div>

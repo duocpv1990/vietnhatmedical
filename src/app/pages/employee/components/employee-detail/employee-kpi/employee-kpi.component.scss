@@ -1,0 +1,59 @@
+th.mat-header-cell,
+td.mat-cell,
+td.mat-footer-cell {
+  width: 200px;
+  padding: 15px;
+}
+.first {
+  height: 10px;
+  width: 100%;
+  background: #ddd;
+}
+
+.second {
+  height: 10px;
+  // background: red;
+}
+
+.bar {
+  width: 80%;
+  margin-left: 15px;
+  border-radius: 15px;
+  margin-bottom: 11px;
+  background: #ffffff;
+  box-shadow: inset 6px 6px 12px #bfbfbf, inset -6px -6px 12px #ffffff;
+  display: flex;
+  justify-content: flex-start;
+}
+.percent {
+  border-radius: 15px;
+  display: inline-block;
+  animation: load 2.5s 0s;
+  text-align: center;
+  -webkit-animation: load 2.5s 0s;
+  -moz-animation: load 2.5s 0s;
+  -o-animation: load 2.5s 0s;
+}
+.d-flex {
+  align-items: baseline;
+}
+@keyframes load {
+  from {
+    width: 0%;
+  }
+}
+@-webkit-keyframes load {
+  from {
+    width: 0%;
+  }
+}
+@-moz-keyframes load {
+  from {
+    width: 0%;
+  }
+}
+@-o-keyframes load {
+  from {
+    width: 0%;
+  }
+}

@@ -1,0 +1,137 @@
+.call-dialog {
+  position: absolute;
+  background: #fff;
+  width: 60rem;
+  height: 60vh;
+  right: 34em;
+  bottom: 18em;
+  .form-group {
+    display: flex;
+    align-items: center;
+    mat-label {
+      width: 40%;
+    }
+  }
+}
+.customerStatus {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  transition: 2s;
+  width: 100%;
+  animation-name: slidein;
+  animation-duration: 1.1s;
+  padding: 2px;
+  label {
+    margin: 0 2px;
+    padding: 0.4rem 0.75rem;
+    // border: 1px solid;
+  }
+}
+
+.customerStatus input:checked + label {
+  background: #375384;
+  color: #fff;
+  border: 1px solid #000;
+  border-radius: 10px;
+}
+
+.rate {
+  padding-left: 18%;
+}
+.rate:not(:checked) > input {
+  position: absolute;
+  top: -9999px;
+}
+.rate:not(:checked) > label {
+  float: right;
+  width: 1em;
+  overflow: hidden;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 26px;
+  color: #ccc;
+}
+.rate:not(:checked) > label:before {
+  content: "★ ";
+}
+.rate > input:checked ~ label {
+  color: #ffc700;
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+  color: #deb217;
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+  color: #c59b08;
+}
+
+.customBtn {
+  padding: 0.1rem 0.75rem;
+}
+
+.text-center {
+  display: flex;
+  justify-content: center;
+  .insideShadow {
+    width: 120px;
+    outline: none;
+  }
+}
+
+@keyframes slidein {
+  0% {
+    width: 0px;
+    background: #375384;
+  }
+  50% {
+    background: #a7c3e6;
+  }
+  100% {
+    width: 100%;
+  }
+}
+
+/* (1366x768) WXGA Display */
+@media screen and (max-width: 1366px) {
+  .call-dialog {
+    width: 50rem;
+    height: 81vh;
+    overflow-y: auto;
+    position: absolute;
+    top: 6em;
+    right: 13em;
+    background: #fff;
+  }
+}
+
+/* (1440x900) WXGA+ Display */
+@media screen and (max-width: 1440px) and (min-width: 1366px) {
+  .call-dialog {
+    width: 60rem;
+    height: 66vh;
+    right: 10em;
+    bottom: 13em;
+  }
+}
+
+/* (1680x1050) WSXGA+ Display */
+@media screen and (max-width: 1680px) and (min-width: 1536px) {
+  .call-dialog {
+    height: 68vh;
+    right: 24em;
+    bottom: 12em;
+  }
+}
+
+@media screen and (max-width: 1536px) and (min-width: 1440px) {
+  .call-dialog {
+    height: 75vh;
+    right: 14em;
+    bottom: 7em;
+  }
+}

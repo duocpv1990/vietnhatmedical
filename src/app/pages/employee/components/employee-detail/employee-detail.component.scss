@@ -1,0 +1,44 @@
+::ng-deep .employee-detail-tab-group .mat-tab-label .mat-tab-label-content {
+  flex-direction: column;
+}
+::ng-deep .mat-tab-label-container {
+  margin-left: 250px;
+  margin-top: 12px;
+}
+::ng-deep .employee-detail-tab-group .example-tab-icon {
+  color: #224177;
+  position: absolute;
+  padding: 0px 90px 49px 65px;
+}
+.example-tab-icon:hover {
+    color: #224177;
+}
+span {
+  color: #224177;
+  margin-top: 20px;
+}
+.tab-info {
+  height: 60px;
+  background: #375384;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  border-radius: 15px;
+  position: absolute;
+  .avatar {
+    width: 60px;
+    height: 100%;
+    border: 2px solid white;
+    border-radius: 15px;
+  }
+  div {
+    color: #ffffff;
+    margin-left: 15px;
+    margin-right: 15px;
+    h4 {
+      margin-bottom: 0;
+      font-size: 100%;
+      line-height: 1.3;
+    }
+  }
+}

@@ -1,0 +1,24 @@
+
+ .changebandage-table {
+  height: 20vh;
+  overflow-y: auto;
+  margin-top: 15px;
+  padding: 0 !important;
+  td {
+    font-size: 11px;
+    padding: 3px;
+  }
+  table tr.mat-header-row {
+    height: 3.5vh !important;
+  }
+  table.customTableStyle td:first-child {
+    padding-left: 0px  !important;
+  }
+  tr.mat-row {
+    height: 5vh !important;
+  }
+}
+.add-button{
+  padding-top: 5px;
+  padding-left: 10px;
+}

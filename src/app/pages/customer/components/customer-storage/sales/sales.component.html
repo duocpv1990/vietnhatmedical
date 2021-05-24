@@ -1,0 +1,111 @@
+<div class="container-fluid mt-3">
+    <div class="row">
+        <div class="col">
+            <!-- <button class="add-button">
+                <i class="material-icons">
+                    add_circle_outline
+                </i>
+            </button> -->
+            <button class="add-button" matTooltip="Chuyển kho" (click)="storageUpdate()"
+                [style.display]="assignedCustomerIdList.length == 0 ? 'none' : 'inline'">
+                <span class="material-icons">
+                    input
+                </span>
+            </button>
+            <button class="add-button" matTooltip="Giao khách hàng" (click)="openEmployeeListDialog()"
+                [style.display]="
+                assignedCustomerIdList.length == 0 ? 'none' : 'inline'
+          ">
+                <img class="assignImg" src="assets/svg/assign-customer.svg" alt="" />
+            </button>
+            <div class="search-box">
+                <input class="searchInput" matInput (keyup)="applyFilter($event.target.value)" placeholder="Tìm kiếm"><i
+                    class="material-icons">
+                    search
+                </i>
+            </div>
+
+            <table mat-table [dataSource]="dataSource" matSort
+                class=" table-hover table-striped text-center customTableStyle">
+                <ng-container matColumnDef="choose">
+                    <th mat-header-cell *matHeaderCellDef>
+                        <input type="checkbox" id="checkbox" (change)="selectAll()" hidden />
+                        <label for="checkbox"></label>
+                    </th>
+                    <td mat-cell *matCellDef="let customer">
+                        <input type="checkbox" id="{{ customer.CustomerID }}" [checked]="isSelectAll" (click)="chooseCustomer(customer.CustomerID)
+                  " hidden />
+                        <label for="{{ customer.CustomerID }}"></label>
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Mã KH">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Mã KH</th>
+                    <td mat-cell *matCellDef="let customer" routerLink="/pages/customer/{{ customer.CustomerID }}">
+                        &nbsp;&nbsp; {{ customer.CustomerID }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Họ tên">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Họ tên</th>
+                    <td class="text-start" mat-cell *matCellDef="let customer"
+                        routerLink="/pages/customer/{{ customer.CustomerID }}" class="text-left pl-2">
+                        {{ customer.FullNameAndID }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Điện thoại">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                        Điện thoại
+                    </th>
+                    <td mat-cell *matCellDef="let customer" routerLink="/pages/customer/{{ customer.CustomerID }}">
+                        {{ customer.Phone }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Nguồn">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Nguồn</th>
+                    <td mat-cell *matCellDef="let customer" routerLink="/pages/customer/{{ customer.CustomerID }}">
+                        {{ customer.TypeDescription }}
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="Sale phụ trách">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Sale phụ trách</th>
+                    <td mat-cell *matCellDef="let customer" routerLink="/pages/customer/{{ customer.CustomerID }}">
+                        {{ customer.EmployeeFullName }}
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Tỉnh thành">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Tỉnh thành</th>
+                    <td mat-cell *matCellDef="let customer">
+
+                    </td>
+                </ng-container>
+
+                <ng-container matColumnDef="Ghi chú">
+                    <th mat-header-cell *matHeaderCellDef mat-sort-header>Ghi chú</th>
+                    <td class="text-start" mat-cell *matCellDef="let customer"
+                        routerLink="/pages/customer/{{ customer.CustomerID }}" class="text-left pl-2">
+                        {{ customer.NoteContent }}
+                    </td>
+                </ng-container>
+
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns; let customer" [style.background]="
+                assignedCustomerIdList.includes(customer.CustomerID)
+                  ? '#D0DBEE'
+                  : ''
+              "></tr>
+            </table>
+            <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10" showFirstLastButtons="false">
+            </mat-paginator>
+            <div class="amountCustomerAssign">
+                <span>Số lượng</span>
+                <input type="text" placeholder="1 - 50" [(ngModel)]="amountCustomer" (keyup.enter)="moveToMaketing()">
+            </div>
+        </div>
+    </div>
+</div>

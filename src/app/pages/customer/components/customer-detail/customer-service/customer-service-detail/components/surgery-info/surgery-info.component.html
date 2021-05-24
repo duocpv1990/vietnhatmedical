@@ -1,0 +1,122 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-9 px-0 d-flex">
+            <span class="titleBox">
+                Thông tin phẫu thuật
+            </span>
+            <!-- <span class="titleBox" (click)="openCreateScheduleForm()">Đặt lịch</span> -->
+
+            <span class="serviceName" *ngIf="operation !== undefined">
+                Dịch vụ : {{operation.SurgerySubServiceName}}
+            </span>
+            <span class="material-icons booking p-1" style="color: #6b80a4;" matTooltip="Đặt lịch phẫu thuật"
+                (click)="openCreateScheduleForm()">
+                event
+            </span>
+        </div>
+    </div>
+    <div class="row mt-1" (click)="openDetailForm()">
+        <div class="col-6">
+            <table class="w-100">
+                <tr>
+                    <td>
+                        <mat-label>Ngày nhập viện</mat-label>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput name="admissionDateString" [(ngModel)]="admissionDateString" readonly>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-label>Ngày phẫu thuật</mat-label>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput name="operationDateString" [(ngModel)]="operationDateString" readonly>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-label>Giờ phẫu thuật</mat-label>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput name="operationTimeString" [(ngModel)]="operationTimeString" readonly>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-label>Giờ kết thúc</mat-label>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput name="completedTimeString" [(ngModel)]="completedTimeString" readonly>
+                        </mat-form-field>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-6">
+            <table class="w-100">
+                <tr>
+                    <td>
+                        <mat-label>Bác sĩ chính</mat-label>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput name="mainProviderListString" [(ngModel)]="mainProviderListString" readonly>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-label>Điều dưỡng chính</mat-label>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput name="mainNurseString" [(ngModel)]="mainNurseString" readonly>
+                        </mat-form-field>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <mat-label>Note</mat-label>
+                    </td>
+                    <td>
+                        <mat-form-field>
+                            <input matInput name="notes" [(ngModel)]="notes" readonly>
+                        </mat-form-field>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>
+                        <mat-label>Đánh giá</mat-label>
+                    </td>
+                    <td>
+                        <div class="rate-container">
+                            <div class="rate">
+                                <input [checked]="rating == 5" type="radio" />
+                                <label title="text">5 stars</label>
+                                <input [checked]="rating == 4" type="radio" />
+                                <label title="text">4 stars</label>
+                                <input [checked]="rating == 3" type="radio" />
+                                <label title="text">3 stars</label>
+                                <input [checked]="rating == 2" type="radio" />
+                                <label title="text">2 stars</label>
+                                <input [checked]="rating == 1" type="radio" />
+                                <label title="text">1 star</label>
+                            </div>
+                        </div>
+
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
+</div>

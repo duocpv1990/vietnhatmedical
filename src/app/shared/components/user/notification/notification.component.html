@@ -1,0 +1,35 @@
+<div class="container notification">
+    <div class="title">
+        <span *ngIf="!isShow">Thông báo</span>
+        <span *ngIf="isShow">Chi tiết thông báo</span>
+        <button *ngIf="isShow" (click)="hideNotificationDetail()">Quay lại</button>
+    </div>
+    <div class="list-group" *ngIf="!isShow">
+        <div class="list-group-item list-group-item-action" *ngFor="let notification of notifications"
+            (click)="viewNotificationDetail(notification.NotificationId)">
+            <div class="sub-title">
+                <!-- <span>29/10/2020</span> -->
+                <p>{{notification?.Name}}</p>
+            </div>
+            <div class="content">
+                {{notification?.Description}}
+            </div>
+
+        </div>
+
+    </div>
+
+    <div *ngIf="isShow">
+        <div class="notification-detail" *ngIf="notificationDetail">
+            <div class="form-group">
+                <label>Tiêu đề: </label>
+                <input class="form-control" [(ngModel)]="notificationDetail.Name">
+            </div>
+            <div class="form-group">
+                <label>Nội dung: </label>
+                <textarea class="form-control" rows="3" [(ngModel)]="notificationDetail.Description"></textarea>
+            </div>
+        </div>
+    </div>
+
+</div>

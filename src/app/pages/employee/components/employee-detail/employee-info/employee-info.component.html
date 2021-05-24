@@ -1,0 +1,124 @@
+<form ngNativeValidate #updateForm="ngForm">
+    <div class="container-fluid">
+        <div class="row customerInfo">
+            <div class="col-2">
+                <div class="avatar insideShadow">
+                    <img [src]="employeeAvatarString"><br>
+                    <label for="employeeAvatar">
+                        <span class="material-icons">
+                            add_a_photo
+                        </span>
+                    </label>
+                    <input #EmployeeAvatar type="file" accept='image/*' id="employeeAvatar"
+                        (change)="processFileEmployeeAvatar(EmployeeAvatar.files)" hidden> <br>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="info-col">
+                    <div>
+                        <mat-label>Mã nhân viên</mat-label>
+                        <mat-form-field *ngIf="currentEmployee !== undefined">
+                            <input disabled matInput [(ngModel)]="currentEmployee.EmployeeId" name="employeeId">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-label>Họ</mat-label>
+                        <mat-form-field>
+                            <input matInput name="firstName" [(ngModel)]="firstName" required>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-label>Tên</mat-label>
+                        <mat-form-field>
+                            <input matInput name="lastName" [(ngModel)]="lastName" required>
+                        </mat-form-field>
+                    </div>
+                    <br>
+                    <div style="line-height: 25px;">
+                        <mat-label>Giới tính</mat-label>
+                        <mat-radio-group *ngIf="currentEmployee !== undefined">
+                            <span class="pr-3"><input type="radio" name="gender" (change)="chooseGenderType(1)"
+                                    [checked]="currentEmployee.Gender == 1"> Nam</span>
+                            <input type="radio" name="gender" (change)="chooseGenderType(2);"
+                                [checked]="currentEmployee.Gender == 2"> Nữ
+                        </mat-radio-group>
+                    </div>
+                    <div>
+                        <mat-label>Ngày sinh</mat-label>
+                        <mat-form-field>
+                            <input type="date" matInput name="DOB" [(ngModel)]="DOB" required>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-label>Điện thoại</mat-label>
+                        <mat-form-field>
+                            <input type="number" matInput name="phone" [(ngModel)]="phone" required>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-label>Địa chỉ</mat-label>
+                        <mat-form-field>
+                            <input matInput name="state" [(ngModel)]="state" required>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-label>Thành phố</mat-label>
+                        <mat-form-field>
+                            <input matInput name="city" [(ngModel)]="city" required>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+                <div class="insideShadow btnGroup">
+                    <button class="btn customBtn" [disabled]="updateForm.invalid"
+                        (click)="updateEmployeeInfo()">Lưu</button>
+                    <button class="btn cancelBtn" (click)="openDeleteForm()">Xóa</button>
+                </div><br>
+            </div>
+            <div class="col-4">
+
+                <div class="form-group">
+                    <label>Phòng ban</label>
+                    <mat-form-field>
+                        <select matNativeControl [(ngModel)]="departmentId" name="departmentId"
+                            (change)="chooseDepartment($event.target.value)">
+                            <option *ngFor="let deparment of deparmentList" [value]="deparment.CompanyDepartmentId">
+                                {{deparment.DepartmentName}}
+                            </option>
+                        </select>
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <label>Chức vụ</label>
+                    <!-- <mat-form-field>
+                            <mat-select  [(ngModel)]="positionIdList" (selectionChange) = "choosePosition($event.value)">
+                                <mat-option *ngFor="let pos of positions" [value]="pos.PositionId">
+                                     {{pos.Name}}
+                                </mat-option>    
+                            </mat-select>
+                        </mat-form-field> -->
+                    <mat-form-field>
+                        <select matNativeControl name="positionId" [(ngModel)]="positionId"
+                            (change)="choosePosition($event.target.value)">
+                            <option *ngFor="let pos of positions" [value]="pos.PositionId"> {{pos.Name}}</option>
+                        </select>
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <mat-form-field>
+                        <input type="email" name="email" matInput [(ngModel)]="email">
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <label>Mã IPPhone</label>
+                    <mat-form-field>
+                        <input type="text" name="iPPhoneId" matInput [(ngModel)]="iPPhoneId">
+                    </mat-form-field>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</form>

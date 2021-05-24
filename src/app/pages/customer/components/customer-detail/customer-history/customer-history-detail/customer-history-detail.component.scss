@@ -1,0 +1,47 @@
+.schedule-booking .col-6{
+    mat-label{
+        display: inline-block;
+        width: 120px;
+    }
+    
+    mat-form-field{
+        width: 50%;
+    }
+ 
+} 
+
+.scheduleStatus{
+    height: 23px;
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.16);
+    display: inline-block;
+    label{
+      background: #a7c3e6;
+      color: #fff;
+      border-radius: 15px;
+      padding: 0px 15px;
+      cursor: pointer;
+    }
+    label:last-child{
+      background: #fff;
+      color: #E1B243;
+      border-radius: 15px;
+      padding: 0px 15px;
+      cursor: pointer;
+    }
+    .material-icons{
+      margin-top: 1px;
+      font-size: 17px;
+    }
+  }
+  
+  .scheduleStatus input[type="checkbox"]:checked + label{
+      background: #fff !important;
+      color: #E1B243;
+  
+    &+label{
+      background: #a7c3e6 !important;
+      color: #fff;
+    }
+  }

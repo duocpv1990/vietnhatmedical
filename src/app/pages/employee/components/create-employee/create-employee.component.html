@@ -1,0 +1,138 @@
+<form ngNativeValidate #createForm="ngForm">
+    <div class="container-fluid">
+        <div class="row mb-3">
+            <div class="col">
+                <div class="create-employee-title" style="max-width: 35%;">
+                    <span>Tạo hồ sơ nhân viên mới</span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-2">
+                <div class="avatar insideShadow">
+                    <img [src]="profileImageString" *ngIf="profileImageString" class="img-fluid"
+                        class="w-100 h-100 mb-1 ">
+                    <label for="profileImage">
+                        <span class="material-icons">
+                            add_a_photo
+                        </span>
+                    </label>
+                    <input #ProfileImage type="file" accept='image/*' id="profileImage"
+                        (change)="processFileProfileImage(ProfileImage.files)" hidden required>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="create-form">
+                    <mat-label>Họ và tên</mat-label>
+                    <mat-form-field>
+                        <input matInput name="name" [(ngModel)]="name" required>
+                    </mat-form-field>
+                </div><br>
+                <div class="create-form mb-3">
+                    <mat-label style="padding: 0;">Giới tính</mat-label>
+                    <span class="pr-3"><input type="radio" name="gender" (change)="chooseGenderType(1)"> Nam</span>
+                    <input type="radio" name="gender" (change)="chooseGenderType(2);" checked> Nữ
+                </div>
+                <div class="create-form">
+                    <mat-label>Ngày sinh</mat-label>
+                    <mat-form-field>
+                        <input type="date" matInput name="birthDay" [(ngModel)]="birthDay" required>
+                    </mat-form-field>
+                </div>
+                <div class="create-form">
+                    <mat-label>Điện thoại</mat-label>
+                    <mat-form-field>
+                        <input matInput name="phone" [(ngModel)]="phone" #validPhone="ngModel" minlength="10" maxlength="10" required>
+                    </mat-form-field>
+                    <div class="validForm">
+                        <p *ngIf="validPhone.touched && (validPhone.errors?.required || validPhone.errors?.minlength || validPhone.errors?.maxlength || isNumber(phone))">
+                            Yêu cầu 10 chữ số!</p>
+                    </div>
+                </div>
+                <div class="create-form">
+                    <mat-label>Địa chỉ</mat-label>
+                    <mat-form-field>
+                        <input matInput name="state" [(ngModel)]="state" required>
+                    </mat-form-field>
+                </div>
+                <div class="create-form">
+                    <mat-label>Thành phố</mat-label>
+                    <mat-form-field>
+                        <input matInput name="city" [(ngModel)]="city" required>
+                    </mat-form-field>
+                </div>
+                <div class="create-form">
+                    <mat-label>Số CMND</mat-label>
+                    <mat-form-field>
+                        <input matInput name="idCardNumber" [(ngModel)]="idCardNumber" #validIdCard="ngModel" minlength="9" required>
+                    </mat-form-field>
+                    <div class="validForm">
+                        <p *ngIf="validIdCard.touched && (validIdCard.errors?.required || validIdCard.errors?.minlength || isNumber(idCardNumber))">
+                            Tối thiểu 9 chữ số!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-5">
+                <div class="create-form">
+                    <mat-label>Email</mat-label>
+                    <mat-form-field>
+                        <input type="email" matInput name="email" [(ngModel)]="email" #validEmail="ngModel" email required>
+                    </mat-form-field>
+                    <div class="validForm">
+                        <p *ngIf="validEmail.touched && (validEmail.errors?.required || validEmail.errors?.email)">
+                            Email chưa đúng!</p>
+                    </div>
+                </div>
+                <div class="create-form">
+                    <mat-label>Mật khẩu</mat-label>
+                    <mat-form-field>
+                        <input type="password" matInput name="password" [(ngModel)]="password" #validPass="ngModel"
+                            minlength="6" required (keyup)="validPassword()">
+                    </mat-form-field>
+                    <div class="validForm">
+                        <p
+                            *ngIf="validPass.touched && (validPass.errors?.required || validPass.errors?.minlength || !hasNumber)">
+                            Có ít nhất một số, Tối thiểu 6 ký tự!</p>
+                        <!-- <p *ngIf="createForm.controls.password.touched && !hasNumber">Có tối thiểu một số!</p>-->
+                    </div>
+                </div>
+                <div class="create-form">
+                    <mat-label>Xác nhận lại</mat-label>
+                    <mat-form-field>
+                        <input type="password" matInput name="confirmPassword" [(ngModel)]="confirmPassword"
+                            minlength="6" required>
+                    </mat-form-field>
+                    <div class="validForm">
+                        <p
+                            *ngIf="createForm.controls.confirmPassword?.touched && createForm.controls.confirmPassword?.value !== createForm.controls.password?.value">
+                            Mật khẩu phải trùng khớp!</p>
+                    </div>
+                </div>
+                <div class="create-form" style="margin-bottom: 2em;">
+                    <mat-label>Phòng ban</mat-label>
+                    <select name="departmentIdList" [(ngModel)]="departmentIdList"
+                        (change)="chooseDepartment($event.target.value)">
+                        <option *ngFor="let dep of departments" value="{{dep.CompanyDepartmentId}}">
+                            {{dep.DepartmentName}}
+                        </option>
+                    </select>
+                </div>
+                <div class="create-form">
+                    <mat-label>Chức vụ</mat-label>
+                    <select name="positionIdList" [(ngModel)]="positionIdList"
+                        (change)="choosePosition($event.target.value)">
+                        <!-- <option value="0">Chọn chức vụ</option> -->
+                        <option *ngFor="let pos of positions" value="{{pos.PositionId}}">
+                            {{pos.Name}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="insideShadow btnGroup">
+            <button class="btn customBtn" type="submit" (click)="createEmployee()"
+                [disabled]="createForm.invalid || !profileImageString">Tạo</button>
+            <button class="btn cancelBtn" routerLink="/pages/employee">Hủy</button>
+        </div><br>
+    </div>
+</form>

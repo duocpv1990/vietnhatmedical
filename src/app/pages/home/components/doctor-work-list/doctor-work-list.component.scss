@@ -1,0 +1,76 @@
+// :host{
+//   display: block;
+//   // background: #6b80a4;
+// }
+.customTableStyle {
+    box-shadow: none !important;
+    
+  }
+  tr.mat-row {
+      height: 36px !important;
+    }
+  .scheduleType {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background: #6b80a4;
+    border-radius: 10px;
+    height: 115px;
+    // height: 15.5vh;
+    text-align: center;
+    color: #fff;
+    padding: 5px;
+  }
+
+  mat-paginator{
+    max-height: 35px;
+  }
+
+  ::ng-deep .operationSchedule {
+    .mat-paginator .mat-paginator-container {
+      justify-content: flex-end !important;
+  
+      .mat-paginator-page-size {
+        display: none;
+      }
+    }
+  }
+
+  ::ng-deep .examinationSchedule {
+    table thead {
+      visibility: hidden;
+      display: table-caption;
+      max-height: 30px;
+    }
+    .mat-paginator .mat-paginator-container {
+      justify-content: flex-end !important;
+  
+      .mat-paginator-page-size {
+        display: none;
+      }
+    }
+  }
+
+  .scheduleStatus{
+    width: 80px;
+    margin: 0 auto;
+    mat-form-field{
+      width: 100%;
+
+      
+    }
+  ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-wrapper {
+        padding-bottom: .5em !important;
+      }
+
+  ::ng-deep .mat-form-field-appearance-legacy .mat-form-field-underline{
+    height: 0px !important;
+  }
+
+  ::ng-deep .mat-form-field-infix {
+      border-top-width: 0px;
+      padding-top: 10px;
+      padding-bottom: 0px;
+    }
+    
+  }

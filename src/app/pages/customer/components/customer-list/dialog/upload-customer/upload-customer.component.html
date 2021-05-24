@@ -1,0 +1,42 @@
+<div class="dialog-container container">
+    <div class="row">
+        <div class="col-10">
+            <span class="dialog-title p-2">Tải lên tệp khách hàng</span>
+        </div>
+        <!-- <div class="col-2 pl-4">
+            <span class="material-icons close-button" (click)="closeDialog()">
+                close
+            </span>
+        </div> -->
+    </div><br>
+    <form action="" #uploadForm="ngForm" class="mt-2">
+        <div class="row">
+            <div class="col">
+                <label for="">Tên</label>
+                <mat-form-field>
+                    <input type="text" matInput  name="name" [(ngModel)]="name">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <label for="">Giá tiền</label>
+                <mat-form-field>
+                    <input type="text" matInput  name="price" [(ngModel)]="price">
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <!-- <label for="chooseFile"><mat-icon>create_new_folder</mat-icon><span class="mb-2">Chọn file</span></label> -->
+                <label for="">Tập khách hàng</label>
+                <input #Upload type="file" id="chooseFile" name="list-customer" class="form-control" (change)="processFile(Upload.files)" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" required><br>
+                <!-- <input #Upload type="file" id="chooseFile" name="list-customer" class="form-control-file" (change)="processFile(Upload.files)" accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" hidden> -->
+            </div>
+        </div><br><br>
+        <div class="text-center">
+            <button class="btn customBtn mr-3" [disabled]="uploadForm.invalid" style="padding: 0.1rem 0.75rem" (click)="sendForm()">Lưu</button>
+            <button class="btn btn-dark" style="padding: 0.1rem 0.75rem" (click)="closeDialog()">Hủy</button>
+        </div><br>
+    </form>
+</div>

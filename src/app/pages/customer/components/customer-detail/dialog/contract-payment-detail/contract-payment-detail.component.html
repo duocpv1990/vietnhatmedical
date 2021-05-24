@@ -1,0 +1,71 @@
+<div class="dialog-container container">
+    <div class="row">
+        <div class="col-10">
+            <span class="dialog-title" style="padding: .4em .7em;">Chi tiết thanh toán</span>
+        </div>
+        <div class="col-2 pl-4">
+            <span class="material-icons close-button" (click)="closeDialog()">
+                close
+            </span>
+        </div>
+    </div><br>
+    <form ngNativeValidate #updateForm="ngForm">
+        <div class="row">
+            <div class="col-3">
+                <mat-label for="">Số tiền:</mat-label>
+            </div>
+            <div class="col-9">
+                <mat-form-field>
+                    <input (ngModelChange)="amount=currencyInputChanged($event)" [ngModel]="amount | number: '.'"
+                        matInput name="amount" required>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <mat-label>Ngày thu:</mat-label>
+            </div>
+            <div class="col-9">
+                <mat-form-field>
+                    <input type="date" matInput name="paymentDate" [(ngModel)]="paymentDate" required>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <mat-label for="">Ghi chú:</mat-label>
+            </div>
+            <div class="col-9">
+                <mat-form-field>
+                    <textarea cdkTextareaAutosize="false" rows="2" matInput type="text" name="title"
+                        [(ngModel)]="title"></textarea>
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3"><br>
+                <mat-label for="">Ảnh:</mat-label>
+            </div>
+            <div class="col-9 text-center">
+                <div class="imageForm">
+                    <label for="contractPayment" class="w-100 h-100"><img [src]="contractPaymentImageString"
+                            *ngIf="contractPaymentImageString" class="img-fluid mb-1"></label>
+                    <label for="contractPayment"><span class="material-icons">
+                            add_a_photo
+                        </span></label>
+                </div>
+                <input #ContractPayment type="file" accept='image/*' id="contractPayment"
+                    (change)="processFileContractPaymentImage(ContractPayment.files)" required hidden>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col text-center">
+                <div class="mx-auto insideShadow" style="max-width: 7rem;">
+                    <button class="btn customBtn" [disabled]="updateForm.invalid"
+                        (click)="updateContractPayment()">Lưu</button>
+                    <button class="btn cancelBtn" (click)="deleteContractPayment()">Xóa</button>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

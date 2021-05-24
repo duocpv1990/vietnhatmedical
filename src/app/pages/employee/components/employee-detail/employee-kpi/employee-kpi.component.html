@@ -1,0 +1,75 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col">
+      <br>
+      <table mat-table [dataSource]="dataSource" class=" table-hover table-striped text-center customTableStyle">
+        <ng-container matColumnDef="Tháng">
+          <th mat-header-cell *matHeaderCellDef> Tháng </th>
+          <td mat-cell *matCellDef="let kpi">
+            {{kpi.a}}
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="Năm">
+          <th mat-header-cell *matHeaderCellDef> Năm </th>
+          <td mat-cell *matCellDef="let kpi">
+            {{kpi.b }}</td>
+        </ng-container>
+        <ng-container matColumnDef="Tỉ lệ gọi">
+          <th mat-header-cell *matHeaderCellDef> Tỉ lệ gọi </th>
+          <div class="">
+            <td mat-cell *matCellDef="let kpi">
+              <div class="d-flex">
+                {{kpi.c}}%
+                <div class="bar">
+                  <span [style.background]="kpi.c < 30 ? '#CE7474' : kpi.c > 60? '#AAEE9D': '#E1B243'"
+                    [ngStyle]="{'width.%': kpi.c}" class="second percent">
+                  </span>
+                </div>
+              </div>
+            </td>
+          </div>
+        </ng-container>
+        <ng-container matColumnDef="Tỉ lệ gặp">
+          <th mat-header-cell *matHeaderCellDef> Tỉ lệ gặp </th>
+          <div class="">
+            <td mat-cell *matCellDef="let kpi">
+              <div class="d-flex">
+                {{kpi.d }}%
+                <div class="bar">
+                  <span [style.background]="kpi.d < 30 ? '#CE7474' : kpi.d > 60? '#AAEE9D': '#E1B243'"
+                    [ngStyle]="{'width.%': kpi.d}" class="second percent">
+                  </span>
+                </div>
+              </div>
+            </td>
+          </div>
+        </ng-container>
+        <ng-container matColumnDef="Tỉ lệ chốt">
+          <th mat-header-cell *matHeaderCellDef> Tỉ lệ chốt </th>
+          <div class="">
+            <td mat-cell *matCellDef="let kpi">
+              <div class="d-flex">
+                {{kpi.e }}%
+                <div class="bar">
+                  <span [style.background]="kpi.e < 30 ? '#CE7474' : kpi.e > 60? '#AAEE9D': '#E1B243'"
+                    [ngStyle]="{'width.%': kpi.e}" class="second percent">
+                  </span>
+                </div>
+              </div>
+            </td>
+          </div>
+        </ng-container>
+        <ng-container matColumnDef="Doanh số">
+          <th mat-header-cell *matHeaderCellDef> Doanh số </th>
+          <td mat-cell *matCellDef="let kpi">
+            {{kpi.f | number:'.'}}
+          </td>
+        </ng-container>
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let kpi; columns: displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10" showFirstLastButtons="false">
+      </mat-paginator>
+    </div>
+  </div>
+</div>

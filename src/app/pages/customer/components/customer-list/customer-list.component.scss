@@ -1,0 +1,352 @@
+.customer-table {
+  height: 100%;
+}
+
+.customer-header {
+  display: inline-flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  cursor: pointer;
+}
+
+.text-start {
+  text-align: start !important;
+}
+
+.customer-title {
+  border-radius: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.16);
+  ::ng-deep .mat-button {
+    background: #3db4a9;
+    color: #fff;
+    border-radius: 15px;
+    font-weight: 500;
+    font-size: 16px;
+  }
+  span {
+    background: #3db4a9;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 10px;
+    margin-left: -3px;
+    margin-right: 3px;
+  }
+}
+
+$labelWidth: 70px;
+.switch {
+  position: relative;
+  padding-top: 10px;
+  height: 50px;
+  width: $labelWidth * 4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.switch-label {
+  position: relative;
+  width: 100px;
+  z-index: 2;
+  float: left;
+  // line-height: 26px;
+  font-size: 14px;
+  font-weight: 500;
+  text-align: center;
+  opacity: 0.2;
+  cursor: pointer;
+  transition: all ease-in-out 0.3s;
+  &:active {
+    // font-weight: bold;
+  }
+  &:hover {
+    // font-weight: 600;
+    opacity: 1;
+  }
+  div {
+    color: #375384;
+    position: relative;
+    font-size: 14px;
+    margin-right: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    span {
+      font-size: 14px !important;
+      padding: 0 !important;
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+.switch-label-off {
+  padding-left: 2px;
+}
+
+.switch-label-on {
+  padding-right: 2px;
+}
+
+.switch-input {
+  display: none;
+  &:checked + .switch-label {
+    // font-weight: bold;
+    opacity: 1;
+    transition: all ease-in-out 0.3s;
+    div::after {
+      background: none repeat scroll 0 0 transparent;
+      bottom: 0;
+      content: "";
+      display: block;
+      height: 2px;
+      border-radius: 15px;
+      background: #375384;
+      transition: all ease-in-out 0.5s;
+      transition: width 0.3s ease 0s, left 0.3s ease 0s;
+      width: 0;
+      // margin-bottom: -7px;
+      width: 100%;
+      left: 0;
+      bottom: -2px;
+    }
+  }
+  &:checked + .switch-label-on ~ .switch-selection {
+    left: $labelWidth + 2px;
+    /* Note: left: 50% doesn't transition in WebKit */
+  }
+}
+
+.switch-selection {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: 2px;
+  left: 2px;
+  width: $labelWidth;
+  height: 22px;
+  border-radius: 3px;
+  .switch-yellow & {
+    background: white;
+    opacity: 0.5;
+  }
+}
+
+// input[type="checkbox"] {
+//   // padding-left: 0 !important;
+//   margin-left: 15px;
+// }
+tr.mat-header-row {
+  height: 35px !important;
+  th {
+    font-size: 14px;
+    font-weight: 600;
+    font-family: "Segoe UI", sans-serif !important;
+  }
+}
+
+th.mat-header-cell[_ngcontent-jsn-c196]:first-of-type {
+  padding-left: unset !important;
+}
+
+// th.mat-header-cell:nth-child(2){
+//   border-bottom-left-radius: 10px;
+//   border-top-left-radius: 10px;
+// }
+th.mat-header-cell:first-of-type,
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type {
+  width: 40px;
+  // background: none;
+  padding-left: unset !important;
+  label {
+    background-color: #fff;
+    border: 1px solid #000000;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    margin-bottom: -5px !important;
+  }
+  input[type="checkbox"] {
+    visibility: hidden;
+  }
+  input[type="checkbox"]:checked + label {
+    background-color: #375384;
+    border-color: #375384;
+  }
+  input[type="checkbox"]:checked + label:after {
+    opacity: 1;
+  }
+}
+
+.col-checkbox {
+  width: 40px;
+  // background: none;
+  padding-left: unset !important;
+  label {
+    background-color: #fff;
+    border: 1px solid #000000;
+    border-radius: 50%;
+    cursor: pointer;
+    height: 20px;
+    width: 20px;
+    margin-bottom: -5px !important;
+  }
+  input[type="checkbox"] {
+    visibility: hidden;
+  }
+  input[type="checkbox"]:checked + label {
+    background-color: #375384;
+    border-color: #375384;
+  }
+  input[type="checkbox"]:checked + label:after {
+    opacity: 1;
+  }
+}
+
+.search-box {
+  display: flex;
+  position: absolute;
+  right: 15px;
+  width: 290px;
+  .searchInput {
+    border: 1px solid white;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: inset 5px 5px 10px #cccccc, inset -5px -5px 10px #ffffff;
+    height: 40px;
+    padding-left: 20px !important;
+    position: absolute;
+    width: 100%;
+  }
+  i {
+    position: absolute;
+    color: #224177;
+    right: 0px;
+    margin-top: 7px;
+    margin-right: 10px;
+  }
+  .clearStr {
+    position: absolute;
+    right: 30px;
+    mat-icon {
+      margin-bottom: 5px;
+      font-size: medium;
+    }
+  }
+}
+
+.function-btn {
+  display: flex;
+  align-items: center;
+  img {
+    height: 30px;
+    margin-bottom: 5px;
+  }
+  ::ng-deep mat-form-field {
+    max-width: 100px;
+    .mat-form-field-infix {
+      border-top: 0.3em solid transparent !important;
+    }
+  }
+  .export-excel {
+    background: #375384;
+    color: #fff;
+    border-radius: 10px;
+    border: none;
+    height: 5%;
+    padding: 0.1em 0.8em;
+  }
+}
+
+.booking {
+  color: #375384;
+  cursor: pointer;
+  &:hover {
+    color: #5885d3;
+    font-size: 1.7rem;
+  }
+}
+
+::ng-deep .customerPaginator .mat-paginator-page-size {
+  visibility: hidden;
+}
+
+.searchSchedule {
+  // border: 1px solid;
+  border-radius: 10px;
+  display: flex;
+  position: absolute;
+  right: 23vw;
+  height: 40px;
+  // top: 5px;
+  // width: 290px;
+  background: #ffffff;
+  box-shadow: inset 5px 5px 10px #cccccc, inset -5px -5px 10px #ffffff;
+  input {
+    padding: 10px 0 0 5px;
+    border: none;
+    outline: none;
+    background: none;
+    // border: none;
+  }
+}
+
+.call {
+  color: #375384;
+  border: none;
+  background: none;
+}
+
+.text-note {
+  width: 12vw;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+::ng-deep .tooltip-class {
+  font-size: 0.8em !important;
+}
+
+.table-sale {
+  &__header {
+    background: #6b80a4;
+    color: #ffff;
+  }
+  .pagination-controls {
+    display: flex;
+    justify-content: center;
+    &__count {
+      margin-top: 0.25em;
+    }
+  }
+
+  .table th {
+    padding: 0.4rem;
+    vertical-align: unset;
+  }
+  .table td {
+    padding: 0.4rem;
+    vertical-align: middle;
+  }
+
+  .user-note {
+    width: 12vw;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  ::ng-deep .mat-checkbox-layout {
+    margin-bottom: 0;
+  }
+}
