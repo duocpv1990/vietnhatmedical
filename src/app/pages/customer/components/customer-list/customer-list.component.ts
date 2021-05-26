@@ -331,7 +331,6 @@ export class CustomerListComponent extends BaseComponent implements OnInit, OnDe
 
   openUploadFileForm() {
     this.dialog.open(UploadCustomerComponent).afterClosed().subscribe(() => {
-      this.isShowMyCustomer = true;
       this.viewCustomer();
     });
   }
