@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  API_URL: 'http://192.168.1.34/jvc',
-  // API_URL: 'https://api.bemesoft.com'
+  // API_URL: 'http://192.168.1.34/jvc',
+  API_URL: 'http://jvc-env.ap-southeast-1.elasticbeanstalk.com'
 };
 
 /*
