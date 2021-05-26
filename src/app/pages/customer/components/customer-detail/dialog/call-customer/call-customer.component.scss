@@ -30,7 +30,7 @@
 }
 
 .customerStatus input:checked + label {
-  background: #375384;
+  background: #3db4a9;
   color: #fff;
   border: 1px solid #000;
   border-radius: 10px;
@@ -86,7 +86,7 @@
 @keyframes slidein {
   0% {
     width: 0px;
-    background: #375384;
+    background: #3db4a9;
   }
   50% {
     background: #a7c3e6;

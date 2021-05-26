@@ -8,7 +8,8 @@
   </div>
   <div class="row">
     <div class="col">
-      <mat-tab-group class="employee-detail-tab-group customScrollbars tab-group-customer" [(selectedIndex)]="selectedIndex">
+      <mat-tab-group class="employee-detail-tab-group customScrollbars tab-group-customer"
+        [(selectedIndex)]="selectedIndex">
         <div>
           <mat-tab>
             <ng-template mat-tab-label>
@@ -21,7 +22,7 @@
 
           </mat-tab>
 
-          <mat-tab>
+          <!-- <mat-tab>
             <ng-template mat-tab-label>
               <mat-icon class="example-tab-icon" (click)="loadMyCustomer()">supervisor_account</mat-icon>
               <span>Khách hàng</span>
@@ -42,7 +43,7 @@
               <span>KPI</span>
             </ng-template>
             <div #kpi></div>
-          </mat-tab>
+          </mat-tab> -->
         </div>
       </mat-tab-group>
 

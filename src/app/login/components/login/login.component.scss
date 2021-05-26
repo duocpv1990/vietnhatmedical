@@ -141,6 +141,12 @@ label:active:after {
   transition: all ease-in-out 0.5s;
 }
 
+.login-logo {
+  img {
+    width: 250px;
+  }
+}
+
 @media only screen and (max-width: 1360px) {
   .login {
     width: 35%;

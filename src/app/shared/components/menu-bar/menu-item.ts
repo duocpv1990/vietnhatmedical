@@ -16,30 +16,30 @@ export const menuItem: Array<any> = [
         link: '/pages/customer',
         isAccess: true
     },
-    {
-        title: 'Lịch',
-        elementOnUrl: 'schedule',
-        class: 'material-icons',
-        icon: 'date_range',
-        link: '/pages/schedule',
-        isAccess: true
-    },
-    {
-        title: 'Tài liệu',
-        elementOnUrl: 'document',
-        class: 'material-icons',
-        icon: 'library_books',
-        link: '/pages/document',
-        isAccess: true
-    },
-    {
-        title: 'Báo cáo',
-        elementOnUrl: 'report',
-        class: 'material-icons',
-        icon: 'assignment',
-        link: '/pages/report',
-        isAccess: true
-    },
+    // {
+    //     title: 'Lịch',
+    //     elementOnUrl: 'schedule',
+    //     class: 'material-icons',
+    //     icon: 'date_range',
+    //     link: '/pages/schedule',
+    //     isAccess: true
+    // },
+    // {
+    //     title: 'Tài liệu',
+    //     elementOnUrl: 'document',
+    //     class: 'material-icons',
+    //     icon: 'library_books',
+    //     link: '/pages/document',
+    //     isAccess: true
+    // },
+    // {
+    //     title: 'Báo cáo',
+    //     elementOnUrl: 'report',
+    //     class: 'material-icons',
+    //     icon: 'assignment',
+    //     link: '/pages/report',
+    //     isAccess: true
+    // },
     {
         title: 'Nhân viên',
         elementOnUrl: 'employee',
@@ -50,14 +50,14 @@ export const menuItem: Array<any> = [
     },
 
 
-    {
-        title: 'Thiết lập',
-        elementOnUrl: 'setting',
-        class: 'material-icons',
-        icon: 'tune',
-        link: '/pages/setting',
-        isAccess: true
-    },
+    // {
+    //     title: 'Thiết lập',
+    //     elementOnUrl: 'setting',
+    //     class: 'material-icons',
+    //     icon: 'tune',
+    //     link: '/pages/setting',
+    //     isAccess: true
+    // },
 
 
 

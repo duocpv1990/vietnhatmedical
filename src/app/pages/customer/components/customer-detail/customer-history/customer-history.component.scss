@@ -1,73 +1,70 @@
 .insideShadow {
-    padding: 10px 5px;
-    // max-width: 35%;
-    border-radius: 15px;
-  
-    span {
-      background: #375384;
-      color: #fff;
-      padding: 10px 15px;
-      border-radius: 10px;
-    }
-  }
-  $labelWidth: 50px;
+  padding: 10px 5px;
+  // max-width: 35%;
+  border-radius: 15px;
 
-  .switch {
-    position: relative;
-    height: 26px;
-    width: $labelWidth * 2 + 4px;
-    background: white;
-    border-radius: 15px;
-    // border: 1px solid white;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.16);
+  span {
+    background: #3db4a9;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 10px;
+  }
+}
+$labelWidth: 50px;
+
+.switch {
+  position: relative;
+  height: 26px;
+  width: $labelWidth * 2 + 4px;
+  background: white;
+  border-radius: 15px;
+  // border: 1px solid white;
+  box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.16);
   display: inline-block;
+}
+
+.switch-label {
+  position: relative;
+  z-index: 2;
+  float: left;
+  width: $labelWidth;
+  line-height: 26px;
+  font-size: 11px;
+  color: #e1b243;
+  text-align: center;
+  cursor: pointer;
+
+  &:active {
+    font-weight: bold;
   }
-  
-  .switch-label {
-    position: relative;
-    z-index: 2;
-    float: left;
-    width: $labelWidth;
-    line-height: 26px;
-    font-size: 11px;
-    color: #E1B243;
-    text-align: center;
-    cursor: pointer;
-  
-    &:active {
-      font-weight: bold;
-    }
+}
+
+.switch-input {
+  display: none;
+
+  &:checked + .switch-label {
+    font-weight: bold;
+    color: white;
+    transition: 0.15s ease-out;
   }
-  
-  
-  .switch-input {
-    display: none;
-  
-    &:checked + .switch-label {
-      font-weight: bold;
-      color: white;
-      transition: 0.15s ease-out;
-    }
-  
-    &:checked + .switch-label-on ~ .switch-selection {
-      left: $labelWidth + 2px; /* Note: left: 50% doesn't transition in WebKit */
-    }
+
+  &:checked + .switch-label-on ~ .switch-selection {
+    left: $labelWidth + 2px; /* Note: left: 50% doesn't transition in WebKit */
   }
-  
-  .switch-selection {
-    display: block;
-    position: absolute;
-    z-index: 1;
-    top: 2px;
-    left: 2px;
-    width: $labelWidth;
-    height: 22px;
-    border-radius: 3px;
-   
-  
-    .switch-yellow & {
-      background: #a7c3e6;
-      border-radius:15px ;
-    }
+}
+
+.switch-selection {
+  display: block;
+  position: absolute;
+  z-index: 1;
+  top: 2px;
+  left: 2px;
+  width: $labelWidth;
+  height: 22px;
+  border-radius: 3px;
+
+  .switch-yellow & {
+    background: #a7c3e6;
+    border-radius: 15px;
   }
-  
+}

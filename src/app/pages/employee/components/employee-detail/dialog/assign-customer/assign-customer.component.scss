@@ -1,32 +1,33 @@
 .assignCustomer {
-    position: absolute !important;
-    width: 70rem !important;
-    height: 100vh !important;
-    top: 0;
-    right: 0;
-    background: #fff;
-    padding-top: 3rem;
+  position: absolute !important;
+  width: 70rem !important;
+  height: 100vh !important;
+  top: 0;
+  right: 0;
+  background: #fff;
+  padding-top: 3rem;
 }
 
-  .table {
-    height: 65vh;
-    overflow: auto;
-   td {
-      vertical-align: middle;
-   }
-   th {
-       vertical-align: middle;
-   }
+.table {
+  height: 65vh;
+  overflow: auto;
+  td {
+    vertical-align: middle;
   }
-
-  th.mat-header-cell[_ngcontent-jsn-c196]:first-of-type {
-    padding-left: unset !important;
+  th {
+    vertical-align: middle;
+  }
 }
 
-th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
-    padding-left: unset !important;
+th.mat-header-cell[_ngcontent-jsn-c196]:first-of-type {
+  padding-left: unset !important;
 }
 
+th.mat-header-cell:first-of-type,
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type {
+  padding-left: unset !important;
+}
 
 .round {
   position: relative;
@@ -72,16 +73,17 @@ th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:
 }
 
 .assign-btn {
-  width: 100%; 
+  width: 100%;
   text-align: center;
   button {
-    background: #E4BC65;
+    background: #e4bc65;
     color: #ffffff;
   }
-
 }
 
-th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
+th.mat-header-cell:first-of-type,
+td.mat-cell:first-of-type,
+td.mat-footer-cell:first-of-type {
   padding-left: unset !important;
   label {
     background-color: #fff;
@@ -91,19 +93,19 @@ th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:
     height: 15px;
     width: 15px;
     margin-bottom: 0 !important;
-    }
-    input[type="checkbox"] {
-      visibility: hidden;
-      }
+  }
+  input[type="checkbox"] {
+    visibility: hidden;
+  }
 
-    input[type="checkbox"]:checked + label {
-      background-color: #375384;
-      border-color: #375384;
-        }
+  input[type="checkbox"]:checked + label {
+    background-color: #3db4a9;
+    border-color: #3db4a9;
+  }
 
-    input[type="checkbox"]:checked + label:after {
-      opacity: 1;
-    }
+  input[type="checkbox"]:checked + label:after {
+    opacity: 1;
+  }
 }
 
 .search-box {
@@ -114,20 +116,19 @@ th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:
   right: 32px;
   width: 290px;
   .searchInput {
-      border: 1px solid white;
-      border-radius: 10px;
-      background: #ffffff;
-      box-shadow: inset 5px 5px 10px #cccccc, inset -5px -5px 10px #ffffff;
-      height: 40px;
-      padding-left: 20px !important;
-      position: absolute;
-    }
-    i {
-        position: absolute;
-        color: #224177;
-        right: 0px;
-        margin-top: 7px;
-        margin-right: 10px;
-    }
+    border: 1px solid white;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: inset 5px 5px 10px #cccccc, inset -5px -5px 10px #ffffff;
+    height: 40px;
+    padding-left: 20px !important;
+    position: absolute;
+  }
+  i {
+    position: absolute;
+    color: #224177;
+    right: 0px;
+    margin-top: 7px;
+    margin-right: 10px;
+  }
 }
-
