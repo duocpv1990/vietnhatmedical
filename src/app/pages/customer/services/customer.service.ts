@@ -72,4 +72,22 @@ export class CustomerService extends BaseApiService<CustomerModel>{
     return this.http.get(`api/customer/potentialLevel?potentialLevelId=${potentialLevel}&pageNumber=${pageNumber}`);
   }
 
+  getCustomers(
+    pageNumber,
+    pageSize,
+    countryId,
+    provinceId,
+    districtId,
+    surgeryServiceId,
+    type,
+    genderType,
+    lastname,
+    phone,
+    geographicregionId,
+    idCardNumber,
+    address,
+    email): Observable<CustomerModel[]> {
+    return this.http.get<CustomerModel[]>(`api/customer/search?countryId=${countryId}&provinceId=${provinceId}&districtId=${districtId}&surgeryServiceId=${surgeryServiceId}&type=${type}&pageNumber=${pageNumber}&pageSize=${pageSize}&genderType=${genderType}&lastname=${lastname}&phone=${phone}&geographicregionId=${geographicregionId}&idCardNumber=${idCardNumber}&address=${address}&email=${email}`).pipe(map((res: any) => res.Payload));
+  }
+
 }

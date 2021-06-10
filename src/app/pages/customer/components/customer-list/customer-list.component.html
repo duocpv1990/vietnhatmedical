@@ -1,6 +1,6 @@
 <div class="container-fluid customer-table">
     <div class="row">
-        <div class="col">
+        <div class="col-2">
             <div class="customer-header">
                 <div class="customer-title">
 
@@ -15,28 +15,6 @@
                         <button mat-menu-item routerLink="/pages/customer/file-upload">File upload</button>
                     </mat-menu>
 
-                    <!-- <div class="switch switch-yellow" *ngIf="isAccess">
-                        <input type="radio" class="switch-input" name="view" [checked]="!isShowMyCustomer"
-                            *ngIf="isAccess" />
-                        <label for="ignore" class="switch-label switch-label-on" (click)=" viewCustomer()">
-                            <div>
-                                <span class="material-icons">
-                                    groups
-                                </span>
-                                Tất cả
-                            </div>
-                        </label>
-                        <input type="radio" [checked]="isShowMyCustomer" class="switch-input" name="view" />
-                        <label for="check" class="switch-label switch-label-off" (click)="viewCustomer()">
-                            <div>
-                                <span class="material-icons">
-                                    person
-                                </span>
-                                Của tôi
-                            </div>
-                        </label>
-                        <span class="switch-selection"></span>
-                    </div> -->
                 </div>
                 <div class="function-btn my-1">
                     <button class="add-button" matTooltip="Thêm khách hàng mới" [matMenuTriggerFor]="createCustomer"
@@ -63,305 +41,123 @@
               assignedCustomerList.length == 0 ? 'none' : 'inline'
             " class="export-excel" (click)="exportExcel()" matTooltip="Xuất Excel danh sách KH">Export</button>
 
-                    <mat-form-field class="ml-2" *ngIf="!isShowMyCustomer">
-                        <mat-select [(ngModel)]="potentialLevelId" name="potentialLevelId" style="padding-left: 5px;"
-                            (selectionChange)="getCustomerForLevel($event.value, 1)">
-                            <mat-option *ngFor="let i of level" [value]="i.PotentialLevelId">{{i.Name}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                    <mat-form-field class="ml-2" *ngIf="isShowMyCustomer">
-                        <mat-select [(ngModel)]="potentialLevelId" name="potentialLevelId" style="padding-left: 5px;"
-                            (selectionChange)="getMyCustomer($event.value)">
-                            <mat-option *ngFor="let i of level" [value]="i.PotentialLevelId">{{i.Name}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <!-- <div class="search-box">
-          <input class="searchInput" matInput (keyup)="applyFilter($event.target.value)" placeholder="Tìm kiếm">
-          <i class="material-icons">search</i>
-        </div> -->
-                <div class="search-box">
-                    <input class="searchInput" matInput [(ngModel)]="searchString" placeholder="Tìm kiếm"
-                        (keyup.enter)="searchByText()" />
-                    <button class="clearStr" mat-button *ngIf="searchString" matTooltip="Hủy tìm kiếm" matSuffix
-                        mat-icon-button (click)="getListCustomer(selected); searchString = ''">
-                        <mat-icon>close</mat-icon>
-                    </button>
-                    <i class="material-icons searchBtn" matTooltip="Tìm kiếm" (click)="searchByText()">search</i>
-                </div>
-                <div class="searchSchedule">
-                    <div>
-                        <input style="margin-right: 10px;" matTooltip="Từ ngày" placeholder="Từ ngày" type="date"
-                            name="fromDate" [(ngModel)]="fromDate">
-                    </div>
-                    <div>
-                        <input matTooltip="Đến ngày" placeholder="Đến ngày" type="date" name="toDate"
-                            [(ngModel)]="toDate">
-                    </div>
-                    <div style="cursor: pointer; margin: 10px 10px 0 5px;">
-                        <i class="material-icons searchBtn" matTooltip="Tìm kiếm" style="font-size: x-large;"
-                            (click)="getMyCustomer(potentialLevelId)">search</i>
-                    </div>
+
                 </div>
             </div>
-            <div style="max-height: 60vh; overflow: hidden auto;">
-                <table *ngIf="!isShowMyCustomer" mat-table [dataSource]="dataSource" matSort
-                    class=" table-hover table-striped text-center customTableStyle">
-                    <ng-container matColumnDef="choose">
-                        <th mat-header-cell *matHeaderCellDef>
-                            <input type="checkbox" id="checkbox" (change)="selectAll()" hidden />
-                            <label for="checkbox"></label>
-                        </th>
-                        <td mat-cell *matCellDef="let customer">
-                            <input type="checkbox" id="{{ customer?.CustomerID }}" [checked]="isSelectAll" (change)="
-                  chooseCustomerAssignToSale(customer);
-                  chooseCustomer(customer?.CustomerID)
-                " hidden />
-                            <label for="{{ customer?.CustomerID }}"></label>
-                        </td>
-                    </ng-container>
+        </div>
+        <div class="col">
+            <div class="filter-block">
+                <div class="item">
+                    <span>Quốc gia</span>
+                    &nbsp;
+                    <select class="form-control" name="" id="">
+                        <option value=""></option>
+                    </select>
+                </div>
 
-                    <ng-container matColumnDef="Ngày chia contact">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ngày chia contact</th>
-                        <td mat-cell *matCellDef="let customer" (click)="viewCustomerDetail(customer?.CustomerID)">
-                            {{ customer?.CreatedOn | date: 'dd/MM/yyyy' }}
-                        </td>
-                    </ng-container>
+                <div class="item">
+                    <span>Nguồn KH</span>
+                    &nbsp;
+                    <select class="form-control" name="" id="">
+                        <option value=""></option>
+                    </select>
+                </div>
+                <div class="item">
+                    <span>Giới tính</span>
+                    &nbsp;
+                    <select class="form-control" name="" id="">
+                        <option value=""></option>
+                    </select>
+                </div>
 
-                    <ng-container matColumnDef="Mã KH">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Mã KH</th>
-                        <td mat-cell *matCellDef="let customer" (click)="viewCustomerDetail(customer?.CustomerID)">
-                            &nbsp;&nbsp; {{ customer?.CustomerID }}
-                        </td>
-                    </ng-container>
+                <div class="item">
+                    <input type="text" class="form-control" placeholder="Nhập từ khóa">
+                    &nbsp;
+                    <button type="button" class="btn">Tìm kiếm</button>
+                </div>
+            </div>
+        </div>
 
-                    <ng-container matColumnDef="Họ tên">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Họ tên</th>
-                        <td style="width: 10vw; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; "
-                            class="text-start pl-1" mat-cell *matCellDef="let customer"
-                            (click)="viewCustomerDetail(customer?.CustomerID)">
-                            {{ customer?.LastName }}
-                        </td>
-                    </ng-container>
+    </div>
 
-                    <ng-container matColumnDef="Điện thoại">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                            Điện thoại
-                        </th>
-                        <td mat-cell *matCellDef="let customer" (click)="viewCustomerDetail(customer?.CustomerID)">
-                            <div class="d-flex" *ngIf="customer && customer?.Phone">
-                                <span>{{ customer?.Phone }} </span>
+    <div class="row">
+        <div class="col">
+            <div class="table-sale">
+                <table class="table">
+                    <thead>
+                        <tr class="table-sale__header">
+                            <th scope="col col-checkbox">
+                                <mat-checkbox color="primary" (change)="selectAll()"></mat-checkbox>
+                            </th>
 
-                            </div>
+                            <th scope="col">Mã KH</th>
+                            <th scope="col">Họ tên</th>
+                            <th scope="col">Điện thoại</th>
+                            <th scope="col">Nguồn</th>
 
-                        </td>
-                    </ng-container>
+                            <th scope="col">Sale phụ trách</th>
+                            <th scope="col">Ngày gọi</th>
+                            <th scope="col">Ghi chú</th>
+                            <th scope="col">Gọi điện</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            *ngFor="let customer of customers | paginate: { itemsPerPage: 10, currentPage: userCurrentPage, totalItems: count }">
+                            <td scope="row col-checkbox">
 
-                    <ng-container matColumnDef="Nguồn">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Nguồn</th>
-                        <td mat-cell *matCellDef="let customer" (click)="viewCustomerDetail(customer?.CustomerID)">
-                            {{ customer?.TypeDescription }}
-                        </td>
-                    </ng-container>
+                                <mat-checkbox color="primary" [checked]="isSelectAll"
+                                    (change)="chooseCustomerAssignToSale(customer);chooseCustomer(customer?.CustomerID)">
+                                </mat-checkbox>
+                            </td>
 
-                    <ng-container matColumnDef="Level">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Level</th>
-                        <td mat-cell *matCellDef="let customer" (click)="viewCustomerDetail(customer?.CustomerID)">
-                            {{ customer?.PotentialLevelName }}
-                        </td>
-                    </ng-container>
+                            <td (click)="viewCustomerDetail(customer?.CustomerID)">
+                                {{ customer?.CustomerID }}
+                            </td>
+                            <td (click)="viewCustomerDetail(customer?.CustomerID)">
+                                {{ customer?.LastName }}
+                            </td>
+                            <td (click)="viewCustomerDetail(customer?.CustomerID)">
+                                {{ customer?.Phone }}
+                            </td>
+                            <td (click)="viewCustomerDetail(customer?.CustomerID)">
+                                {{ customer?.TypeDescription }}
+                            </td>
 
-                    <ng-container matColumnDef="Sale phụ trách">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                            Sale phụ trách
-                        </th>
-                        <td mat-cell *matCellDef="let customer" (click)="viewCustomerDetail(customer?.CustomerID)">
-                            {{ customer?.EmployeeFullName }}
-                        </td>
-                    </ng-container>
-                    <ng-container matColumnDef="Dịch vụ">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Dịch vụ</th>
-                        <td mat-cell *matCellDef="let customer" (click)="viewCustomerDetail(customer?.CustomerID)">
-                            {{ customer?.InitInterestedService }}
-                        </td>
-                    </ng-container>
+                            <td (click)="viewCustomerDetail(customer?.CustomerID)">
+                                {{ customer?.EmployeeFullName }}
+                            </td>
 
-                    <ng-container matColumnDef="Ngày gọi">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ngày gọi</th>
-                        <td mat-cell *matCellDef="let customer" (click)="viewCustomerDetail(customer?.CustomerID)">
-                            <div>
-                                {{ customer?.CallCreatedOn | date: 'dd/MM/yyyy, h:mm a' }}
-                            </div>
-                        </td>
-                    </ng-container>
+                            <td (click)="viewCustomerDetail(customer?.CustomerID)">
+                                <div>
+                                    {{ customer?.CallCreatedOn | date: 'dd/MM/yyyy, h:mm a' }}
+                                </div>
+                            </td>
+                            <td (click)="viewCustomerDetail(customer?.CustomerID)">
+                                <div matTooltip="{{ customer?.CallNoteContent }}" matTooltipClass="tooltip-class"
+                                    class="user-note">
+                                    {{ customer?.NoteContent }}
+                                </div>
 
-                    <ng-container matColumnDef="Ghi chú">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Ghi chú</th>
-                        <td class="text-start p-1" mat-cell *matCellDef="let customer"
-                            (click)="viewCustomerDetail(customer?.CustomerID)">
-                            <div matTooltip="{{ customer?.CallNoteContent }}" matTooltipClass="tooltip-class"
-                                class="text-note">
-                                {{ customer?.CallNoteContent }}
-                            </div>
+                            </td>
 
-                        </td>
-                    </ng-container>
-
-                    <ng-container matColumnDef="Lịch hẹn">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Lịch hẹn</th>
-                        <td mat-cell *matCellDef="let customer">
-                            <span class="material-icons booking" matTooltip="Đặt lịch"
-                                (click)="redirectBookingTab(customer?.CustomerID)">
-                                event
-                            </span>
-                        </td>
-                    </ng-container>
-                    <ng-container matColumnDef="Gọi điện">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>Gọi điện</th>
-                        <td mat-cell *matCellDef="let customer">
-                            <button class="call" (click)="callCustomer(customer?.CustomerID, customer?.Phone)">
-                                <span class="material-icons">
-                                    call
-                                </span>
-                            </button>
-                        </td>
-                    </ng-container>
-
-                    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-                    <tr mat-row *matRowDef="let row; columns: displayedColumns; let customer" [style.background]="
-              assignedCustomerIdList.includes(customer?.CustomerID)
-                ? '#D0DBEE'
-                : ''
-            "></tr>
-                </table>
-
-                <div *ngIf="isShowMyCustomer" class="table-sale">
-                    <table class="table table-striped">
-                        <thead>
-                            <tr class="table-sale__header">
-                                <th scope="col col-checkbox">
-                                    <mat-checkbox color="primary" (change)="selectAll()"></mat-checkbox>
-                                </th>
-                                <th scope="col">Ngày chia contact</th>
-                                <th scope="col">Mã KH</th>
-                                <th scope="col">Họ tên</th>
-                                <th scope="col">Điện thoại</th>
-                                <th scope="col">Nguồn</th>
-                                <th scope="col">Level</th>
-                                <th scope="col">Sale phụ trách</th>
-                                <th scope="col">Dịch vụ</th>
-                                <th scope="col">Ngày gọi</th>
-                                <th scope="col">Ghi chú</th>
-                                <th scope="col">Lịch hẹn</th>
-                                <th scope="col">Gọi điện</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr
-                                *ngFor="let customer of filtedCustomer | paginate: { itemsPerPage: 10, currentPage: userCurrentPage, totalItems: count }">
-                                <td scope="row col-checkbox">
-
-                                    <mat-checkbox color="primary" [checked]="isSelectAll"
-                                        (change)="chooseCustomerAssignToSale(customer);chooseCustomer(customer?.CustomerID)">
-                                    </mat-checkbox>
-                                </td>
-                                <td (click)="viewCustomerDetail(customer?.CustomerID)">
-                                    {{ customer?.CreatedOn | date: 'dd/MM/yyyy' }}
-                                </td>
-                                <td (click)="viewCustomerDetail(customer?.CustomerID)">
-                                    {{ customer?.CustomerID }}
-                                </td>
-                                <td (click)="viewCustomerDetail(customer?.CustomerID)">
-                                    {{ customer?.LastName }}
-                                </td>
-                                <td (click)="viewCustomerDetail(customer?.CustomerID)">
-                                    {{ customer?.Phone }}
-                                </td>
-                                <td (click)="viewCustomerDetail(customer?.CustomerID)">
-                                    {{ customer?.TypeDescription }}
-                                </td>
-                                <td (click)="viewCustomerDetail(customer?.CustomerID)">
-                                    {{ customer?.PotentialLevelName }}
-                                </td>
-                                <td (click)="viewCustomerDetail(customer?.CustomerID)">
-                                    {{ customer?.EmployeeFullName }}
-                                </td>
-                                <td (click)="viewCustomerDetail(customer?.CustomerID)">
-                                    {{ customer?.InitInterestedService }}
-                                </td>
-                                <td (click)="viewCustomerDetail(customer?.CustomerID)">
-                                    <div>
-                                        {{ customer?.CallCreatedOn | date: 'dd/MM/yyyy, h:mm a' }}
-                                    </div>
-                                </td>
-                                <td (click)="viewCustomerDetail(customer?.CustomerID)">
-                                    <div matTooltip="{{ customer?.CallNoteContent }}" matTooltipClass="tooltip-class"
-                                        class="user-note">
-                                        {{ customer?.CallNoteContent }}
-                                    </div>
-
-                                </td>
-                                <td>
-                                    <span class="material-icons booking" matTooltip="Đặt lịch"
-                                        (click)="redirectBookingTab(customer?.CustomerID)">
-                                        event
+                            <td>
+                                <button class="call" (click)="callCustomer(customer?.CustomerID, customer?.Phone)">
+                                    <span class="material-icons">
+                                        call
                                     </span>
-                                </td>
-                                <td>
-                                    <button class="call" (click)="callCustomer(customer?.CustomerID, customer?.Phone)">
-                                        <span class="material-icons">
-                                            call
-                                        </span>
-                                    </button>
-                                </td>
+                                </button>
+                            </td>
 
-                            </tr>
+                        </tr>
 
-                        </tbody>
-                    </table>
-                    <div class="pagination-controls">
-                        <pagination-controls (pageChange)="handlePageChange($event)"></pagination-controls>
-                        <div class="pagination-controls__count"> <u>Tổng:</u> {{count}} </div>
-                    </div>
-                </div>
-
-            </div>
-            <div *ngIf="!isShowMyCustomer" class="row">
-                <div class="col-1 pr-0">
-                    <mat-form-field style="width: 100%; background: #fff; padding-left: 15px;">
-                        <mat-select (selectionChange)="getListCustomer($event.value)" [(value)]="selected">
-                            <mat-option *ngFor="let page of pageArray" [value]="page">
-                                <div *ngIf="page === pageArray.length">
-                                    {{ lastVar }} - {{ count }}
-                                </div>
-                                <div *ngIf="page !== pageArray.length">
-                                    {{ (page - 1) * recordRespond + 1 }} - {{ page * recordRespond }}
-                                </div>
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <!-- <div class="col-1 pr-0" *ngIf="customerListPotential != undefined">
-                    <mat-form-field style="width: 100%; background: #fff; padding-left: 15px;">
-                        <mat-select (selectionChange)="getCustomerForLevel(levelFilter, $event.value)"
-                            [(value)]="selected">
-                            <mat-option *ngFor="let page of pageArray" [value]="page">
-                                <div *ngIf="page === pageArray.length">
-                                    {{ lastVar }} - {{ count }}
-                                </div>
-                                <div *ngIf="page !== pageArray.length">
-                                    {{ (page - 1) * recordRespond + 1 }} - {{ page * recordRespond }}
-                                </div>
-                            </mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div> -->
-                <div class="col-11 pl-0 customerPaginator">
-                    <mat-paginator [pageIndex]="pageIndex" (page)="pageChange($event)" [pageSize]="10"
-                        showFirstLastButtons="false">
-                    </mat-paginator>
+                    </tbody>
+                </table>
+                <div class="pagination-controls">
+                    <pagination-controls (pageChange)="handlePageChange($event)"></pagination-controls>
                 </div>
             </div>
+
         </div>
     </div>
 </div>

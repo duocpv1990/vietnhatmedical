@@ -319,7 +319,7 @@ td.mat-footer-cell:first-of-type {
 
 .table-sale {
   &__header {
-    background: #6b80a4;
+    background: #3db4a9;
     color: #ffff;
   }
   .pagination-controls {
@@ -348,5 +348,23 @@ td.mat-footer-cell:first-of-type {
 
   ::ng-deep .mat-checkbox-layout {
     margin-bottom: 0;
+  }
+}
+
+.filter-block {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-gap: 20px;
+  .item {
+    display: flex;
+    align-items: center;
+    span {
+      width: 6em;
+    }
+    button {
+      width: 10em;
+      background: #3db4a9;
+      color: #ffffff;
+    }
   }
 }

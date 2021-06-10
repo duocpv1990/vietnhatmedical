@@ -23,64 +23,39 @@ import { map } from 'rxjs/operators';
   templateUrl: './customer-list.component.html',
   styleUrls: ['./customer-list.component.scss']
 })
-export class CustomerListComponent extends BaseComponent implements OnInit, OnDestroy {
+export class CustomerListComponent extends BaseComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatPaginator, { static: false }) paginatorFiltered: MatPaginator;
   isAccess: any;
   isAccessAdd: any;
   routeIndex = 0;
-  tab = undefined;
-  isFilter: number = 0;
   unDisplayButtonAssign: Boolean = true;
   assignedCustomerList: any[] = [];
   assignedCustomerIdList: any[] = [];
   isSelectAll: boolean = false;
-  customerList: any;
-  myCustomerList = [];
-  dataSource: any;
-  isShowMyCustomer = false;
   searchString: string;
-  pageNumber: string;
   count: number;
-  pageCount: number;
-  pageArray = [];
-  recordRespond: number = 50;
-  extraSpare: number;
-  selected = 1;
-  isLast: false;
-  lastVar: number;
-  potentialLevelId = 0;
-  level = [];
-  userCurrentPage: number;
-  historyPage: number;
-
-  fromDate: string;
-  toDate: string;
-  customerListPotential: any;
-  levelFilter: number;
-  displayedColumns = [
-    'choose',
-    'Ngày chia contact',
-    'Mã KH',
-    'Họ tên',
-    'Điện thoại',
-    'Nguồn',
-    'Level',
-    'Sale phụ trách',
-    'Dịch vụ',
-    'Ngày gọi',
-    'Ghi chú',
-    'Lịch hẹn',
-    'Gọi điện'
-  ];
-
-  userPrivilegeList: any;
-  privilegeList = [];
   accessUser: any;
   position: string;
   pageIndex: number;
   filtedCustomer = [];
   IPPhoneId: string;
+  customers = [];
+  userCurrentPage = 1;
+  countryId = null;
+  provinceId = null;
+  districtId = null;
+  surgeryServiceId = null;
+  type = '';
+  pageNumber = 1;
+  pageSize = 10;
+  genderType = '';
+  lastname = '';
+  phone = '';
+  geographicregionId = null;
+  idCardNumber = '';
+  address = '';
+  email = '';
 
   constructor(
     private customerService: CustomerService,
@@ -100,158 +75,32 @@ export class CustomerListComponent extends BaseComponent implements OnInit, OnDe
 
   ngOnInit() {
     this.accessUser = JSON.parse(localStorage.getItem('access_user'));
-    this.position = this.accessUser.PositionName;
     this.IPPhoneId = this.accessUser.IPPhoneId;
     this.activatedRoute.queryParams.subscribe(params => {
-      this.fromDate = params['fromDate'];
-      this.toDate = params['toDate'];
       this.pageIndex = params['page_index'];
-      if (params['page_index'] == undefined || params['page_index'] == 0) {
-        this.userCurrentPage = 1
-      } else this.userCurrentPage = params['page_index'];
-
     });
-    this.checkPosition();
-    this.getPrivilegeList();
-    this.getLevelValue();
-    this.viewCustomer();
+
+    this.getCustomers();
+
     this.checkStringeeToken();
   }
 
-  checkPosition() {
-
-    if (this.position.toLocaleLowerCase() === 'cskh') {
-      this.potentialLevelId = 17;
-      setTimeout(() => {
-        this.getCustomerForLevel(17, 1);
-      }, 500)
-    }
-    if (this.position.toLocaleLowerCase() === 'admin') {
-      this.isShowMyCustomer = false;
-    } else this.isShowMyCustomer = true;
-  }
-
-  getPrivilegeList() {
-    this.privilegeService.getUserPrivilege().subscribe(data => {
-      this.userPrivilegeList = data;
-      this.userPrivilegeList.forEach(e => {
-        this.privilegeList.push(e.APIURL + ',' + e.Method);
-      });
-      localStorage.setItem('access_privilegeList', JSON.stringify(this.privilegeList));
-    });
-  }
-
-  ngOnDestroy() {
-    this.isShowMyCustomer = true;
-  }
-
-
-  viewCustomer() {
-    if (this.isShowMyCustomer === true) {
-      this.potentialLevelId = +localStorage.getItem("Level");
-      if (this.potentialLevelId == null) {
-        this.potentialLevelId = 0;
-        this.getMyCustomer(null);
-      } else this.getMyCustomer(this.potentialLevelId);
-
-    } else {
-      this.historyPage = +localStorage.getItem('currentPage');
-      if (this.historyPage) {
-        let level = +localStorage.getItem("Level");
-        this.getCustomerForLevel(level, this.historyPage);
-      } else this.getCustomerForLevel(0, 1)
-
-    }
-  }
-
-
-  getMyCustomer(event) {
-    localStorage.setItem('Level', event);
-    if (event == 0) {
-      this.potentialLevelId = event;
-      this.customerService.getMyCustomer(this.fromDate, this.toDate, this.userCurrentPage, 10, null).subscribe(res => {
-        this.filtedCustomer = res.Payload;
-        this.count = res.Count;
-        this.customerList = this.filtedCustomer;
-      });
-    } else {
-      this.potentialLevelId = event;
-      this.customerService.getMyCustomer(this.fromDate, this.toDate, this.userCurrentPage, 10, this.potentialLevelId).subscribe(res => {
-        this.filtedCustomer = res.Payload;
-        this.count = res.Count;
-        this.customerList = this.filtedCustomer;
-      });
-    }
-    const paginationQueryParams = {
-      fromDate: this.fromDate,
-      toDate: this.toDate,
-      page_index: this.userCurrentPage
-    };
-    this.router.navigate([], { queryParams: paginationQueryParams, queryParamsHandling: 'merge' });
-
-  }
-
-
-  getCustomerForLevel(event: any, pageNumber: number) {
-    this.potentialLevelId = +event;
-    localStorage.setItem('Level', event);
-    this.historyPage = +JSON.parse(localStorage.getItem('currentPage'));
-    this.customerService.getCustomerForPotentialLevel(event, pageNumber).subscribe(res => {
-      this.customerListPotential = JSON.parse(JSON.stringify(res)).Payload;
-      this.pageArray = [];
-      this.count = JSON.parse(JSON.stringify(res)).Count;
-      if (event != 0) {
-        this.levelFilter = +JSON.parse(localStorage.getItem('Level'));
-        this.pageCount = Math.ceil(this.count / this.recordRespond);
-        for (let i = 0; i < this.pageCount; i++) {
-          this.pageArray.push(i + 1);
-        }
-
-        this.lastVar = this.recordRespond * (this.pageArray.length - 1) + 1;
-        this.dataSource = new MatTableDataSource(this.customerListPotential);
-        this.dataSource.paginator = this.paginator;
-      } else {
-        this.getListCustomer(pageNumber);
-      }
-    });
-  }
-
-  getListCustomer(page) {
-    this.selected = page;
-    localStorage.setItem('currentPage', page);
-    this.customerService.getAllCustomer(page).subscribe(data => {
-      console.log('DS khach hang: ', data);
-      this.pageArray = [];
-      this.customerList = data.Payload;
-      this.dataSource = new MatTableDataSource(this.customerList);
-      this.dataSource.paginator = this.paginator;
-      // console.log('DS khach hang: ', this.customerList);
-      this.count = data.Count;
-      this.pageCount = Math.ceil(this.count / this.recordRespond);
-      for (let i = 0; i < this.pageCount; i++) {
-        this.pageArray.push(i + 1);
-      }
-      this.lastVar = this.recordRespond * (this.pageArray.length - 1) + 1;
-
+  getCustomers() {
+    this.customerService.getCustomers(this.pageNumber, this.pageSize, this.countryId, this.provinceId, this.districtId, this.surgeryServiceId, this.type, this.genderType, this.lastname, this.phone, this.geographicregionId, this.idCardNumber, this.address, this.email,).subscribe(res => {
+      this.customers = res;
+      console.log('ds kh', this.customers);
 
     });
   }
 
-  searchByText() {
-    this.searchString = this.searchString.trim();
-    this.customerService.searchByText(this.searchString, this.selected).subscribe(res => {
-      this.isShowMyCustomer = false;
-      this.dataSource = res;
-      this.dataSource.paginator = this.paginator;
-    });
-  }
+
 
   selectAll() {
     this.isSelectAll = !this.isSelectAll;
-    if (this.customerList.length !== this.assignedCustomerList.length) {
+    if (this.customers.length !== this.assignedCustomerList.length) {
       this.assignedCustomerList.length = 0;
-      for (var i = 0; i < this.customerList.length; i++) {
-        this.assignedCustomerList.push(this.customerList[i]);
+      for (var i = 0; i < this.customers.length; i++) {
+        this.assignedCustomerList.push(this.customers[i]);
       }
       this.unDisplayButtonAssign = false;
     }
@@ -293,12 +142,7 @@ export class CustomerListComponent extends BaseComponent implements OnInit, OnDe
 
   }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
+
 
   openEmployeeListDialog() {
     this.dialog.open(AssignCustomerComponent, {
@@ -307,11 +151,6 @@ export class CustomerListComponent extends BaseComponent implements OnInit, OnDe
       }
     }).afterClosed().subscribe(() => {
       this.assignedCustomerList = [];
-      if (this.isAccess) {
-        this.getListCustomer(1);
-      } else {
-        this.getMyCustomer(null);
-      }
     });
   }
 
@@ -319,19 +158,9 @@ export class CustomerListComponent extends BaseComponent implements OnInit, OnDe
     this.router.navigate([`/pages/customer/${customerId}`], { queryParams: { tab: 1 } });
   }
 
-  getLevelValue() {
-    this.customerService.getLevelValue().subscribe(res => {
-      res.unshift({ "PotentialLevelId": 0, "Name": "Tất cả L" });
-      this.level = res;
-    });
-  }
-
-
-
-
   openUploadFileForm() {
     this.dialog.open(UploadCustomerComponent).afterClosed().subscribe(() => {
-      this.viewCustomer();
+
     });
   }
 
@@ -342,7 +171,9 @@ export class CustomerListComponent extends BaseComponent implements OnInit, OnDe
       data: {
         customerId: customerId,
       }
-    }).afterClosed().subscribe(() => this.getMyCustomer(this.potentialLevelId)), 100);
+    }).afterClosed().subscribe(() => {
+      this.getCustomers();
+    }), 100);
   }
 
   getStringeeToken() {
@@ -397,7 +228,7 @@ export class CustomerListComponent extends BaseComponent implements OnInit, OnDe
 
   handlePageChange(e) {
     this.userCurrentPage = e;
-    this.getMyCustomer(this.potentialLevelId);
+    this.getCustomers();
   }
 }
 

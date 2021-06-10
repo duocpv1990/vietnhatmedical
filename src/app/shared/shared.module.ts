@@ -48,6 +48,7 @@ import { LogoutDialogComponent } from './components/user/logout-dialog/logout-di
 import { ChartsModule } from 'ng2-charts';
 import { NotificationComponent } from './components/user/notification/notification.component';
 import { NgMatTableQueryReflectorDirective } from './directives/ng-mat-table-query-reflector.directive';
+import { FilterComponent } from './components/filter/filter.component';
 
 
 export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
@@ -72,7 +73,8 @@ export const CustomCurrencyMaskConfig: CurrencyMaskConfig = {
     LogoutDialogComponent,
     NotificationComponent,
     PhoneNumberPipe,
-    NgMatTableQueryReflectorDirective
+    NgMatTableQueryReflectorDirective,
+    FilterComponent
   ],
   imports: [
     CommonModule,
