@@ -21,16 +21,16 @@ export class EmployeeListComponent extends BaseComponent implements OnInit {
   pageSize = 10;
   companyDepartmentId = null;
   positionId = null;
-  gender = '';
-  status = '';
+  gender = null;
+  status = null;
   fullname = '';
   phoneNumber = '';
   email = '';
   city = '';
   state = ''
-  ipPhoneId = null;
+  ipPhoneId = '';
   departments = [];
-  CompanyDepartmentId
+
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
@@ -72,12 +72,24 @@ export class EmployeeListComponent extends BaseComponent implements OnInit {
   }
 
   getEmployees() {
-    this.employeeService.getEmployees(this.pageNumber, this.pageSize, this.companyDepartmentId, this.positionId, this.gender, this.status, this.fullname, this.phoneNumber, this.email, this.city, this.state, this.ipPhoneId).subscribe(
-      (res) => {
-        this.employees = res.Payload;
-        console.log('employee', this.employees);
-      }
-    )
+    this.employeeService.getEmployees(
+      this.pageNumber,
+      this.pageSize,
+      this.companyDepartmentId,
+      this.positionId,
+      this.gender,
+      this.status,
+      this.fullname,
+      this.phoneNumber,
+      this.email,
+      this.city,
+      this.state,
+      this.ipPhoneId).subscribe(
+        (res) => {
+          this.employees = res.Payload;
+          console.log('employee', this.employees);
+        }
+      )
   }
 
   viewEmployeeDetail(item) {

@@ -74,7 +74,7 @@ export class EmployeeService extends BaseApiService<EmployeeModel>{
   }
 
   getEmployees(pageNumber, pageSize, companyDepartmentId, positionId, gender, status, fullname, phoneNumber, email, city, state, ipPhoneId) {
-    return this.http.get(`api/employee?companyDepartmentId=${companyDepartmentId}&positionId=${positionId}&gender=${gender}&status=${status}&fullname=${fullname}&phoneNumber=${phoneNumber}&email=${email}&city=${city}&state=${state}&ipPhoneId=${ipPhoneId}&pageNumber=${pageNumber}&pageSize=${pageSize}`).pipe(
+    return this.http.get(`api/employee/search?companyDepartmentId=${companyDepartmentId}&positionId=${positionId}&gender=${gender}&status=${status}&fullname=${fullname}&phoneNumber=${phoneNumber}&email=${email}&city=${city}&state=${state}&ipPhoneId=${ipPhoneId}&pageNumber=${pageNumber}&pageSize=${pageSize}`).pipe(
       map((res: any) => res)
     );
   }
