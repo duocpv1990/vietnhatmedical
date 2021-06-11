@@ -18,13 +18,13 @@ export class EmployeeService extends BaseApiService<EmployeeModel>{
   constructor(public http: HttpClient) {
     super(http, 'api/employee')
   }
- 
+
   getAllEmployee(page: number) {
-    return this.http.get(`api/employee?pageNumber=${page}`).pipe(map( (res: any) => res.Payload));
+    return this.http.get(`api/employee?pageNumber=${page}`).pipe(map((res: any) => res.Payload));
   }
 
   getLocalEmployee() {
-    return this.http.get(`api/employee/username`).pipe(map( (res: any) => res.Payload));
+    return this.http.get(`api/employee/username`).pipe(map((res: any) => res.Payload));
   }
 
   getEmployeeByPage(page: number) {
@@ -42,10 +42,10 @@ export class EmployeeService extends BaseApiService<EmployeeModel>{
   getDepartment() {
     return this.http.get('api/CompanyDepartment').pipe(map((res: any) => res.Payload));
   }
-  getCalenderEmployee(employeeId: number){
+  getCalenderEmployee(employeeId: number) {
     return this.http.get(`api/customerReminder/employee/${employeeId}`).pipe(map((res: any) => res.Payload));
   }
-  
+
   getAssignedCustomerByEmployeeID(employeeId: number) {
     return this.http.get(`api/customer/employee/${employeeId}`);
   }
@@ -61,7 +61,7 @@ export class EmployeeService extends BaseApiService<EmployeeModel>{
     return this.http.get(`api/employee/search?keyword=${keyword}&pageNumber=${page}`).pipe(map((res: any) => res.Payload));
   }
 
-  getScheduleForDoctor(employeeId: number, pageNumber: number){ //3 lich cua kh dang cham soc
+  getScheduleForDoctor(employeeId: number, pageNumber: number) { //3 lich cua kh dang cham soc
     return this.http.get(`api/schedule/employee?employeeid=${employeeId}&page=${pageNumber}`).pipe(map((res: any) => res.Payload));
   }
 
@@ -72,4 +72,11 @@ export class EmployeeService extends BaseApiService<EmployeeModel>{
   addEmployeeToBranch(data): Observable<any> {
     return this.http.post<any>('api/CompanyDepartment/BranchAssignment', data);
   }
+
+  getEmployees(pageNumber, pageSize, companyDepartmentId, positionId, gender, status, fullname, phoneNumber, email, city, state, ipPhoneId) {
+    return this.http.get(`api/employee?companyDepartmentId=${companyDepartmentId}&positionId=${positionId}&gender=${gender}&status=${status}&fullname=${fullname}&phoneNumber=${phoneNumber}&email=${email}&city=${city}&state=${state}&ipPhoneId=${ipPhoneId}&pageNumber=${pageNumber}&pageSize=${pageSize}`).pipe(
+      map((res: any) => res)
+    );
+  }
+
 }

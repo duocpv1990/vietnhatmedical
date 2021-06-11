@@ -16,13 +16,29 @@ import { BaseComponent } from "../../../../shared/components/base.component";
   styleUrls: ['./employee-list.component.scss']
 })
 export class EmployeeListComponent extends BaseComponent implements OnInit {
+  employees = [];
+  pageNumber = 1;
+  pageSize = 10;
+  companyDepartmentId = null;
+  positionId = null;
+  gender = '';
+  status = '';
+  fullname = '';
+  phoneNumber = '';
+  email = '';
+  city = '';
+  state = ''
+  ipPhoneId = null;
+  departments = [];
+  CompanyDepartmentId
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
   constructor(
     private employeeService: EmployeeService,
     public router: Router
-  ) { super(router); 
+  ) {
+    super(router);
     this.checkToken();
     this.isAccess = this.checkAccess('api/employee,GET');
   }
@@ -30,19 +46,17 @@ export class EmployeeListComponent extends BaseComponent implements OnInit {
   employeeList: any;
   displayedData: any;
   filterResult: any;
-  positionId: number = 0;
   positions: any;
   searchString: string;
-  pageNumber: string;
   count: number;
-  pageCount : number;
+  pageCount: number;
   pageArray = [];
   recordRespond: number = 50;
   selected: number = 1;
   lastVar: number;
   dataSource: any;
 
-  displayedColumns =[
+  displayedColumns = [
     'Mã NV',
     'Họ tên',
     'Điện thoại',
@@ -52,58 +66,61 @@ export class EmployeeListComponent extends BaseComponent implements OnInit {
   ];
 
   ngOnInit(): void {
-    this.getEmployeeList(1);
+    this.getEmployees();
     this.getAllPosition();
-    console.log(this.isAccess);
+    this.getDeparment();
   }
 
-  // getEmployeeList() {
-  //   this.employeeService.getAllEmployee(1).subscribe(data => {
-  //     this.employeeList = data;
-  //     this.displayedData = this.employeeList;
-  //     this.dataSource = new MatTableDataSource(this.employeeList);
-  //     this.dataSource.paginator = this.paginator;
-  //   });
-  // }
-
-  getEmployeeList(page: number) {
-    // this.searchString = '';
-    this.employeeService.getEmployeeByPage(page).subscribe(data => {
-      console.log('DS nhan vien', data);
-      this.pageArray = [];
-      this.employeeList = JSON.parse(JSON.stringify(data)).Payload;
-      this.count = JSON.parse(JSON.stringify(data)).Count;
-      this.pageCount = Math.ceil(this.count/this.recordRespond);  
-      for(let i = 0; i<this.pageCount; i++) {
-        this.pageArray.push(i+1);
+  getEmployees() {
+    this.employeeService.getEmployees(this.pageNumber, this.pageSize, this.companyDepartmentId, this.positionId, this.gender, this.status, this.fullname, this.phoneNumber, this.email, this.city, this.state, this.ipPhoneId).subscribe(
+      (res) => {
+        this.employees = res.Payload;
+        console.log('employee', this.employees);
       }
-      this.lastVar = this.recordRespond * (this.pageArray.length -1) + 1;
-      this.dataSource = new MatTableDataSource(JSON.parse(JSON.stringify(this.employeeList)));
-      this.dataSource.paginator = this.paginator;
-    });
+    )
   }
 
-  filterByPosition(positionId: number) {
-    if (positionId != 0) {
-      this.filterResult = this.employeeList.filter(i => +i.ListPositionId[0] == positionId);
-      this.dataSource = this.filterResult;
-    } else {
-      this.dataSource = this.employeeList;
-    }
+  viewEmployeeDetail(item) {
+    this.router.navigate([`pages/employee/${item}`])
   }
 
   getAllPosition() {
     this.employeeService.getPosition().subscribe(data => {
       this.positions = data;
-      console.log('DS chức vụ',data);
     });
   }
 
-  searchEmployee(){
-    this.employeeService.searchByText(this.searchString, 1).subscribe(data =>{
-      console.log(data);
+  getDeparment() {
+    this.employeeService.getDepartment().subscribe(res => {
+      this.departments = res;
+    });
+  }
+
+  filterByPosition(event) {
+    this.positionId = event.target.value;
+    this.getEmployees();
+  }
+
+  filterByGender(event) {
+    this.gender = event.target.value;
+    this.getEmployees();
+  }
+
+  filterByDepartment(event) {
+    this.companyDepartmentId = event.target.value;
+    this.getEmployees();
+  }
+
+  searchEmployee() {
+    this.employeeService.searchByText(this.searchString, 1).subscribe(data => {
       this.dataSource = data;
     });
+  }
+
+  handlePageChange(e) {
+    this.pageNumber = e;
+    this.pageSize = 10;
+    this.getEmployees();
   }
 
 }

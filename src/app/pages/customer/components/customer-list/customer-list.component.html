@@ -50,23 +50,34 @@
                 <div class="item">
                     <span>Quốc gia</span>
                     &nbsp;
-                    <select class="form-control" name="" id="">
-                        <option value=""></option>
+                    <select class="form-control" (change)="filterByCountry($event)">
+                        <option *ngFor="let country of countries" [value]="country?.CountryId">
+                            {{country?.Name}}
+                        </option>
                     </select>
                 </div>
 
                 <div class="item">
                     <span>Nguồn KH</span>
                     &nbsp;
-                    <select class="form-control" name="" id="">
-                        <option value=""></option>
+                    <select class="form-control" (change)="filterByType($event)">
+                        <option value="">Tất cả</option>
+                        <option [value]="1">Hot line</option>
+                        <option [value]="2">Khách giới thiệu</option>
+                        <option [value]="3">Facebook</option>
+                        <option [value]="4">Web</option>
+                        <option [value]="5">Data</option>
+                        <option [value]="6">Cộng tác viên</option>
+                        <option [value]="7">Affiliate</option>
                     </select>
                 </div>
                 <div class="item">
                     <span>Giới tính</span>
                     &nbsp;
-                    <select class="form-control" name="" id="">
-                        <option value=""></option>
+                    <select class="form-control" (change)="filterByGender($event)">
+                        <option value="">Tất cả</option>
+                        <option value="1">Nam</option>
+                        <option value="2">Nữ</option>
                     </select>
                 </div>
 
@@ -82,19 +93,17 @@
 
     <div class="row">
         <div class="col">
-            <div class="table-sale">
+            <div class="shared-table">
                 <table class="table">
                     <thead>
                         <tr class="table-sale__header">
                             <th scope="col col-checkbox">
                                 <mat-checkbox color="primary" (change)="selectAll()"></mat-checkbox>
                             </th>
-
                             <th scope="col">Mã KH</th>
                             <th scope="col">Họ tên</th>
                             <th scope="col">Điện thoại</th>
                             <th scope="col">Nguồn</th>
-
                             <th scope="col">Sale phụ trách</th>
                             <th scope="col">Ngày gọi</th>
                             <th scope="col">Ghi chú</th>
@@ -103,7 +112,7 @@
                     </thead>
                     <tbody>
                         <tr
-                            *ngFor="let customer of customers | paginate: { itemsPerPage: 10, currentPage: userCurrentPage, totalItems: count }">
+                            *ngFor="let customer of customers | paginate: { itemsPerPage: 10, currentPage: pageNumber, totalItems: count }">
                             <td scope="row col-checkbox">
 
                                 <mat-checkbox color="primary" [checked]="isSelectAll"
@@ -121,7 +130,13 @@
                                 {{ customer?.Phone }}
                             </td>
                             <td (click)="viewCustomerDetail(customer?.CustomerID)">
-                                {{ customer?.TypeDescription }}
+                                <div *ngIf="customer?.Type === 1">Hot line</div>
+                                <div *ngIf="customer?.Type === 2">Khách giới thiệu</div>
+                                <div *ngIf="customer?.Type === 3">Facebook</div>
+                                <div *ngIf="customer?.Type === 4">Web</div>
+                                <div *ngIf="customer?.Type === 5">Data</div>
+                                <div *ngIf="customer?.Type === 6">Cộng tác viên</div>
+                                <div *ngIf="customer?.Type === 7">Affiliate</div>
                             </td>
 
                             <td (click)="viewCustomerDetail(customer?.CustomerID)">

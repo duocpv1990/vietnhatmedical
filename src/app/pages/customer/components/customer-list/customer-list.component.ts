@@ -17,6 +17,8 @@ import { CallCenterService } from '../../services/call-center.service';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { ExportService } from '../../services/export.service';
 import { map } from 'rxjs/operators';
+import { FormControl } from '@angular/forms';
+
 
 @Component({
   selector: 'app-customer-list',
@@ -56,6 +58,9 @@ export class CustomerListComponent extends BaseComponent implements OnInit {
   idCardNumber = '';
   address = '';
   email = '';
+  countries = [];
+  keyword: string;
+  queryField: FormControl = new FormControl('');
 
   constructor(
     private customerService: CustomerService,
@@ -79,17 +84,16 @@ export class CustomerListComponent extends BaseComponent implements OnInit {
     this.activatedRoute.queryParams.subscribe(params => {
       this.pageIndex = params['page_index'];
     });
-
     this.getCustomers();
-
     this.checkStringeeToken();
+    this.getCountries();
   }
 
   getCustomers() {
+    this.keyword = '';
     this.customerService.getCustomers(this.pageNumber, this.pageSize, this.countryId, this.provinceId, this.districtId, this.surgeryServiceId, this.type, this.genderType, this.lastname, this.phone, this.geographicregionId, this.idCardNumber, this.address, this.email,).subscribe(res => {
-      this.customers = res;
-      console.log('ds kh', this.customers);
-
+      this.customers = res.Payload;
+      this.count = res.Count;
     });
   }
 
@@ -227,9 +231,32 @@ export class CustomerListComponent extends BaseComponent implements OnInit {
   }
 
   handlePageChange(e) {
-    this.userCurrentPage = e;
+    this.pageNumber = e;
+    this.pageSize = 10;
     this.getCustomers();
   }
+
+  getCountries() {
+    this.customerService.getAllCountry().subscribe(data => {
+      this.countries = data;
+    });
+  }
+
+  filterByCountry(event) {
+    this.countryId = event.target.value;
+    this.getCustomers();
+  }
+
+  filterByType(event) {
+    this.type = event.target.value;
+    this.getCustomers();
+  }
+
+  filterByGender(event) {
+    this.genderType = event.target.value;
+    this.getCustomers();
+  }
+
 }
 
 

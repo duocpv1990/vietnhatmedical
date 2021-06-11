@@ -317,26 +317,37 @@ td.mat-footer-cell:first-of-type {
   font-size: 0.8em !important;
 }
 
-.table-sale {
-  &__header {
-    background: #3db4a9;
-    color: #ffff;
-  }
-  .pagination-controls {
-    display: flex;
-    justify-content: center;
-    &__count {
-      margin-top: 0.25em;
+.shared-table {
+  .table {
+    thead {
+      background: #3db4a9;
+      color: #ffff;
+    }
+    th {
+      padding: 0.4rem;
+      border: none;
+    }
+    td {
+      padding: 0.4rem;
+      vertical-align: middle;
+    }
+    td:first-child {
+      border-radius: 10px 0 0 10px;
+    }
+
+    td:last-child {
+      border-radius: 0 10px 10px 0;
+    }
+    th:first-child {
+      border-radius: 10px 0 0 10px;
+    }
+    th:last-child {
+      border-radius: 0 10px 10px 0;
     }
   }
 
-  .table th {
-    padding: 0.4rem;
-    vertical-align: unset;
-  }
-  .table td {
-    padding: 0.4rem;
-    vertical-align: middle;
+  .pagination-controls {
+    text-align: center;
   }
 
   .user-note {

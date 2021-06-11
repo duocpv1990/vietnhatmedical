@@ -18,14 +18,15 @@ import { EmployeeCustomerComponent } from './components/employee-detail/employee
 import { EmployeeCalenderComponent } from './components/employee-detail/employee-calender/employee-calender.component';
 import { AssignCustomerComponent } from './components/employee-detail/dialog/assign-customer/assign-customer.component';
 import { EmployeeKpiComponent } from './components/employee-detail/employee-kpi/employee-kpi.component';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
-    EmployeeListComponent, 
+    EmployeeListComponent,
     CreateEmployeeComponent,
-    EmployeeDetailComponent, 
-    EmployeeInfoComponent, 
-    DeleteEmployeeComponent, 
+    EmployeeDetailComponent,
+    EmployeeInfoComponent,
+    DeleteEmployeeComponent,
     EmployeeCalenderComponent,
     EmployeeCustomerComponent,
     AssignCustomerComponent,
@@ -37,8 +38,9 @@ import { EmployeeKpiComponent } from './components/employee-detail/employee-kpi/
     MatPaginatorModule,
     EmployeeRoutingModule,
     SharedModule,
-    MatTooltipModule
+    MatTooltipModule,
+    NgxPaginationModule
   ],
-  schemas: [ CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA ]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
 })
 export class EmployeeModule { }
