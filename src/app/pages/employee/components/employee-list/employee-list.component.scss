@@ -73,5 +73,16 @@
     .search-icon {
       margin-left: -23px;
     }
+    .choose-field {
+      width: 60%;
+    }
+    .clearStr {
+      position: absolute;
+      right: 90px;
+      mat-icon {
+        margin-bottom: 5px;
+        font-size: medium;
+      }
+    }
   }
 }

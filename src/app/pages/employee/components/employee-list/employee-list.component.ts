@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 //service
 import { EmployeeService } from '../../services/employee.service';
@@ -30,13 +30,14 @@ export class EmployeeListComponent extends BaseComponent implements OnInit {
   state = ''
   ipPhoneId = '';
   departments = [];
-  fieldType: number;
+  fieldType = 1;
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
   constructor(
     private employeeService: EmployeeService,
-    public router: Router
+    public router: Router,
+    private activatedRoute: ActivatedRoute
   ) {
     super(router);
     this.checkToken();
@@ -69,6 +70,11 @@ export class EmployeeListComponent extends BaseComponent implements OnInit {
     this.getEmployees();
     this.getAllPosition();
     this.getDeparment();
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (params['pageNumber'] == undefined) {
+        this.pageNumber = 1
+      } else this.pageNumber = params['pageNumber'];
+    });
   }
 
   getEmployees() {
@@ -113,6 +119,14 @@ export class EmployeeListComponent extends BaseComponent implements OnInit {
 
   }
 
+  clearSearchString() {
+    this.searchString = '';
+    this.fullname = '';
+    this.phoneNumber = '';
+    this.email = '';
+    this.getEmployees();
+  }
+
   viewEmployeeDetail(item) {
     this.router.navigate([`pages/employee/${item}`])
   }
@@ -151,6 +165,10 @@ export class EmployeeListComponent extends BaseComponent implements OnInit {
   }
 
   handlePageChange(e) {
+    const paginationQueryParams = {
+      pageNumber: e
+    };
+    this.router.navigate([], { queryParams: paginationQueryParams, queryParamsHandling: 'merge' });
     this.pageNumber = e;
     this.pageSize = 10;
     this.getEmployees();

@@ -82,13 +82,17 @@
                 </div>
 
                 <div class="item">
-                    <select class="form-control" (change)="chooseFieldType($event)">
-                        <option value="">Tìm kiếm theo... </option>
+                    <select class="form-control choose-field" [(ngModel)]="fieldType"
+                        (change)="chooseFieldType($event)">
                         <option value="1">Họ tên</option>
                         <option value="2">Số điện thoại</option>
                     </select>
                     <input (keyup.enter)="searchByFields()" [(ngModel)]="searchString" type="text" class="form-control"
                         placeholder="Nhập từ khóa">
+                    <button class="clearStr" mat-button *ngIf="searchString" matTooltip="Hủy tìm kiếm" matSuffix
+                        mat-icon-button (click)="clearSearchString()">
+                        <mat-icon>close</mat-icon>
+                    </button>
                     <span (click)="searchByFields()" class="material-icons search-icon">
                         search
                     </span>

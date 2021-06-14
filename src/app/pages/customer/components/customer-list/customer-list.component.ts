@@ -28,7 +28,7 @@ import { FormControl } from '@angular/forms';
 export class CustomerListComponent extends BaseComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatPaginator, { static: false }) paginatorFiltered: MatPaginator;
-  @Input() searchString: string;
+
 
   isAccess: any;
   isAccessAdd: any;
@@ -60,10 +60,9 @@ export class CustomerListComponent extends BaseComponent implements OnInit {
   address = '';
   email = '';
   countries = [];
-  keyword: string;
   queryField: FormControl = new FormControl('');
-  fieldType: number;
-
+  fieldType = 1;
+  searchString = '';
 
   constructor(
     private customerService: CustomerService,
@@ -85,7 +84,9 @@ export class CustomerListComponent extends BaseComponent implements OnInit {
     this.accessUser = JSON.parse(localStorage.getItem('access_user'));
     this.IPPhoneId = this.accessUser.IPPhoneId;
     this.activatedRoute.queryParams.subscribe(params => {
-      this.pageIndex = params['page_index'];
+      if (params['pageNumber'] == undefined) {
+        this.pageNumber = 1
+      } else this.pageNumber = params['pageNumber'];
     });
     this.getCustomers();
     this.checkStringeeToken();
@@ -95,7 +96,6 @@ export class CustomerListComponent extends BaseComponent implements OnInit {
 
 
   getCustomers() {
-    this.keyword = '';
     this.customerService.getCustomers(this.pageNumber, this.pageSize, this.countryId, this.provinceId, this.districtId, this.surgeryServiceId, this.type, this.genderType, this.lastname, this.phone, this.geographicregionId, this.idCardNumber, this.address, this.email,).subscribe(res => {
       this.customers = res.Payload;
       this.count = res.Count;
@@ -118,6 +118,13 @@ export class CustomerListComponent extends BaseComponent implements OnInit {
         break;
     }
 
+  }
+
+  clearSearchString() {
+    this.searchString = '';
+    this.lastname = '';
+    this.phone = '';
+    this.getCustomers();
   }
 
   selectAll() {
@@ -252,6 +259,10 @@ export class CustomerListComponent extends BaseComponent implements OnInit {
   }
 
   handlePageChange(e) {
+    const paginationQueryParams = {
+      pageNumber: e
+    };
+    this.router.navigate([], { queryParams: paginationQueryParams, queryParamsHandling: 'merge' });
     this.pageNumber = e;
     this.pageSize = 10;
     this.getCustomers();

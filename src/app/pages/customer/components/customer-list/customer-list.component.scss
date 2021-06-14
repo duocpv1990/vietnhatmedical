@@ -233,14 +233,6 @@ td.mat-footer-cell:first-of-type {
     margin-top: 7px;
     margin-right: 10px;
   }
-  .clearStr {
-    position: absolute;
-    right: 30px;
-    mat-icon {
-      margin-bottom: 5px;
-      font-size: medium;
-    }
-  }
 }
 
 .function-btn {
@@ -364,7 +356,7 @@ td.mat-footer-cell:first-of-type {
 
 .filter-block {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 2fr;
   grid-gap: 20px;
   .item {
     display: flex;
@@ -374,6 +366,17 @@ td.mat-footer-cell:first-of-type {
     }
     .search-icon {
       margin-left: -23px;
+    }
+    .choose-field {
+      width: 60%;
+    }
+    .clearStr {
+      position: absolute;
+      right: 90px;
+      mat-icon {
+        margin-bottom: 5px;
+        font-size: medium;
+      }
     }
   }
 }
