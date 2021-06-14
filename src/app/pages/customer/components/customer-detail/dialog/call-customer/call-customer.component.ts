@@ -32,7 +32,6 @@ export class CallCustomerComponent implements OnInit, OnDestroy {
   reminderForm: FormGroup;
   dayDate: string;
   hourDate: string;
-  onMakeCall = 0;
   employeeId: number;
   customerId: number;
   contractId: number;
@@ -41,8 +40,6 @@ export class CallCustomerComponent implements OnInit, OnDestroy {
   choosedContract: any;
   potentialLevelId: number;
   potentialLevelList: any;
-  fromPhoneNumber: any = '84947774666';
-  fromNumbers = [{ alias: 'Number-1', number: '+84947774666' }];
   callLogInfo: any;
   stringee_token: string;
   stringee_rest_token: string;
@@ -70,7 +67,6 @@ export class CallCustomerComponent implements OnInit, OnDestroy {
     });
     this.stringee_token = localStorage.getItem('stringee_token');
     this.stringee_rest_token = localStorage.getItem("stringee_restful_token");
-    this.fromNumbers = [{ alias: 'Number-1', number: `${this.fromPhoneNumber}` }];
   }
 
 
@@ -85,7 +81,6 @@ export class CallCustomerComponent implements OnInit, OnDestroy {
     this.callConfig();
 
     setTimeout(() => {
-      this.callConnect();
       this.getContractByCustomerId();
       this.getPotentialLevel();
       this.getOperationServices();
@@ -94,10 +89,7 @@ export class CallCustomerComponent implements OnInit, OnDestroy {
 
   }
 
-  callConnect() {
-    StringeeSoftPhone.connect(this.stringee_token);
-    StringeeSoftPhone.config({ fromNumbers: this.fromNumbers });
-  }
+
 
   hiddenPhone() {
     var config = {
@@ -109,78 +101,32 @@ export class CallCustomerComponent implements OnInit, OnDestroy {
 
 
   callConfig() {
-    new stringee();
-    var access_token = 'YOUR_ACCESS_TOKEN';
-
-    var config = {
+    let config = {
       showMode: 'full',
+      top: 10,
+      left: 30,
       arrowLeft: 155,
-      arrowDisplay: 'top',
-      fromNumbers: this.fromNumbers,
-      askCallTypeWhenMakeCall: false,
-      appendToElement: null,
-      makeAndReceiveCallInNewPopupWindow: false
+      arrowDisplay: 'none',
+      fromNumbers: [{ alias: 'Siam', number: '+84947774666' }],
+      appendToElement: 'call-container'
     };
+
     StringeeSoftPhone.init(config);
 
-    StringeeSoftPhone.on('displayModeChange', function (event) {
-
-      if (event === 'min') {
-        StringeeSoftPhone.config({ arrowLeft: 75 });
-      } else if (event === 'full') {
-        StringeeSoftPhone.config({ arrowLeft: 155 });
-      }
-    });
-
     StringeeSoftPhone.on('requestNewToken', function () {
-
-      StringeeSoftPhone.connect(access_token);
+      console.log('requestNewToken+++++++');
+      StringeeSoftPhone.connect(this.stringee_token);
     });
 
     StringeeSoftPhone.on('authen', function (res) {
-
-    });
-
-    StringeeSoftPhone.on('disconnect', function () {
-
-    });
-
-    StringeeSoftPhone.on('beforeMakeCall', function (call, callType) {
-
-      return true;
-    });
-
-    StringeeSoftPhone.on('answerIncomingCallBtnClick', function () {
-
-    });
-
-    StringeeSoftPhone.on('makeOutgoingCallBtnClick', function (fromNumber, toNumber, callType) {
-      localStorage.setItem('onMakeCall', '1');
+      console.log('authen: ', res);
     });
 
     StringeeSoftPhone.on('incomingCall', function (incomingcall) {
-
     });
 
-    StringeeSoftPhone.on('endCallBtnClick', function () {
+    StringeeSoftPhone.connect(this.stringee_token);
 
-    });
-
-    StringeeSoftPhone.on('callingScreenHide', function () {
-
-    });
-
-    StringeeSoftPhone.on('declineIncomingCallBtnClick', function () {
-
-    });
-
-    StringeeSoftPhone.on('incomingScreenHide', function () {
-
-    });
-
-    StringeeSoftPhone.on('customMessage', function (data) {
-
-    });
   }
 
   ngOnDestroy() {
@@ -214,9 +160,8 @@ export class CallCustomerComponent implements OnInit, OnDestroy {
     if (this.reminderForm.value.dayDate) {
       this.createCustomerReminder();
     }
-    this.onMakeCall = +localStorage.getItem('onMakeCall')
-
-    if (this.onMakeCall == 1) {
+    let isCalled = localStorage.getItem('isCalled');
+    if (isCalled === 'true') {
       let callId = JSON.parse(localStorage.getItem('callInfo')).callId;
       this.callCenterService.getCallLogList(this.stringee_rest_token).subscribe(
         (data) => {
@@ -238,7 +183,7 @@ export class CallCustomerComponent implements OnInit, OnDestroy {
               color: 'green'
             });
             localStorage.removeItem('callInfo');
-            localStorage.removeItem('onMakeCall');
+            localStorage.removeItem('isCalled');
             this.dialogRef.close();
           });
         },
@@ -252,6 +197,7 @@ export class CallCustomerComponent implements OnInit, OnDestroy {
           color: 'green'
         });
         localStorage.removeItem('callInfo');
+        localStorage.removeItem('isCalled')
         this.dialogRef.close();
       });
     }
