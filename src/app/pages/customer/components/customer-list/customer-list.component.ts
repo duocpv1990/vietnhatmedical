@@ -183,6 +183,7 @@ export class CustomerListComponent extends BaseComponent implements OnInit {
       }
     }).afterClosed().subscribe(() => {
       this.assignedCustomerList = [];
+      this.getCustomers();
     });
   }
 

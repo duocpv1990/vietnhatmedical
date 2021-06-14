@@ -65,7 +65,8 @@ export class CallCustomerComponent implements OnInit, OnDestroy {
       dayDate: [""],
       hourDate: [""]
     });
-    this.stringee_token = localStorage.getItem('stringee_token');
+    // this.stringee_token = localStorage.getItem('stringee_token');
+    this.stringee_token = 'eyJjdHkiOiJzdHJpbmdlZS1hcGk7dj0xIiwidHlwIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJqdGkiOiJTSzRGRWUwMWJHWUhDTExlTThLY3V3OVFpUHlKRXJsS281LTE2MjM2NjQ4MjQiLCJpc3MiOiJTSzRGRWUwMWJHWUhDTExlTThLY3V3OVFpUHlKRXJsS281IiwiZXhwIjoxNjI2MjU2ODI0LCJ1c2VySWQiOiIxMTMiLCJpY2NfYXBpIjp0cnVlfQ.soe1KYrqi2gLyHgoWhF8NaDk2Ku-fvUc3hrp5ORAOe4'
     this.stringee_rest_token = localStorage.getItem("stringee_restful_token");
   }
 
@@ -107,7 +108,7 @@ export class CallCustomerComponent implements OnInit, OnDestroy {
       left: 30,
       arrowLeft: 155,
       arrowDisplay: 'none',
-      fromNumbers: [{ alias: 'Siam', number: '+84947774666' }],
+      fromNumbers: [{ alias: 'JVC', number: '+842473030020' }],
       appendToElement: 'call-container'
     };
 
