@@ -62,7 +62,7 @@
 
 .filter-block {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr 1fr 2fr;
   grid-gap: 20px;
   .item {
     display: flex;
@@ -70,10 +70,8 @@
     span {
       width: 7em;
     }
-    button {
-      width: 10em;
-      background: #3db4a9;
-      color: #ffffff;
+    .search-icon {
+      margin-left: -23px;
     }
   }
 }

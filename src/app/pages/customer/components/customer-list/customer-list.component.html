@@ -47,7 +47,7 @@
         </div>
         <div class="col">
             <div class="filter-block">
-                <div class="item">
+                <!-- <div class="item">
                     <span>Quốc gia</span>
                     &nbsp;
                     <select class="form-control" (change)="filterByCountry($event)">
@@ -55,7 +55,7 @@
                             {{country?.Name}}
                         </option>
                     </select>
-                </div>
+                </div> -->
 
                 <div class="item">
                     <span>Nguồn KH</span>
@@ -82,9 +82,16 @@
                 </div>
 
                 <div class="item">
-                    <input type="text" class="form-control" placeholder="Nhập từ khóa">
-                    &nbsp;
-                    <button type="button" class="btn">Tìm kiếm</button>
+                    <select class="form-control" (change)="chooseFieldType($event)">
+                        <option value="">Tìm kiếm theo... </option>
+                        <option value="1">Họ tên</option>
+                        <option value="2">Số điện thoại</option>
+                    </select>
+                    <input (keyup.enter)="searchByFields()" [(ngModel)]="searchString" type="text" class="form-control"
+                        placeholder="Nhập từ khóa">
+                    <span (click)="searchByFields()" class="material-icons search-icon">
+                        search
+                    </span>
                 </div>
             </div>
         </div>

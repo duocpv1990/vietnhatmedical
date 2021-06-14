@@ -1,5 +1,5 @@
 
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from "@angular/router";
 
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
@@ -28,6 +28,8 @@ import { FormControl } from '@angular/forms';
 export class CustomerListComponent extends BaseComponent implements OnInit {
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   @ViewChild(MatPaginator, { static: false }) paginatorFiltered: MatPaginator;
+  @Input() searchString: string;
+
   isAccess: any;
   isAccessAdd: any;
   routeIndex = 0;
@@ -35,7 +37,6 @@ export class CustomerListComponent extends BaseComponent implements OnInit {
   assignedCustomerList: any[] = [];
   assignedCustomerIdList: any[] = [];
   isSelectAll: boolean = false;
-  searchString: string;
   count: number;
   accessUser: any;
   position: string;
@@ -61,6 +62,8 @@ export class CustomerListComponent extends BaseComponent implements OnInit {
   countries = [];
   keyword: string;
   queryField: FormControl = new FormControl('');
+  fieldType: number;
+
 
   constructor(
     private customerService: CustomerService,
@@ -89,6 +92,8 @@ export class CustomerListComponent extends BaseComponent implements OnInit {
     this.getCountries();
   }
 
+
+
   getCustomers() {
     this.keyword = '';
     this.customerService.getCustomers(this.pageNumber, this.pageSize, this.countryId, this.provinceId, this.districtId, this.surgeryServiceId, this.type, this.genderType, this.lastname, this.phone, this.geographicregionId, this.idCardNumber, this.address, this.email,).subscribe(res => {
@@ -97,7 +102,23 @@ export class CustomerListComponent extends BaseComponent implements OnInit {
     });
   }
 
+  chooseFieldType(event) {
+    this.fieldType = +event.target.value;
+  }
 
+  searchByFields() {
+    switch (this.fieldType) {
+      case 1:
+        this.lastname = this.searchString.trim();
+        this.getCustomers();
+        break;
+      case 2:
+        this.phone = this.searchString.trim();
+        this.getCustomers();
+        break;
+    }
+
+  }
 
   selectAll() {
     this.isSelectAll = !this.isSelectAll;

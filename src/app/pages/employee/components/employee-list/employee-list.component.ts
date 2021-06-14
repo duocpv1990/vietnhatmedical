@@ -30,7 +30,7 @@ export class EmployeeListComponent extends BaseComponent implements OnInit {
   state = ''
   ipPhoneId = '';
   departments = [];
-
+  fieldType: number;
 
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
 
@@ -90,6 +90,27 @@ export class EmployeeListComponent extends BaseComponent implements OnInit {
           console.log('employee', this.employees);
         }
       )
+  }
+
+  chooseFieldType(event) {
+    this.fieldType = +event.target.value;
+  }
+
+  searchByFields() {
+    switch (this.fieldType) {
+      case 1:
+        this.fullname = this.searchString.trim();
+        this.getEmployees();
+        break;
+      case 2:
+        this.phoneNumber = this.searchString.trim();
+        this.getEmployees();
+        break;
+      case 3:
+        this.email = this.searchString.trim();
+        this.getEmployees();
+    }
+
   }
 
   viewEmployeeDetail(item) {
