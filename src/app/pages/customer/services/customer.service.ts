@@ -33,7 +33,7 @@ export class CustomerService extends BaseApiService<CustomerModel>{
   getCustomerById(id) {
     return this.http.get(`api/customer/detail/${id}`).pipe(map((res: any) => res.Payload));
   }
-  getLevelValue() {
+  getPotentialLevels() {
     return this.http.get('api/PotentialLevel').pipe(map((res: any) => res.Payload));
   }
 

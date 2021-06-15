@@ -1,51 +1,60 @@
 <div class="container assignCustomer">
-    <div class="row">
+    <!-- <div class="row">
         <div class="search-box">
             <input class="searchInput" matInput (keyup)="applyFilter($event.target.value)" placeholder="Tìm kiếm"><i
                 class="material-icons">
                 search
             </i>
         </div>
+    </div> -->
+    <div class="row">
+        <div class="col">
+            <div class="shared-table">
+                <table class="table">
+                    <thead>
+                        <tr class="table-sale__header">
+                            <th scope="col">Mã NV</th>
+                            <th scope="col">Họ tên</th>
+                            <th scope="col">Điện thoại</th>
+                            <th scope="col">Phòng ban</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let employee of employees | paginate: { itemsPerPage: 10, currentPage: pageNumber, totalItems: count }"
+                            (click)="selectedEmployee(employee.EmployeeId)"
+                            [class.selected-row]="selectedEmployeeId.includes(employee.EmployeeId)">
+
+                            <td>
+                                {{ employee?.EmployeeId }}
+                            </td>
+                            <td>
+                                {{ employee?.FullName }}
+                            </td>
+                            <td>
+                                {{employee?.Phone}}
+                            </td>
+                            <td>
+                                {{employee?.DepartmentName}}
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+                </table>
+                <div class="pagination-controls">
+                    <pagination-controls (pageChange)="handlePageChange($event)"></pagination-controls>
+                </div>
+            </div>
+        </div>
+
+
     </div>
     <div class="row">
-        <table mat-table [dataSource]="dataSource" matSort
-            class=" table-bordered table-hover table-striped text-center customTableStyle">
-            <ng-container matColumnDef="Mã NV">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Mã NV </th>
-                <td mat-cell *matCellDef="let employee" (click)="selectedEmployee(employee.EmployeeId)">
-                    &nbsp;&nbsp; {{employee.EmployeeId}} </td>
-            </ng-container>
-
-            <ng-container matColumnDef="Họ tên">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Họ tên </th>
-                <td mat-cell *matCellDef="let employee">
-                    {{employee.FullName}}
-                </td>
-            </ng-container>
-
-            <ng-container matColumnDef="Điện thoại">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Điện thoại </th>
-                <td mat-cell *matCellDef="let employee">
-                    {{employee.Phone}}
-                </td>
-            </ng-container>
-
-
-            <ng-container matColumnDef="Phòng ban">
-                <th mat-header-cell *matHeaderCellDef mat-sort-header> Phòng ban </th>
-                <td mat-cell *matCellDef="let employee">
-                    {{employee.DepartmentName}}
-                </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns; let employee"
-                (click)="selectedEmployee(employee.EmployeeId)"
-                [style.background]="selectedEmployeeId.includes(employee.EmployeeId) ? '#D0DBEE':''"></tr>
-        </table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10" showFirstLastButtons="true"></mat-paginator><br>
-        <button class="btn customBtn mx-auto" (click)="assignCustomerToSale()">
-            Giao KH
-        </button>
+        <div class="col text-center">
+            <button class="btn customBtn mx-auto" (click)="assignCustomerToSale()">
+                Giao KH
+            </button>
+        </div>
     </div>
 </div>

@@ -15,50 +15,70 @@ import { AlertService } from '../../../../../../shared/services/alert.service';
   styleUrls: ['./assign-customer.component.scss']
 })
 export class AssignCustomerComponent implements OnInit, AfterViewInit {
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
 
-  constructor(private employeeService: EmployeeService,
+  employees = [];
+  pageNumber = 1;
+  pageSize = 10;
+  companyDepartmentId = null;
+  positionId = null;
+  gender = null;
+  status = null;
+  fullname = '';
+  phoneNumber = '';
+  email = '';
+  city = '';
+  state = ''
+  ipPhoneId = '';
+  employeeId: number;
+  employeeList = [];
+  selectedEmployeeId = [];
+  customerIdList = [];
+  count: number;
+
+
+  constructor(
+    private employeeService: EmployeeService,
     private assignCustomerSvc: AssignCustomerService,
     public alertService: AlertService,
     public router: Router,
     public dialogRef: MatDialogRef<AssignCustomerComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any) { }
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) { }
 
-  employeeId: number;
-  employeeList: any;
-  dataSource: any;
-  selectedEmployeeId: any[] = [];
-  customerIdList: any;
 
-  displayedColumns = [
-    'Mã NV',
-    'Họ tên',
-    'Điện thoại',
-    'Phòng ban'
-  ];
 
   ngOnInit(): void {
-    setTimeout(() => this.getEmployeeList(), 30);
+    setTimeout(() => {
+      this.getEmployees();
+    }, 0)
+
   }
 
   ngAfterViewInit() {
+
     setTimeout(() => this.customerIdList = this.data.assignedCustomerIdList, 0);
   }
 
-  getEmployeeList() {
-    this.employeeService.getAllEmployee(1).subscribe(data => {
-      this.employeeList = data;
-      this.dataSource = new MatTableDataSource(JSON.parse(JSON.stringify(this.employeeList)));
-      this.dataSource.paginator = this.paginator;
+  getEmployees() {
+    this.employeeService.getEmployees(
+      this.pageNumber,
+      this.pageSize,
+      this.companyDepartmentId,
+      this.positionId,
+      this.gender,
+      this.status,
+      this.fullname,
+      this.phoneNumber,
+      this.email,
+      this.city,
+      this.state,
+      this.ipPhoneId
+    ).subscribe(res => {
+      this.employees = res.Payload;
+      this.count = res.Count;
     });
   }
 
-  applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
-    if (this.dataSource.paginator) {
-      this.dataSource.paginator.firstPage();
-    }
-  }
 
   selectedEmployee(employeeId: number) {
     this.selectedEmployeeId.length = 0;
@@ -75,9 +95,13 @@ export class AssignCustomerComponent implements OnInit, AfterViewInit {
           text: `Giao KH thành công!`
         });
       }, 300);
-      // this.router.navigate([`/pages/employee/${this.selectedEmployeeId[0]}`], { queryParams: { tab: 1} });
-      
     });
+  }
+
+  handlePageChange(e) {
+    this.pageNumber = e;
+    this.pageSize = 10;
+    this.getEmployees();
   }
 
 }

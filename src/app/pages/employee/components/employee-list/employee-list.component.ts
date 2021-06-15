@@ -93,7 +93,7 @@ export class EmployeeListComponent extends BaseComponent implements OnInit {
       this.ipPhoneId).subscribe(
         (res) => {
           this.employees = res.Payload;
-          console.log('employee', this.employees);
+          this.count = res.Count;
         }
       )
   }

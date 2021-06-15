@@ -1,68 +1,86 @@
-
 .assignCustomer {
-    position: absolute !important;
-    width: 50rem !important;
-    height: 100vh !important;
-    top: 0;
-    right: 0;
-    border-top-left-radius: 50px;
-    border-bottom-left-radius: 50px;
-    background: #fff;
-    padding-top: 3rem;
+  position: absolute !important;
+  width: 50rem !important;
+  height: 100vh !important;
+  top: 0;
+  right: 0;
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+  background: #fff;
+  padding-top: 3rem;
 }
-  
-  .table {
-    height: 64vh;
-    overflow: auto;
-    
-   td {
-      vertical-align: middle;
-   }
-   th {
-       vertical-align: middle;
-       font-size: 15px;
-       font-weight: 600;
-   }
-  }
-  .search-box {
-    display: flex;
+
+.table {
+  width: 100%;
+}
+.search-box {
+  display: flex;
+  position: absolute;
+  right: 3px;
+  top: 5px;
+  width: 290px;
+  .searchInput {
+    border: 1px solid white;
+    border-radius: 10px;
+    background: #ffffff;
+    box-shadow: inset 5px 5px 10px #cccccc, inset -5px -5px 10px #ffffff;
+    height: 40px;
+    padding-left: 20px !important;
     position: absolute;
-    right: 3px;
-    top: 5px;
-    width: 290px;
-    .searchInput {
-        border: 1px solid white;
-        border-radius: 10px;
-        background: #ffffff;
-        box-shadow: inset 5px 5px 10px #cccccc, inset -5px -5px 10px #ffffff;
-        height: 40px;
-        padding-left: 20px !important;
-        position: absolute;
-      }
-      i {
-          position: absolute;
-          color: #224177;
-          right: 0px;
-          margin-top: 7px;
-          margin-right: 10px;
-      }
   }
-
-  ::ng-deep mat-paginator {
-    width: 100%;
+  i {
+    position: absolute;
+    color: #224177;
+    right: 0px;
+    margin-top: 7px;
+    margin-right: 10px;
   }
+}
 
-  .assign-btn {
-    width: 100%; 
-    text-align: center;
-    button {
-      background: #E4BC65;
-      color: #ffffff;
+.assign-btn {
+  width: 100%;
+  text-align: center;
+  button {
+    background: #e4bc65;
+    color: #ffffff;
+  }
+}
+
+.shared-table {
+  width: 100%;
+  .table {
+    thead {
+      background: #3db4a9;
+      color: #ffff;
     }
-  
+    th {
+      padding: 0.4rem;
+      border: none;
+    }
+    td {
+      padding: 0.4rem;
+      vertical-align: middle;
+    }
+    td:first-child {
+      border-radius: 10px 0 0 10px;
+    }
+
+    td:last-child {
+      border-radius: 0 10px 10px 0;
+    }
+    th:first-child {
+      border-radius: 10px 0 0 10px;
+    }
+    th:last-child {
+      border-radius: 0 10px 10px 0;
+    }
   }
 
+  .pagination-controls {
+    text-align: center;
+  }
 
-
-    
-  
+  .selected-row {
+    background: #d0dbee;
+  }
+}

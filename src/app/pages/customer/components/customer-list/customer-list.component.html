@@ -56,6 +56,16 @@
                         </option>
                     </select>
                 </div> -->
+                <div class="item">
+                    <span>Level</span>
+                    &nbsp;
+                    <select class="form-control">
+                        <option *ngFor="let potentialLevel of potentialLevels"
+                            [value]="potentialLevel?.PotentialLevelId">
+                            {{potentialLevel?.Name}}
+                        </option>
+                    </select>
+                </div>
 
                 <div class="item">
                     <span>Nguồn KH</span>

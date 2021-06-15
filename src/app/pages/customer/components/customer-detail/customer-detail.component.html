@@ -59,6 +59,14 @@
           </div>
         </mat-tab>
 
+        <mat-tab [disabled]="!isContract">
+          <ng-template mat-tab-label>
+            <mat-icon #btnContract class="example-tab-icon" (click)="loadCustomerContract()">book</mat-icon>
+            <span>Đơn hàng</span>
+          </ng-template>
+          <app-customer-contract></app-customer-contract>
+        </mat-tab>
+
         <!-- <mat-tab [disabled]="!isConsultantNote">
           <ng-template mat-tab-label>
             <mat-icon #btnConsultantNote class="example-tab-icon" (click)="loadCustomerConsultantNote()">event_note
@@ -76,13 +84,7 @@
           <div #exam></div>
         </mat-tab>
 
-        <mat-tab [disabled]="!isContract">
-          <ng-template mat-tab-label>
-            <mat-icon #btnContract class="example-tab-icon" (click)="loadCustomerContract()">book</mat-icon>
-            <span>Đơn hàng</span>
-          </ng-template>
-          <app-customer-contract></app-customer-contract>
-        </mat-tab>
+       
 
         <mat-tab [disabled]="!isPersonInCharge">
           <ng-template mat-tab-label>

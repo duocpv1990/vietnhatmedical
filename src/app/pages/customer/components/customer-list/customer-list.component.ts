@@ -63,6 +63,7 @@ export class CustomerListComponent extends BaseComponent implements OnInit {
   queryField: FormControl = new FormControl('');
   fieldType = 1;
   searchString = '';
+  potentialLevels = [];
 
   constructor(
     private customerService: CustomerService,
@@ -91,6 +92,7 @@ export class CustomerListComponent extends BaseComponent implements OnInit {
     this.getCustomers();
     this.checkStringeeToken();
     this.getCountries();
+    this.getPotentialLevels();
   }
 
 
@@ -174,7 +176,14 @@ export class CustomerListComponent extends BaseComponent implements OnInit {
 
   }
 
+  getPotentialLevels() {
+    this.customerService.getPotentialLevels().subscribe(res => {
+      res.unshift({ "PotentialLevelId": 0, "Name": "Tất cả L" });
+      this.potentialLevels = res;
+      console.log('potentialLevels', this.potentialLevels);
 
+    });
+  }
 
   openEmployeeListDialog() {
     this.dialog.open(AssignCustomerComponent, {
