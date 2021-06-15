@@ -1,0 +1,41 @@
+.shared-table {
+  margin-top: 0.5em;
+  .table {
+    thead {
+      background: #3db4a9;
+      color: #ffff;
+    }
+    th {
+      padding: 0.4rem;
+      border: none;
+    }
+    td {
+      padding: 0.4rem;
+      vertical-align: middle;
+    }
+    td:first-child {
+      border-radius: 10px 0 0 10px;
+    }
+
+    td:last-child {
+      border-radius: 0 10px 10px 0;
+    }
+    th:first-child {
+      border-radius: 10px 0 0 10px;
+    }
+    th:last-child {
+      border-radius: 0 10px 10px 0;
+    }
+  }
+
+  .pagination-controls {
+    text-align: center;
+  }
+
+  .user-note {
+    width: 12vw;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+}

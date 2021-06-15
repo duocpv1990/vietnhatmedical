@@ -1,48 +1,45 @@
-<table mat-table [dataSource]="dataSource" class="mt-2 table-hover table-striped text-center customTableStyle w-100">
-    <ng-container matColumnDef="Ngày">
-        <th mat-header-cell *matHeaderCellDef> Ngày </th>
-        <td mat-cell *matCellDef="let callLog">{{callLog?.DateString}}</td>
-    </ng-container>
-    <ng-container matColumnDef="Giờ">
-        <th mat-header-cell *matHeaderCellDef> Giờ </th>
-        <td mat-cell *matCellDef="let callLog">{{callLog?.TimeString}}</td>
-    </ng-container>
-    <ng-container matColumnDef="Đơn hàng">
-        <th mat-header-cell *matHeaderCellDef> Đơn hàng </th>
-        <td mat-cell *matCellDef="let callLog">{{callLog?.ContractCode}}</td>
-    </ng-container>
-    <!-- <ng-container matColumnDef="Thời lượng">
-                      <th mat-header-cell *matHeaderCellDef> Thời lượng </th>
-                      <td mat-cell *matCellDef="let callLog">{{callLog.Phone}}</td>
-                    </ng-container> -->
-    <ng-container matColumnDef="File ghi âm">
-        <th mat-header-cell *matHeaderCellDef> File ghi âm </th>
-        <td mat-cell *matCellDef="let callLog">
-            <audio controls style="width: 270px;">
-                <source src="{{callLog.URL}}" type="audio/ogg">
-            </audio>
-        </td>
-    </ng-container>
-    <ng-container matColumnDef="Sale phụ trách">
-        <th mat-header-cell *matHeaderCellDef> Sale phụ trách </th>
-        <td mat-cell *matCellDef="let callLog">{{callLog?.EmployeeName}}</td>
-    </ng-container>
+<div class="shared-table">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Ngày</th>
+                <th scope="col">Giờ</th>
+                <th scope="col">Đơn hàng</th>
+                <th scope="col">File ghi âm</th>
+                <th scope="col">Sale phụ trách</th>
+                <th scope="col">Ghi chú </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr
+                *ngFor="let callLog of callLogList | paginate: { itemsPerPage: 10, currentPage: pageNumber, totalItems: 10 }">
 
-    <ng-container matColumnDef="Ghi chú">
-        <th mat-header-cell *matHeaderCellDef> Ghi chú </th>
-        <td mat-cell *matCellDef="let callLog">
-            <div class="text-note" matTooltip="{{callLog?.NoteContent}}" matTooltipClass="tooltip-class">
-                {{callLog?.NoteContent}}
-            </div>
-        </td>
-    </ng-container>
-    <ng-container matColumnDef="Level">
-        <th mat-header-cell *matHeaderCellDef>Level </th>
-        <td mat-cell *matCellDef="let callLog">{{callLog?.PotentialLevelName}}
-        </td>
-    </ng-container>
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let callLog; columns: displayedColumns;"></tr>
-</table>
-<mat-paginator [pageSizeOptions]="[5, 10]" [pageSize]="5" showFirstLastButtons="false">
-</mat-paginator>
+                <td>
+                    {{callLog?.DateString}}
+                </td>
+                <td>
+                    {{callLog?.TimeString}}
+                </td>
+                <td>
+                    {{callLog?.ContractCode}}
+                </td>
+                <td>
+                    <audio controls style="width: 270px;">
+                        <source src="{{callLog.URL}}" type="audio/ogg">
+                    </audio>
+                </td>
+
+                <td>
+                    {{callLog?.EmployeeName}}
+                </td>
+                <td>
+                    {{callLog?.NoteContent}}
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <div class="pagination-controls">
+        <pagination-controls (pageChange)="handlePageChange($event)"></pagination-controls>
+    </div>
+</div>

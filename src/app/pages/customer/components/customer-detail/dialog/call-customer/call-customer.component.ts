@@ -67,7 +67,7 @@ export class CallCustomerComponent implements OnInit, OnDestroy {
     });
     // this.stringee_token = localStorage.getItem('stringee_token');
     this.stringee_token = 'eyJjdHkiOiJzdHJpbmdlZS1hcGk7dj0xIiwidHlwIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJqdGkiOiJTSzRGRWUwMWJHWUhDTExlTThLY3V3OVFpUHlKRXJsS281LTE2MjM2NjQ4MjQiLCJpc3MiOiJTSzRGRWUwMWJHWUhDTExlTThLY3V3OVFpUHlKRXJsS281IiwiZXhwIjoxNjI2MjU2ODI0LCJ1c2VySWQiOiIxMTMiLCJpY2NfYXBpIjp0cnVlfQ.soe1KYrqi2gLyHgoWhF8NaDk2Ku-fvUc3hrp5ORAOe4'
-    this.stringee_rest_token = localStorage.getItem("stringee_restful_token");
+    this.stringee_rest_token = 'eyJjdHkiOiJzdHJpbmdlZS1hcGk7dj0xIiwidHlwIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJqdGkiOiJTSzRGRWUwMWJHWUhDTExlTThLY3V3OVFpUHlKRXJsS281LTE2MjM3MzA5NzEiLCJpc3MiOiJTSzRGRWUwMWJHWUhDTExlTThLY3V3OVFpUHlKRXJsS281IiwiZXhwIjoxNjI2MzIyOTcxLCJyZXN0X2FwaSI6dHJ1ZX0.2fR1ugqhljXSIH96_s6KvC9z4d03vOp03CQkDpuqtws';
   }
 
 
@@ -169,7 +169,7 @@ export class CallCustomerComponent implements OnInit, OnDestroy {
           this.callLogInfo = data.find(callLog => callLog.id == callId);
           console.log('callLogInfo', this.callLogInfo);
 
-          if (this.callLogInfo.answer_duration !== 0) {
+          if (this.callLogInfo.answer_duration && this.callLogInfo.answer_duration !== 0) {
             call.URL = `http://api.stringee.com/v1/call/play/${this.callLogInfo.id}?access_token=${this.stringee_rest_token}`;
           }
           call.Phone = this.callLogInfo.answer_duration;

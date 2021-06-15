@@ -1,52 +1,57 @@
 <div class="container-fluid">
   <div class="row" *ngIf="isShow == 0">
     <div class="col">
-        <button class="add-button my-2" matTooltip="Thêm đơn hàng" (click)="showCreateContractForm()" *ngIf="isAccessAdd">
-          <i class="material-icons">
-            add_circle_outline
-          </i>
-        </button>
-        <table mat-table [dataSource]="dataSource"
-          class=" table-hover table-striped text-center customTableStyle w-100">
-          <ng-container matColumnDef="ContractCode">
-            <th mat-header-cell *matHeaderCellDef> Tên ĐH </th>
-            <td mat-cell *matCellDef="let contract">
-              {{contract.ContractCode}}
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="Date">
-            <th mat-header-cell *matHeaderCellDef> Ngày </th>
-            <td mat-cell *matCellDef="let contract">
-              {{contract.SignedDate | date : 'dd/MM/yyyy'}}
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="Services">
-            <th mat-header-cell *matHeaderCellDef> Dịch vụ </th>
-            <td mat-cell *matCellDef="let contract">
-              {{contract.SurgeryServiceName}}
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="Value">
-            <th mat-header-cell *matHeaderCellDef> Giá trị </th>
-            <td mat-cell *matCellDef="let contract">
-              {{contract.Amount | number:'.'}}
-            </td>
-          </ng-container>
-          <ng-container matColumnDef="Status">
-            <th mat-header-cell *matHeaderCellDef> Trạng thái </th>
-            <td mat-cell *matCellDef="let contract">
-              <div *ngIf="contract.Status == 1">Đang chăm sóc</div>
-              <div *ngIf="contract.Status == 2">Dừng chăm sóc</div>
-              <div *ngIf="contract.Status == 3">Đã kí</div>
-            </td>
-          </ng-container>
+      <button class="add-button my-2" matTooltip="Thêm đơn hàng" (click)="showCreateContractForm()"
+        *ngIf="isAccessAdd">
+        <i class="material-icons">
+          add_circle_outline
+        </i>
+      </button>
 
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let contract; columns: displayedColumns;" (click)="showContractDetail(contract)"></tr>
+      <div class="shared-table">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Tên ĐH</th>
+              <th scope="col">Ngày</th>
+              <th scope="col">Dịch vụ</th>
+              <th scope="col">Giá trị</th>
+              <th scope="col">Trạng thái</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              *ngFor="let contract of contractList | paginate: { itemsPerPage: 10, currentPage: pageNumber, totalItems: 10 }"
+              (click)="showContractDetail(contract)">
+
+              <td>
+                {{contract?.ContractCode}}
+              </td>
+              <td>
+                {{contract?.SignedDate | date : 'dd/MM/yyyy'}}
+              </td>
+              <td>
+                {{contract?.SurgeryServiceName}}
+              </td>
+              <td>
+                {{contract?.Amount | number:'.'}}
+              </td>
+
+              <td>
+                <div *ngIf="contract.Status == 1">Đang chăm sóc</div>
+                <div *ngIf="contract.Status == 2">Dừng chăm sóc</div>
+                <div *ngIf="contract.Status == 3">Đã kí</div>
+              </td>
+
+            </tr>
+
+          </tbody>
         </table>
-        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons="true">
-        </mat-paginator>
+        <div class="pagination-controls">
+          <pagination-controls (pageChange)="handlePageChange($event)"></pagination-controls>
+        </div>
       </div>
+    </div>
   </div>
   <div class="row" *ngIf="isShow == 1">
     <div class="col">
@@ -58,5 +63,5 @@
       <app-customer-contract-detail></app-customer-contract-detail>
     </div>
   </div>
-  
+
 </div>

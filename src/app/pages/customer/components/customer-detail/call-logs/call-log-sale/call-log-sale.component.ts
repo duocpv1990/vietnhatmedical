@@ -28,6 +28,8 @@ export class CallLogSaleComponent implements OnInit {
     'Ghi chú',
     'Level'
   ];
+  pageNumber = 1;
+  pageSize = 10;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -46,6 +48,12 @@ export class CallLogSaleComponent implements OnInit {
       this.dataSource = new MatTableDataSource(this.callLogList);
       this.dataSource.paginator = this.paginator;
     });
+  }
+
+  handlePageChange(e) {
+    this.pageNumber = e;
+    this.pageSize = 10;
+    this.getCallLogByCustomerId();
   }
 
 }

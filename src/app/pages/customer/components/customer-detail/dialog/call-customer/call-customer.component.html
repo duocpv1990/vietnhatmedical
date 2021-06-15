@@ -68,32 +68,6 @@
                 </mat-form-field>
             </div>
 
-            <form [formGroup]="reminderForm" (ngSubmit)="createCustomerReminder()" action="">
-                <div class="form-group">
-                    <mat-label>Loại lịch</mat-label>
-                    <mat-form-field class="w-100">
-                        <mat-select formControlName="type">
-                            <mat-option value="2">Gọi</mat-option>
-                            <mat-option value="1">Hẹn</mat-option>
-                            <mat-option value="3">Lịch gọi chăm sóc</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <div class="form-group">
-                    <mat-label>Ngày</mat-label>
-                    <mat-form-field class="w-100">
-                        <input matInput type="date" formControlName="dayDate" />
-                    </mat-form-field>
-                </div>
-                <div class="form-group">
-                    <mat-label>Giờ</mat-label>
-                    <mat-form-field class="w-100">
-                        <input matInput type="time" formControlName="hourDate" />
-                    </mat-form-field>
-                </div>
-            </form>
-
-
             <div class="text-center">
                 <div class="insideShadow">
 

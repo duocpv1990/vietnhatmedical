@@ -34,6 +34,8 @@ export class CustomerContractComponent extends BaseComponent implements OnInit {
     'Value',
     'Status'
   ];
+  pageNumber = 1;
+  pageSize = 10;
 
   constructor(
     public customerContractService: CustomerContractService,
@@ -91,6 +93,10 @@ export class CustomerContractComponent extends BaseComponent implements OnInit {
     this.isShow = 2;
   }
 
-
+  handlePageChange(e) {
+    this.pageNumber = e;
+    this.pageSize = 10;
+    this.getContractByCustomerId();
+  }
 
 }
