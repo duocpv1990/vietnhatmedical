@@ -16,14 +16,15 @@ export const menuItem: Array<any> = [
         link: '/pages/customer',
         isAccess: true
     },
-    // {
-    //     title: 'Lịch',
-    //     elementOnUrl: 'schedule',
-    //     class: 'material-icons',
-    //     icon: 'date_range',
-    //     link: '/pages/schedule',
-    //     isAccess: true
-    // },
+
+    {
+        title: 'Email Maketer',
+        elementOnUrl: 'schedule',
+        class: 'material-icons',
+        icon: 'date_range',
+        // link: '/pages/schedule',
+        isAccess: true
+    },
     // {
     //     title: 'Tài liệu',
     //     elementOnUrl: 'document',
@@ -48,16 +49,23 @@ export const menuItem: Array<any> = [
         link: '/pages/employee',
         isAccess: true
     },
-
-
     // {
-    //     title: 'Thiết lập',
-    //     elementOnUrl: 'setting',
+    //     title: 'Email Marketing',
+    //     elementOnUrl: 'marketing',
     //     class: 'material-icons',
-    //     icon: 'tune',
-    //     link: '/pages/setting',
+    //     icon: 'assignment_ind',
+    //     link: '',
     //     isAccess: true
     // },
+
+    {
+        title: 'Thiết lập',
+        elementOnUrl: 'setting',
+        class: 'material-icons',
+        icon: 'tune',
+        link: '/pages/setting',
+        isAccess: true
+    },
 
 
 

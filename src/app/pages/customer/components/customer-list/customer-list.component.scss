@@ -380,3 +380,20 @@ td.mat-footer-cell:first-of-type {
     }
   }
 }
+
+.page-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  width: 100%;
+  font-weight: 600;
+  font-size: 1.2rem;
+  height: 40px;
+  box-shadow: 5px 5px 8px #cccccc, -5px -5px 8px #ffffff;
+  font-size: 16px;
+  font-weight: 500;
+  background: #3db4a9;
+  color: #fff;
+  text-align: center;
+}

@@ -64,6 +64,10 @@ export class CustomerListComponent extends BaseComponent implements OnInit {
   fieldType = 1;
   searchString = '';
   potentialLevels = [];
+  isShowMyCustomer = false;
+  potentialLevelId = null;
+  fromDate: string;
+  toDate: string;
 
   constructor(
     private customerService: CustomerService,
@@ -83,22 +87,39 @@ export class CustomerListComponent extends BaseComponent implements OnInit {
 
   ngOnInit() {
     this.accessUser = JSON.parse(localStorage.getItem('access_user'));
+    this.position = this.accessUser.PositionName;
     this.IPPhoneId = this.accessUser.IPPhoneId;
     this.activatedRoute.queryParams.subscribe(params => {
       if (params['pageNumber'] == undefined) {
         this.pageNumber = 1
       } else this.pageNumber = params['pageNumber'];
     });
-    this.getCustomers();
+    this.checkPosition();
+    // this.getCustomers();
     this.checkStringeeToken();
     this.getCountries();
     this.getPotentialLevels();
   }
 
-
+  checkPosition() {
+    if (this.position.toLocaleLowerCase() === 'admin') {
+      this.isShowMyCustomer = false;
+      this.getCustomers();
+    } else {
+      this.isShowMyCustomer = true;
+      this.getMyCustomer();
+    }
+  }
 
   getCustomers() {
     this.customerService.getCustomers(this.pageNumber, this.pageSize, this.countryId, this.provinceId, this.districtId, this.surgeryServiceId, this.type, this.genderType, this.lastname, this.phone, this.geographicregionId, this.idCardNumber, this.address, this.email,).subscribe(res => {
+      this.customers = res.Payload;
+      this.count = res.Count;
+    });
+  }
+
+  getMyCustomer() {
+    this.customerService.getMyCustomer(this.fromDate, this.toDate, this.pageNumber, this.pageSize, this.potentialLevelId).subscribe(res => {
       this.customers = res.Payload;
       this.count = res.Count;
     });
@@ -112,11 +133,15 @@ export class CustomerListComponent extends BaseComponent implements OnInit {
     switch (this.fieldType) {
       case 1:
         this.lastname = this.searchString.trim();
-        this.getCustomers();
+        if (this.isShowMyCustomer) {
+          this.getMyCustomer()
+        } else this.getCustomers();
         break;
       case 2:
         this.phone = this.searchString.trim();
-        this.getCustomers();
+        if (this.isShowMyCustomer) {
+          this.getMyCustomer()
+        } else this.getCustomers();
         break;
     }
 
@@ -180,8 +205,6 @@ export class CustomerListComponent extends BaseComponent implements OnInit {
     this.customerService.getPotentialLevels().subscribe(res => {
       res.unshift({ "PotentialLevelId": 0, "Name": "Tất cả L" });
       this.potentialLevels = res;
-      console.log('potentialLevels', this.potentialLevels);
-
     });
   }
 
@@ -214,7 +237,10 @@ export class CustomerListComponent extends BaseComponent implements OnInit {
         customerId: customerId,
       }
     }).afterClosed().subscribe(() => {
-      this.getCustomers();
+      if (this.isShowMyCustomer) {
+        this.getMyCustomer();
+      } else this.getCustomers();
+
     }), 100);
   }
 
@@ -286,17 +312,24 @@ export class CustomerListComponent extends BaseComponent implements OnInit {
 
   filterByCountry(event) {
     this.countryId = event.target.value;
-    this.getCustomers();
+    if (this.isShowMyCustomer) {
+      this.getMyCustomer()
+    } else this.getCustomers();
+
   }
 
   filterByType(event) {
     this.type = event.target.value;
-    this.getCustomers();
+    if (this.isShowMyCustomer) {
+      this.getMyCustomer()
+    } else this.getCustomers();
   }
 
   filterByGender(event) {
     this.genderType = event.target.value;
-    this.getCustomers();
+    if (this.isShowMyCustomer) {
+      this.getMyCustomer()
+    } else this.getCustomers();
   }
 
 }

@@ -1,9 +1,11 @@
 <div class="container-fluid customer-table">
     <div class="row">
         <div class="col-2">
-            <div class="customer-header">
+            <div *ngIf="isShowMyCustomer" class="page-title">
+                Danh sách khách hàng
+            </div>
+            <div *ngIf="!isShowMyCustomer" class="customer-header">
                 <div class="customer-title">
-
                     <button mat-button [matMenuTriggerFor]="menu">
                         Danh sách khách hàng
                         <span class="material-icons">
@@ -16,33 +18,7 @@
                     </mat-menu>
 
                 </div>
-                <div class="function-btn my-1">
-                    <button class="add-button" matTooltip="Thêm khách hàng mới" [matMenuTriggerFor]="createCustomer"
-                        *ngIf="isAccessAdd">
-                        <i class="material-icons">
-                            add_circle_outline
-                        </i>
-                    </button>
-                    <mat-menu #createCustomer="matMenu">
-                        <button mat-menu-item routerLink="/pages/customer/create">
-                            <mat-icon>person_add</mat-icon>&nbsp; Thêm khách hàng
-                        </button>
-                        <button mat-menu-item (click)="openUploadFileForm()">
-                            <mat-icon>cloud_upload</mat-icon>&nbsp; Tải tệp
-                        </button>
-                    </mat-menu>
-                    <button class="add-button" matTooltip="Giao khách hàng" (click)="openEmployeeListDialog()"
-                        [style.display]="
-              assignedCustomerList.length == 0 ? 'none' : 'inline'
-            ">
-                        <img src="assets/svg/assign-customer.svg" alt="" />
-                    </button>
-                    <button [style.display]="
-              assignedCustomerList.length == 0 ? 'none' : 'inline'
-            " class="export-excel" (click)="exportExcel()" matTooltip="Xuất Excel danh sách KH">Export</button>
 
-
-                </div>
             </div>
         </div>
         <div class="col">
@@ -112,8 +88,38 @@
 
     </div>
 
+
+
     <div class="row">
         <div class="col">
+            <div class="function-btn my-1">
+                <button class="add-button" matTooltip="Thêm khách hàng mới" [matMenuTriggerFor]="createCustomer"
+                    *ngIf="isAccessAdd">
+                    <i class="material-icons">
+                        add_circle_outline
+                    </i>
+                </button>
+                <mat-menu #createCustomer="matMenu">
+                    <button mat-menu-item routerLink="/pages/customer/create">
+                        <mat-icon>person_add</mat-icon>&nbsp; Thêm khách hàng
+                    </button>
+                    <button mat-menu-item (click)="openUploadFileForm()">
+                        <mat-icon>cloud_upload</mat-icon>&nbsp; Tải tệp
+                    </button>
+                </mat-menu>
+                <button *ngIf="!isShowMyCustomer" class="add-button" matTooltip="Giao khách hàng"
+                    (click)="openEmployeeListDialog()" [style.display]="
+                          assignedCustomerList.length == 0 ? 'none' : 'inline'
+                        ">
+                    <img src="assets/svg/assign-customer.svg" alt="" />
+                </button>
+                <button [style.display]="
+                          assignedCustomerList.length == 0 ? 'none' : 'inline'
+                        " class="export-excel" (click)="exportExcel()"
+                    matTooltip="Xuất Excel danh sách KH">Export</button>
+
+
+            </div>
             <div class="shared-table">
                 <table class="table">
                     <thead>

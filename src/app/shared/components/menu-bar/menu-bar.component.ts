@@ -17,9 +17,11 @@ export class MenuBarComponent extends BaseComponent implements OnInit, DoCheck {
         public router: Router
     ) {
         super(router);
-        // menuItem[1].isAccess = this.checkAccess('api/customer/username,GET');
+        menuItem[1].isAccess = this.checkAccess('api/customer/username,GET');
+        menuItem[3].isAccess = this.checkAccess('api/employee,GET');
+        menuItem[4].isAccess = this.checkAccess('api/role,GET');
         // menuItem[2].isAccess = this.checkAccess('api/schedule,GET');
-        // menuItem[4].isAccess = this.checkAccess('api/position,GET');
+        // menuItem[3].isAccess = this.checkAccess('api/position,GET');
         // menuItem[5].isAccess = this.checkAccess('api/employee,GET');
         // menuItem[6].isAccess = this.checkAccess('api/role,GET');
         this.menuItem = menuItem;
